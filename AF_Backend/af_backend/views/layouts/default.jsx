@@ -1,6 +1,6 @@
-const React = require('react');
+var React = require('react');
 
-const DefaultLayout = React.createClass({
+var DefaultLayout = React.createClass({
   render: function() {
     return (
       <html>
@@ -9,7 +9,6 @@ const DefaultLayout = React.createClass({
       </html>
     );
   }
-
 });
 
 module.exports = DefaultLayout;
