@@ -5,31 +5,57 @@ module.exports = {
 
   //Set the auth token for the graph api calls
   setAuthToken : function(token){
-    graph.setAccessToken('CAACEdEose0cBAPeszjP6QwBOjwoSDeZAXyFCY5oQXNDA3Qf6AIilxFIB5OXE9nqMZADZCEq6KqURZASsddBoK72jr5AqZBUF8zphaZBlH4GFHrauxdS3PpuEo61J6ydZCMepDTVpRZCWENlvYo77hZA3Ve0vwZBgwZAxF4rQ8nflZADgsbzMbDJoAbhkWYNO9zZBCDzgZD');
+    graph.setAccessToken(token);
   },
 
   //page name should be the name from the facebook url e.g. "www.facebook.com/>>>alternativ.feiern<<<"
-  addPage : function(pageName){
-    graph.get(pageName, function(err, res) {
+  addPage : function(pageName, res){
+    graph.get(pageName, function(err, result) {
       if(err){
-        console.error(res);
+        console.error(err);
+        res.send(err);
       } else {
         var page = new Page();
-        page.pageId = res.id;
-        page.pageName = res.name;
+        page.pageId = result.id;
+        page.pageName = result.name;
         page.save(function(err){
           if(err)
             throw err;
+          res.send({'isAdded' : true});
         });
       }
     });
   },
 
-  getAllPages : function(){
+  removePage : function(pageId, res){
+    if(pageId){
+      Page.remove({'pageId': pageId}, function(err){
+        if(err){
+          console.error(err);
+          res.send({
+            'isRemoved' : false,
+            'error' : err
+          });
+        }
+        console.log(pageId);
+        res.send({'isRemoved' : true});
+      });
+    } else {
+      res.send({
+        'isRemoved' : false,
+        'error' : 'No pageId provided'
+      });
+    }
+  },
+
+  getAllPages : function(res){
     Page.find(function(err, pages){
-      if(err)
-        return console.error(err);
+      if(err) {
+         console.error(err);
+         res.send(err);
+      }
       console.log(pages);
-    })
+      res.send(pages);
+    });
   },
 }

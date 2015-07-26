@@ -1,5 +1,5 @@
 var React = require('react');
-var DefaultLayout = require('./layouts/default')
+var DefaultLayout = require('./layouts/loggedOut')
 
 var Signup = React.createClass({
 

@@ -1,3 +1,10 @@
+const bodyParser = require('body-parser');
+
+const auth = require('./config/auth');
+const pm = require('./facebook/page_manager');
+pm.setAuthToken(auth.token);
+
+const pagetitle = ' - Alternativ-Feiern';
 // app/routes.js
 module.exports = function(app, passport) {
 
@@ -5,7 +12,7 @@ module.exports = function(app, passport) {
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', function(req, res) {
-        res.render('index', {title: 'af backend'}); // load the index.ejs file
+        res.render('index', {title: 'Backend' + pagetitle});
     });
 
     // =====================================
@@ -15,20 +22,22 @@ module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.jsx');
+        res.render('login', {title: 'Login' + pagetitle});
     });
 
     // process the login form
-    // app.post('/login', do all our passport stuff here);
+    app.post('/login', passport.authenticate('local-login'), function(req, res){
+      console.log(req.user.local);
+      res.redirect('/dashboard');
+    });
 
     // =====================================
     // SIGNUP ==============================
     // =====================================
     // show the signup form
     app.get('/signup', function(req, res) {
-
         // render the page and pass in any flash data if it exists
-        res.render('signup.jsx');
+        res.render('signup');
     });
 
     // process the signup form
@@ -40,13 +49,15 @@ module.exports = function(app, passport) {
     }));
 
     // =====================================
-    // PROFILE SECTION =====================
+    // Dashboard SECTION =====================
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-    app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.jsx', {
-            user : req.user // get the user out of session and pass to template
+    app.get('/dashboard', isLoggedIn, function(req, res) {
+      console.log(req);
+        res.render('dashboard', {
+          title : 'Dashboard' + pagetitle,
+          user : req.user.local // get the user out of session and pass to template
         });
     });
 
@@ -56,6 +67,26 @@ module.exports = function(app, passport) {
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
+    });
+
+    // =====================================
+    // API Methods =========================
+    // =====================================
+    app.get('/api/pages', function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      pm.getAllPages(res);
+    });
+
+    app.post('/api/pages/add', isLoggedIn, function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      var pageName = req.body.pageName;
+      pm.addPage(pageName, res);
+    });
+
+    app.post('/api/pages/delete', isLoggedIn, function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      var pageId = req.body.pageId;
+      pm.removePage(pageId, res);
     });
 };
 
