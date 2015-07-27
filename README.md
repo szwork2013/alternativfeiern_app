@@ -18,3 +18,12 @@ First Steps:
 4. Generate App
 5. Setup Database
 
+
+Progress:
+- Login
+
+![alt tag](http://i.imgur.com/HwEzYVT.png)
+
+- Dashboard
+
+![alt tag](http://i.imgur.com/WH9Ewmp.png)
