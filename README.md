@@ -26,4 +26,4 @@ Progress:
 
 - Dashboard
 
-![alt tag](http://i.imgur.com/WH9Ewmp.png)
+![alt tag](http://i.imgur.com/FdFDJrR.png)
