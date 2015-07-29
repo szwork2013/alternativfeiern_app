@@ -17,16 +17,18 @@ var DashboardLayout = React.createClass({
           <div className="navbar-fixed">
             <nav className="teal darken-3">
               <div className="nav-wrapper">
-                <a href="#!" className="brand-logo">AF Backend</a>
                 <ul className="right hide-on-med-and-down">
-                  <li><a href="/logout">Logout</a></li>
+                  <li><a href="http://alternativ-feiern.de/" target="_blank">Website</a></li>
+                  <li><a href="http://alternativ-feiern.de/wp-admin/" target="_blank">Wordpress</a></li>
+                  <li><a href="https://us10.admin.mailchimp.com/" target="_blank">Mailchimp</a></li>
+                  <li><a href="http://piwik.alternativ-feiern.de/index.php" target="_blank">Piwik</a></li>
+                  <li className="teal darken-2"><a href="/logout">Logout</a></li>
                 </ul>
               </div>
             </nav>
           </div>
-          <div className="container">
-            {this.props.children}
-          </div>
+          {this.props.children}
+          <script src="js/bundle.js" type="text/javascript"></script>
         </body>
       </html>
     );

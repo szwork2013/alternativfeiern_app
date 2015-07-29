@@ -8,9 +8,9 @@ var Login = React.createClass({
       <DefaultLayout title={this.props.title}>
           <div className="row">
             <div className="col s12 m5">
-              <div className="card-panel hoverable whitetext teal lighten-1">
+              <div className="card-panel hoverable whitetext teal lighten-5">
                 <form action="/login" method="post">
-                  <div class="form-group">
+                  <div className="form-group">
                       <label>Email</label>
                       <input type="text" class="form-control" name="email" />
                   </div>
@@ -19,7 +19,7 @@ var Login = React.createClass({
                       <input type="password" class="form-control" name="password" />
                   </div>
 
-                  <button type="submit" className="waves-effect waves-light btn red darken-1">Login</button>
+                  <button type="submit" className="waves-effect waves-light btn green">Login</button>
                 </form>
               </div>
             </div>

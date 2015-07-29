@@ -4,7 +4,7 @@
 // get all the tools we need
 var express  = require('express');
 var app      = express();
-var port     = process.env.PORT || 8080;
+var port     = process.env.PORT || 8000;
 var mongoose = require('mongoose');
 var passport = require('passport');
 
@@ -16,7 +16,7 @@ var session      = require('express-session');
 var configDB = require('./config/database.js');
 
 // configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+mongoose.connect(configDB.url, {auth: {authdb: 'af_backend'}}); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 

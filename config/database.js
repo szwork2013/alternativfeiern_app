@@ -1,3 +1,3 @@
 module.exports = {
-  'url' : 'mongodb://localhost/af_backend_users'
+  'url' : 'mongodb://backendOwner:test01@localhost/af_backend'
 }

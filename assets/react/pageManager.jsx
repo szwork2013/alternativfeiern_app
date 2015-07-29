@@ -11,10 +11,14 @@ const PageManager = React.createClass({
   },
 
   componentWillMount: function() {
+    this.getPages();
+  },
+
+  getPages : function() {
     var self = this;
     $.ajax({
-      url: 'http://localhost:8080/api/pages',
-      success : function(pages){
+      url: 'http://localhost:8000/api/pages',
+      success : function(pages) {
         self.setState({
           pages : pages
         });
@@ -22,15 +26,57 @@ const PageManager = React.createClass({
     });
   },
 
+  addPage : function(event) {
+    event.preventDefault();
+    var self = this;
+    var inputField = React.findDOMNode(this.refs.page_name);
+    var pageName = inputField.value;
+    $.ajax({
+      method  : 'POST',
+      url     : 'http://localhost:8000/api/pages/add',
+      data    : {
+        pageName : pageName
+      },
+      success : function() {
+        inputField.value = '';
+        self.getPages();
+      }
+    });
+  },
+
+  removePage : function(pageId) {
+    var self = this;
+    $.ajax({
+      method  : 'POST',
+      url   : 'http://localhost:8000/api/pages/delete',
+      data  : {
+        pageId : pageId
+      },
+      success : function() {
+        self.getPages();
+      },
+    });
+  },
+
   render: function() {
+    var removePage = this.removePage
     return(
       <div>
-        <h3>Pages</h3>
-        <div className="collection">
+        <h3>Seiten</h3>
+        <form onSubmit={this.addPage}>
+          <div className="row">
+            <div className="input-field col s6">
+              <input id="page_name" type="text" className="validate" ref="page_name"></input>
+              <label htmlFor="page_name">Seiten-Name</label>
+            </div>
+          </div>
+        </form>
+        <ul className="collection">
           {this.state.pages.map(function(page, index){
+            page.remove = removePage;
             return <PageItem page={page} key={index}></PageItem>
           })}
-        </div>
+        </ul>
       </div>
     );
   }

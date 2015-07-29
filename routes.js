@@ -2,6 +2,8 @@ const bodyParser = require('body-parser');
 
 const auth = require('./config/auth');
 const pm = require('./facebook/page_manager');
+const em = require('./facebook/event_manager');
+
 pm.setAuthToken(auth.token);
 
 const pagetitle = ' - Alternativ-Feiern';
@@ -54,7 +56,6 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/dashboard', isLoggedIn, function(req, res) {
-      console.log(req);
         res.render('dashboard', {
           title : 'Dashboard' + pagetitle,
           user : req.user.local // get the user out of session and pass to template
@@ -77,7 +78,7 @@ module.exports = function(app, passport) {
       pm.getAllPages(res);
     });
 
-    app.post('/api/pages/add', isLoggedIn, function(req, res) {
+    app.post('/api/pages/add', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
       var pageName = req.body.pageName;
       pm.addPage(pageName, res);
@@ -87,6 +88,23 @@ module.exports = function(app, passport) {
       res.setHeader('Content-Type', 'application/json');
       var pageId = req.body.pageId;
       pm.removePage(pageId, res);
+    });
+
+    app.post('/api/events/page', function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      var pageId = req.body.pageId;
+      em.getPageEvents(pageId, res);
+    });
+
+    app.get('/api/events/all/short', function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      em.getAllEventsShort(res);
+    });
+
+    app.post('/api/events/blacklist', function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      var eventId = req.body.eventId;
+      em.blackListEvent(eventId, res);
     });
 };
 

@@ -7,7 +7,10 @@ var Dashboard = React.createClass({
   render: function() {
     return (
       <DashboardLayout title={this.props.title}>
-        //TODO List different things: pages, events, etc.
+        <div className="row">
+          <div className="col s12 m4 l6" id="page__container"></div>
+          <div className="col s12 m4 l6" id="event__container"></div>
+        </div>
       </DashboardLayout>
     );
   }
