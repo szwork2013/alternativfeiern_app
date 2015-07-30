@@ -1,45 +1,28 @@
 const React = require('react');
 const $ = window.jQuery;
 const PropTypes = React.PropTypes;
-const EventItem = require('./partials/eventItem.jsx')
+const EventContainer = require('./partials/eventContainer.jsx');
 
 const EventManager = React.createClass({
   getInitialState: function() {
     return {
-      events: []
+      pages: []
     };
   },
 
   componentWillMount: function() {
-    this.getEvents();
+    this.getPages();
   },
 
-  getEvents : function() {
+  getPages : function() {
     var self = this;
     $.ajax({
-      url: 'http://localhost:8000/api/events/all/short',
-      success : function(events) {
+      url: 'http://localhost:8000/api/pages',
+      success : function(pages) {
+        console.log(pages);
         self.setState({
-          events  : events
+          pages : pages
         });
-      }
-    });
-  },
-
-  blackListEvent : function(eventId) {
-    var self = this;
-    $.ajax({
-      method  : 'POST',
-      url     : 'http://localhost:8000/api/events/blacklist',
-      data    : {
-        eventId : eventId
-      },
-      success : function()  {
-        console.log('blacklisted');
-        self.getEvents();
-      },
-      error : function(err) {
-        console.log(err);
       }
     });
   },
@@ -49,12 +32,9 @@ const EventManager = React.createClass({
     return (
       <div>
         <h3>Events</h3>
-        <ul className="collection">
-          {this.state.events.map(function(event, index){
-            event.blackList = blackList;
-            return <EventItem event={event} key={index}></EventItem>
-          })}
-        </ul>
+        {this.state.pages.map(function(page, index){
+          return <EventContainer page={page} key={index}></EventContainer>
+        })}
       </div>
     );
   }

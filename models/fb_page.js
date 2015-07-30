@@ -11,9 +11,9 @@ var pageSchema = mongoose.Schema({
       start  :   String,
       end    :   String,
       location  :   String,
-      //following values have to be queried for the single event
       description   :   String,
       cover   :   String,
+      isBlacklisted : Boolean,
     }
   ],
 });

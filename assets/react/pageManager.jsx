@@ -19,6 +19,7 @@ const PageManager = React.createClass({
     $.ajax({
       url: 'http://localhost:8000/api/pages',
       success : function(pages) {
+        console.log(pages);
         self.setState({
           pages : pages
         });

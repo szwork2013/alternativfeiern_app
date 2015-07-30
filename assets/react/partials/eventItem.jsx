@@ -11,34 +11,34 @@ const weekdays = [
   'So'
 ];
 
-var EventItem = React.createClass({
-  blackListEvent : function(){
-    this.props.event.blackList(this.props.event.id);
+const EventItem  = React.createClass({
+
+  blacklist : function(){
+    this.props.event.blackList(this.props.event.fbid);
   },
 
   render: function() {
-    var fbUrl = "https://www.facebook.com/" + this.props.event.id;
-    var t = new Date(this.props.event.start_time);
-    var startTime = t.toLocaleDateString();
-    var day = weekdays[t.getDay()];
+    var fbUrl = 'https://www.facebook.com/' + this.props.event.fbid;
+    var unlistBtn = <a className="btn waves-effect green">+</a>;
+    var listBtn = <a className="btn waves-effect red" onClick={this.blacklist}>x</a>;
+    var date = Date.parse(this.props.event.start);
+    //date = date.toLocaleDateString();
     return (
-      <li className="collection-item avatar">
-        <span className="title"><b>{this.props.event.name}</b></span>
-        <p>
-          {this.props.event.location}
-        </p>
-        <p>
-          {/*day + ' ' + startTime*/}
-          {this.props.event.start_time}
-        </p>
-        <p>
-          <a href={fbUrl} target="_blank">Facebook-Event</a>
-        </p>
-        <button className="waves-effect waves-light secondary-content btn-floating red" onClick={this.blackListEvent}>x</button>
+      <li className="collection-item">
+        <div className="row">
+          <a href={fbUrl} target="_blank">
+            <div className="col s6 eventLink">
+                {this.props.event.name}
+            </div>
+          </a>
+          <div className="col s4">{date}</div>
+          <div className="col s2">
+            {this.props.event.isBlacklisted ? unlistBtn : listBtn}
+          </div>
+        </div>
       </li>
     );
   }
-
 });
 
 module.exports = EventItem;

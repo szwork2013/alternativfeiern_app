@@ -93,7 +93,14 @@ module.exports = function(app, passport) {
     app.post('/api/events/page', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
       var pageId = req.body.pageId;
-      em.getPageEvents(pageId, res);
+      if(pageId){
+        em.getPageEvents(pageId, res);
+      } else {
+        res.send({
+          events : [],
+          error : 'no pageId supplied'
+        });
+      }
     });
 
     app.get('/api/events/all/short', function(req, res) {
@@ -104,7 +111,15 @@ module.exports = function(app, passport) {
     app.post('/api/events/blacklist', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
       var eventId = req.body.eventId;
-      em.blackListEvent(eventId, res);
+      var pageId = req.body.pageId;
+      if(pageId && eventId){
+        em.blackListEvent(pageId, eventId, res);
+      } else {
+        res.send({
+          isBlacklisted : false,
+          error : 'insufficient ids supplied'
+        });
+      }
     });
 };
 

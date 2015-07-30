@@ -13,7 +13,7 @@ const PageItem = React.createClass({
           <img src={this.props.page.picture} alt="" className="circle" />
           <span className="title">{this.props.page.name}</span>
           <p>
-            {this.props.page.events.length} Events
+            {this.props.page.eventCount} Event{this.props.page.eventCount > 1 ? 's' : ''}
           </p>
           <p>
             <a href={fbUrl} target="_blank">Facebook-Seite</a>

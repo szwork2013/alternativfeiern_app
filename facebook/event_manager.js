@@ -9,13 +9,17 @@ var pages;
 
 module.exports = {
 
-  getPageEvents : function(pageId, callback) {
-    graph.get(pageId + eventEdge, {limit: 30}, function(err, res){
+  getPageEvents : function(pageId, response) {
+    Page.findOne({'fbid' : pageId}, function(err, page){
       if(err){
-        callback([], err);
+        console.error(err);
+        response.send({
+          events : [],
+          error : err
+        });
+      } else {
+        response.send(page.events);
       }
-      console.log(res);
-      callback(res.data);
     });
   },
 
@@ -62,31 +66,24 @@ module.exports = {
   },
 
 //TODO: Filter events (past/future), sort events (now-later)
-  blackListEvent : function(eventId, response) {
-    if(eventId){
-      Page.findOne({'fbid': eventId}, function(err, res){
-        if(err){
-          console.error(err);
-          response.send(err);
-        }
-        if(res){
-          console.log('already blacklisted:[id]' + res.fbid);
-          response.send('already blacklisted');
-        } else {
-          var blEvent = new BlackListEvent();
-          blEvent.fbid = eventId;
-          blEvent.save(function(err){
-            if(err){
-              throw err;
-            }
-            response.send({blacklisted  : true});
+
+  blackListEvent : function(pageId, eventId, response) {
+      Page.findOne({'fbid' : pageId}, function(err, page){
+        if(err)
+          return response.send(err);
+        page.events.forEach(function(event){
+          if(event.fbid == eventId){
+            event.isBlacklisted = true;
+          }
+        });
+        page.save(function(err){
+          if(err)
+            console.error(err);
+          return response.send({
+              isBlacklisted : true
           });
-        }
-      });
-    } else {
-      console.log('no eventId');
-      response.send('no eventId');
-    }
+        });
+      })
   }
 
 }
