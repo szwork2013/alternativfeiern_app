@@ -65,22 +65,22 @@ module.exports = {
     });
   },
 
-//TODO: Filter events (past/future), sort events (now-later)
-
   blackListEvent : function(pageId, eventId, response) {
       Page.findOne({'fbid' : pageId}, function(err, page){
         if(err)
           return response.send(err);
+        var state = null;
         page.events.forEach(function(event){
           if(event.fbid == eventId){
-            event.isBlacklisted = true;
+            event.isBlacklisted = event.isBlacklisted ? false : true;
+            state = event.isBlacklisted;
           }
         });
         page.save(function(err){
           if(err)
             console.error(err);
           return response.send({
-              isBlacklisted : true
+              isBlacklisted : state
           });
         });
       })

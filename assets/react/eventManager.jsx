@@ -6,7 +6,8 @@ const EventContainer = require('./partials/eventContainer.jsx');
 const EventManager = React.createClass({
   getInitialState: function() {
     return {
-      pages: []
+      pages : [],
+      allPages : []
     };
   },
 
@@ -21,9 +22,24 @@ const EventManager = React.createClass({
       success : function(pages) {
         console.log(pages);
         self.setState({
-          pages : pages
+          pages : pages,
+          allPages : pages
         });
       }
+    });
+  },
+
+  handleInput : function(event) {
+    event.preventDefault();
+    var input = React.findDOMNode(this.refs.page_name).value;
+    var foundPages = [];
+    this.state.allPages.forEach(function(page){
+      if(page.name.toLowerCase().indexOf(input.toLowerCase()) != -1){
+        foundPages.push(page);
+      }
+    });
+    this.setState({
+      pages : foundPages,
     });
   },
 
@@ -32,8 +48,17 @@ const EventManager = React.createClass({
     return (
       <div>
         <h3>Events</h3>
+          <form>
+            <div className="row">
+              <div className="input-field col s6">
+                <input id="page_name" type="text" className="validate" ref="page_name" onChange={this.handleInput}></input>
+                <label htmlFor="page_name">Suche Seiten</label>
+              </div>
+            </div>
+          </form>
         {this.state.pages.map(function(page, index){
-          return <EventContainer page={page} key={index}></EventContainer>
+          if(page.eventCount > 0)
+            return <EventContainer page={page} key={index}></EventContainer>
         })}
       </div>
     );
