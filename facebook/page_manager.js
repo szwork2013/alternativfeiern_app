@@ -49,7 +49,7 @@ module.exports = {
                   location      :   event.location,
                   description   :   event.description,
                   cover         :   event.cover.source,
-                  isBlacklisted :   false,
+                  isBlacklisted :   true,
                 };
                 page.events.push(singleEvent);
               }

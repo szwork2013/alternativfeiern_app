@@ -1,9 +1,9 @@
 const React = require('react');
 const $ = window.jQuery;
 const PropTypes = React.PropTypes;
-const EventContainer = require('./partials/eventContainer.jsx');
+const EventContainer = require('./partials/eventContainer_wl.jsx');
 
-const EventManager = React.createClass({
+const Whitelist = React.createClass({
   getInitialState: function() {
     return {
       pages : [],
@@ -65,4 +65,4 @@ const EventManager = React.createClass({
   }
 });
 
-module.exports = EventManager;
+module.exports = Whitelist;

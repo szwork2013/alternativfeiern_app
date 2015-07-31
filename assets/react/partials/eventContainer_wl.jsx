@@ -57,7 +57,8 @@ const EventContainer  = React.createClass({
         <div className="collection-header teal lighten-1"><h5>{this.props.page.name}</h5></div>
           {this.state.events.map(function(event, index){
             event.blackList = blackList;
-            return <EventItem event={event} key={index}></EventItem>
+            if(!event.isBlacklisted)
+              return <EventItem event={event} key={index}></EventItem>
           })}
       </ul>
     );
