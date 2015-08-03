@@ -1,5 +1,4 @@
 const DashboardLayout = require('./layouts/loggedIn');
-const Page_Manager = require('../facebook/page_manager');
 const React = require('react');
 
 var Dashboard = React.createClass({

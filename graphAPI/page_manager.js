@@ -35,6 +35,8 @@ module.exports = {
             }
             var page = new Page();
             page.fbid = pageData.id;
+            console.log(pageData.id);
+            console.log(page.fbid);
             page.name = pageData.name;
             page.picture = pageData.picture.data.url;
             console.log(eventData);
@@ -43,10 +45,10 @@ module.exports = {
               if(Date.parse(event.start_time) > Date.now()){
                 singleEvent = {
                   fbid          :   event.id,
-                  name          :    event.name,
+                  name          :   event.name,
                   start         :   event.start_time,
                   end           :   event.end_time,
-                  location      :   event.location,
+                  location      :   event.place.name,
                   description   :   event.description,
                   cover         :   event.cover.source,
                   isBlacklisted :   true,
@@ -92,7 +94,6 @@ module.exports = {
     }
   },
 
-  //
   getAllPages : function(res){
     Page.find(function(err, pages){
       if(err) {
@@ -111,6 +112,39 @@ module.exports = {
         lightPages.push(lightPage);
       });
       res.send(lightPages);
+    });
+  },
+
+  getNewEvents : function(page) {
+    graph.get(page.fbid + '/events?fields=name,start_time,end_time,description,place,cover,id', function(err, res){
+      res.data.forEach(function(newEvent){
+        var isInArray = false;
+        page.events.forEach(function(oldEvent){
+          if(newEvent.id == oldEvent.fbid){
+            console.log('isInArray');
+            isInArray = true;
+          }
+        });
+        if(!isInArray && Date.parse(newEvent.start_time) > Date.now()){
+          console.log('new event found');
+          var event = {
+            fbid   :   newEvent.id,
+            name   :   newEvent.name,
+            start  :   newEvent.start_time,
+            end    :   newEvent.end_time,
+            location  :   newEvent.place.name,
+            description   :   newEvent.description,
+            cover   :   newEvent.cover.source,
+            isBlacklisted : true,
+          }
+          page.events.push(event);
+        }
+      });
+      page.save(function(err){
+        if(err)
+          console.error(err);
+        console.log('save new events');
+      })
     });
   },
 }

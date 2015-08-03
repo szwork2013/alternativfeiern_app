@@ -2,6 +2,7 @@ const React = require('react');
 const $ = window.jQuery;
 const PropTypes = React.PropTypes;
 const EventContainer = require('./partials/eventContainer_wl.jsx');
+const apiUrl = require('./apiUrl.jsx');
 
 const Whitelist = React.createClass({
   getInitialState: function() {
@@ -18,7 +19,7 @@ const Whitelist = React.createClass({
   getPages : function() {
     var self = this;
     $.ajax({
-      url: 'http://localhost:8000/api/pages',
+      url: apiUrl.host + '/api/pages',
       success : function(pages) {
         console.log(pages);
         self.setState({

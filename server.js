@@ -15,6 +15,9 @@ var session      = require('express-session');
 
 var configDB = require('./config/database.js');
 
+var scheduler = require('./af_modules/scheduler.js');
+scheduler.setupSchedule();
+
 // configuration ===============================================================
 mongoose.connect(configDB.url, {auth: {authdb: 'af_backend'}}); // connect to our database
 

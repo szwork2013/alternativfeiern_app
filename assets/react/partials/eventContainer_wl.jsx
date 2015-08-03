@@ -1,6 +1,7 @@
 const React = require('react');
 const PropTypes = React.PropTypes;
 const EventItem = require('./eventItem.jsx');
+const apiUrl = require('../apiUrl.jsx');
 
 const EventContainer  = React.createClass({
   getInitialState: function() {
@@ -18,7 +19,7 @@ const EventContainer  = React.createClass({
     console.log(this.props.page);
     $.ajax({
       method : 'POST',
-      url : 'http://localhost:8000/api/events/page',
+      url : apiUrl.host + '/api/events/page',
       data : {
         pageId : this.props.page.fbid
       },
@@ -35,7 +36,7 @@ const EventContainer  = React.createClass({
     var self = this;
     $.ajax({
       method  : 'POST',
-      url     : 'http://localhost:8000/api/events/blacklist',
+      url     : apiUrl.host + '/api/events/blacklist',
       data    : {
         pageId : this.props.page.fbid,
         eventId : eventId,

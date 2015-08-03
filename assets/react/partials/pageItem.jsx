@@ -7,7 +7,7 @@ const PageItem = React.createClass({
   },
 
   render: function() {
-    var fbUrl = "https://www.facebook.com/" + this.props.page.pageId;
+    var fbUrl = "https://www.facebook.com/" + this.props.page.fbid;
     return (
         <li className="collection-item avatar">
           <img src={this.props.page.picture} alt="" className="circle" />

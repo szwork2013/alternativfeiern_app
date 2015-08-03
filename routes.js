@@ -1,8 +1,8 @@
 const bodyParser = require('body-parser');
 
 const auth = require('./config/auth');
-const pm = require('./facebook/page_manager');
-const em = require('./facebook/event_manager');
+const pm = require('./graphAPI/page_manager');
+const em = require('./graphAPI/event_manager');
 
 pm.setAuthToken(auth.token);
 
