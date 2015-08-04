@@ -41,6 +41,7 @@ module.exports = {
     Page.find(function(err, pages){
       if(err){
         console.error(err);
+        response.send(err)
       }
       self.pages = pages;
       var query = '?ids=';
@@ -65,7 +66,52 @@ module.exports = {
     });
   },
 
-  blackListEvent : function(pageId, eventId, response) {
+  getWhitelisted : function(response) {
+    var whitelisted = [];
+    Page.find(function(err, pages){
+      if(err){
+        console.error(err);
+        response.send(err);
+        return;
+      }
+      pages.forEach(function(page){
+        page.events.forEach(function(event){
+          if(!event.isBlacklisted){
+            whitelisted.push(event);
+          }
+        });
+      });
+      console.log(whitelisted);
+      response.send(whitelisted);
+    });
+  },
+
+  getTodayWhitelisted : function(response) {
+    var todayWhitelisted = [];
+    var now = new Date((Date.now() - Date.now()%1000));
+    now.setDate(now.getDate() + 1);
+    Page.find(function(err, pages){
+      if(err){
+        console.error(err);
+        response.send(err);
+        return;
+      }
+      pages.forEach(function(page){
+        page.events.forEach(function(event, index){
+          if(!event.isBlacklisted) {
+            var startTime = new Date(Date.parse(event.start));
+            var endTime = event.end ? new Date(Date.parse(event.end)) : startTime + 43200;
+            if(startTime.toDateString() == now.toDateString()){
+              todayWhitelisted.push(event);
+            }
+          }
+        });
+      });
+      response.send(todayWhitelisted);
+    });
+  },
+
+  blacklist : function(pageId, eventId, response) {
       Page.findOne({'fbid' : pageId}, function(err, page){
         if(err)
           return response.send(err);

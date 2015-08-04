@@ -18,7 +18,7 @@ const EventContainer  = React.createClass({
     var self = this;
     console.log(this.props.page);
     $.ajax({
-      method : 'POST',
+      method : 'GET',
       url : apiUrl.host + '/api/events/page',
       data : {
         pageId : this.props.page.fbid

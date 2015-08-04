@@ -38,10 +38,7 @@ const EventItem  = React.createClass({
     var listBtn = <a className="btn waves-effect red" onClick={this.blacklist}>x</a>;
     var date = new Date(this.props.event.start);
     date.setTime(date.getTime() - date.getTimezoneOffset()*60*1000);
-    console.log(/\d\d/.exec(date));
-    console.log(date);
     var weekday = weekdays[/.{3}/.exec(date)[0]];
-    console.log(weekday);
     return (
       <li className="collection-item">
         <div className="row">

@@ -71,28 +71,33 @@ module.exports = function(app, passport) {
     });
 
     // =====================================
-    // API Methods =========================
+    // API Methods ======    PAGES   =======
     // =====================================
+
+    // returns all pages in the db
     app.get('/api/pages', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
       pm.getAllPages(res);
     });
 
-    app.post('/api/pages/add', function(req, res) {
+    // adds a page and its events to the db
+    app.post('/api/pages/add', isLoggedIn, function(req, res) {
       res.setHeader('Content-Type', 'application/json');
       var pageName = req.body.pageName;
       pm.addPage(pageName, res);
     });
 
+    // deletes a page from the db (and its events)
     app.post('/api/pages/delete', isLoggedIn, function(req, res) {
       res.setHeader('Content-Type', 'application/json');
       var pageId = req.body.pageId;
       pm.removePage(pageId, res);
     });
 
-    app.post('/api/events/page', function(req, res) {
+    // returns the events from a given page
+    app.get('/api/events/page', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      var pageId = req.body.pageId;
+      var pageId = req.query.pageId;
       if(pageId){
         em.getPageEvents(pageId, res);
       } else {
@@ -103,17 +108,34 @@ module.exports = function(app, passport) {
       }
     });
 
+    // =====================================
+    // API Methods ======   Events   =======
+    // =====================================
+
+    // returns a list of all whitelisted events
+    app.get('/api/events/whitelisted', function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      em.getWhitelisted(res);
+    });
+
+    app.get('/api/events/whitelisted/today', function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      em.getTodayWhitelisted(res);
+    });
+
+    // returns a shorter version of all events from the db
     app.get('/api/events/all/short', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
       em.getAllEventsShort(res);
     });
 
+    // sets a given event to blacklisted/whitelisted depending on the current state
     app.post('/api/events/blacklist', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
       var eventId = req.body.eventId;
       var pageId = req.body.pageId;
       if(pageId && eventId){
-        em.blackListEvent(pageId, eventId, res);
+        em.blacklist(pageId, eventId, res);
       } else {
         res.send({
           isBlacklisted : false,

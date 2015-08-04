@@ -35,7 +35,7 @@ const PageManager = React.createClass({
     var pageName = inputField.value;
     $.ajax({
       method  : 'POST',
-      url     : 'http://localhost:8000/api/pages/add',
+      url     : apiUrl.host + '/api/pages/add',
       data    : {
         pageName : pageName
       },
@@ -50,7 +50,7 @@ const PageManager = React.createClass({
     var self = this;
     $.ajax({
       method  : 'POST',
-      url   : 'http://localhost:8000/api/pages/delete',
+      url   : apiUrl.host + '/api/pages/delete',
       data  : {
         pageId : pageId
       },

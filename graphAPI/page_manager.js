@@ -22,53 +22,58 @@ module.exports = {
       var batch_query = [page_query, event_query];
       graph.batch(batch_query, function(err, result) {
         if(err){
-          console.error(err);
+          //console.error(err);
           response.send(err);
         } else {
           var pageData = JSON.parse(result[0].body);
           var eventData = JSON.parse(result[1].body);
-          Page.findOne({'fbid' : pageData.id}, function(err, page){
-            if(err)
-              response.send(err);
-            if(page) {
-              return response.send(page);
-            }
-            var page = new Page();
-            page.fbid = pageData.id;
-            console.log(pageData.id);
-            console.log(page.fbid);
-            page.name = pageData.name;
-            page.picture = pageData.picture.data.url;
-            console.log(eventData);
-            eventData.data.forEach(function(event){
-              var singleEvent = {};
-              if(Date.parse(event.start_time) > Date.now()){
-                singleEvent = {
-                  fbid          :   event.id,
-                  name          :   event.name,
-                  start         :   event.start_time,
-                  end           :   event.end_time,
-                  location      :   event.place.name,
-                  description   :   event.description,
-                  cover         :   event.cover.source,
-                  isBlacklisted :   true,
-                };
-                page.events.push(singleEvent);
+          console.log(pageData);
+            if(!pageData.error){
+            Page.findOne({'fbid' : pageData.id}, function(err, page){
+              if(err)
+                response.send(err);
+              if(page) {
+                return response.send(page);
               }
-            });
-            page.save(function(err){
-              if(err){
-                console.log(err);
+              var page = new Page();
+              page.fbid = pageData.id;
+              console.log(pageData.id);
+              console.log(page.fbid);
+              page.name = pageData.name;
+              page.picture = pageData.picture.data.url;
+              console.log(eventData);
+              eventData.data.forEach(function(event){
+                var singleEvent = {};
+                if(Date.parse(event.start_time) > Date.now()){
+                  singleEvent = {
+                    fbid          :   event.id,
+                    name          :   event.name,
+                    start         :   event.start_time,
+                    end           :   event.end_time,
+                    location      :   event.place.name,
+                    description   :   event.description,
+                    cover         :   event.cover.source,
+                    isBlacklisted :   true,
+                  };
+                  page.events.push(singleEvent);
+                }
+              });
+              page.save(function(err){
+                if(err){
+                  console.log(err);
+                  response.send({
+                    isAdded : false,
+                    error : err
+                  });
+                }
                 response.send({
-                  isAdded : false,
-                  error : err
+                  isAdded : true
                 });
-              }
-              response.send({
-                isAdded : true
               });
             });
-          });
+          } else {
+            response.send(pageData.error);
+          }
         }
       });
   },
