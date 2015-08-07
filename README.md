@@ -4,11 +4,11 @@ This will be the new backend for http://alternativ-feiern.de
 
 
 Resources:
+- NodeJS/npm - https://nodejs.org/
 - ExpressJS  - http://expressjs.com/
 - Express React View - https://github.com/reactjs/express-react-views
-- NodeJS/npm - https://nodejs.org/
 - ReactJS    - https://facebook.github.io/react/
-- MySQL      - https://www.mysql.com/
+- MongoDB    - https://www.mongodb.org/
 
 First Steps:
 
@@ -18,12 +18,32 @@ First Steps:
 4. Generate App
 5. Setup Database
 
+API:
+- GET  '/api/pages' :                   returns array of all pages in the DB.
+- POST '/api/pages/add' :               adds a page, and its events, to the DB. Login required. Expects a pageName.
+- POST '/api/pages/delete' :            deletes a page, and its events, from the DB. Login required. Expects pageId.
+- GET  '/api/events/page' :              returns the events from a given page.
+- GET  '/api/events/whitelisted' :       returns array of all whitelisted events (from all pages).
+- GET  '/api/events/whitelisted/today' : returns array of all whitelisted events happening today.
+- GET  '/api/events/all/short' :         returns all events in a shorter form (missing description) from the GraphAPI (not DB)
+- POST '/api/events/blacklist' : changes the isBlacklisted property of a given event (if true --> false, vice versa) 
+- TBC
+
 
 Progress:
 - Login
 
 ![alt tag](http://i.imgur.com/HwEzYVT.png)
 
-- Dashboard
+- Dashboard - Übersicht Seiten
 
-![alt tag](http://i.imgur.com/FdFDJrR.png)
+![alt tag](http://i.imgur.com/PvJlR3a.png)
+
+- Dashboard - Übersicht Event-Blacklist 
+
+![alt tag](http://i.imgur.com/QQX7JsA.png)
+
+- Dashboard - Übersicht Event-Whitelist 
+
+![alt tag](http://i.imgur.com/XuxPAtW.png)
+
