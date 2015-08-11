@@ -89,7 +89,7 @@ module.exports = {
   getTodayWhitelisted : function(response) {
     var todayWhitelisted = [];
     var now = new Date((Date.now() - Date.now()%1000));
-    now.setDate(now.getDate() + 1);
+    now.setDate(now.getDate());
     Page.find(function(err, pages){
       if(err){
         console.error(err);
