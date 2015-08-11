@@ -11,10 +11,11 @@ const pagetitle = ' - Alternativ-Feiern';
 module.exports = function(app, passport) {
 
     // =====================================
-    // HOME PAGE (with login links) ========
+    // HOME PAGE    ========================
     // =====================================
     app.get('/', function(req, res) {
-        res.render('index', {title: 'Backend' + pagetitle});
+        console.log('get frontpage');
+        res.render('index', {title: 'Aktuelle Events' + pagetitle});
     });
 
     // =====================================

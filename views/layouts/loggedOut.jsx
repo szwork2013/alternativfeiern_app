@@ -1,6 +1,6 @@
 const React = require('react');
 
-const DefaultLayout = React.createClass({
+const LoggedOut_Layout = React.createClass({
   render: function() {
     return (
       <html>
@@ -21,4 +21,4 @@ const DefaultLayout = React.createClass({
   }
 });
 
-module.exports = DefaultLayout;
+module.exports = LoggedOut_Layout;

@@ -1,7 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
-var DashboardLayout = React.createClass({
+var BE_Layout = React.createClass({
 
   render: function() {
     return (
@@ -37,4 +37,4 @@ var DashboardLayout = React.createClass({
 
 });
 
-module.exports = DashboardLayout;
+module.exports = BE_Layout;

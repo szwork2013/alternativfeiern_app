@@ -1,14 +1,14 @@
 var React = require('react');
-var DefaultLayout = require('./layouts/loggedOut');
+var FE_Layout = require('./layouts/frontend.jsx');
 
-var HelloMessage = React.createClass({
+var Frontpage = React.createClass({
   render: function() {
     return (
-      <DefaultLayout title={this.props.title}>
-        <a href="/login">Login</a>
-      </DefaultLayout>
+      <FE_Layout title={this.props.title}>
+        
+      </FE_Layout>
     );
   }
 });
 
-module.exports = HelloMessage;
+module.exports = Frontpage;

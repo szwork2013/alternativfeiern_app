@@ -1,6 +1,6 @@
 # AF_Backend
 
-This will be the new backend for http://alternativ-feiern.de
+This will be the new page replacing current http://alternativ-feiern.de
 
 
 Resources:
@@ -9,6 +9,7 @@ Resources:
 - Express React View - https://github.com/reactjs/express-react-views
 - ReactJS    - https://facebook.github.io/react/
 - MongoDB    - https://www.mongodb.org/
+- MaterializeCSS - http://materializecss.com/
 
 First Steps:
 
@@ -26,7 +27,7 @@ API:
 - GET  '/api/events/whitelisted' :       returns array of all whitelisted events (from all pages).
 - GET  '/api/events/whitelisted/today' : returns array of all whitelisted events happening today.
 - GET  '/api/events/all/short' :         returns all events in a shorter form (missing description) from the GraphAPI (not DB)
-- POST '/api/events/blacklist' : changes the isBlacklisted property of a given event (if true --> false, vice versa) 
+- POST '/api/events/blacklist' : changes the isBlacklisted property of a given event (if true --> false, vice versa)
 - TBC
 
 
@@ -39,11 +40,10 @@ Progress:
 
 ![alt tag](http://i.imgur.com/PvJlR3a.png)
 
-- Dashboard - Übersicht Event-Blacklist 
+- Dashboard - Übersicht Event-Blacklist
 
 ![alt tag](http://i.imgur.com/QQX7JsA.png)
 
-- Dashboard - Übersicht Event-Whitelist 
+- Dashboard - Übersicht Event-Whitelist
 
 ![alt tag](http://i.imgur.com/XuxPAtW.png)
-
