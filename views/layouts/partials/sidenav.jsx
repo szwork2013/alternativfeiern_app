@@ -1,6 +1,5 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var $ = require('jquery');
 
 var SideNavigation = React.createClass({
   render: function() {
@@ -12,28 +11,33 @@ var SideNavigation = React.createClass({
       textAlign: 'center',
       paddingTop: 16,
       paddingBottom: 16,
-      borderBottom: '1px solid #ddd'
     };
     return (
       <header>
-            <nav className="top-nav blue-grey darken-1" style={{height : 97}}>
-              <a href="#" data-activates="nav-mobile" className="button-collapse top-nav full hide-on-large-only">
-                <i className="mdi-navigation-menu"></i>
-              </a>
+            <nav className="top-nav af_green">
+              <div className="container">
+                <div className="nav-wrapper">
+                  <a className="page-title">{this.props.title}</a>
+                </div>
+              </div>
+              <div className="container">
+                <a href="#" data-activates="nav-mobile" className="button-collapse top-nav full hide-on-large-only">
+                  <i className="mdi-navigation-menu"></i>
+                </a>
+              </div>
             </nav>
             <div className="container">
             </div>
             <ul id="nav-mobile" className="side-nav fixed" style={{width: 240 + 'px'}}>
               <li class="logo" style={logoContainerStyle}>
-                <a id="logo-container" href="http://materializecss.com/" class="brand-logo">
+                <a id="logo-container" href="http://localhost:8080" class="brand-logo">
                   <img src="images/logos/brand_logo.png" style={logoStyle}></img>
                 </a>
              </li>
-              <li className="bold"><a href="about.html" className="waves-effect waves-teal">About</a></li>
-              <li className="bold"><a href="getting-started.html" className="waves-effect waves-teal">Getting Started</a></li>
-
-              <li className="bold"><a href="http://materializecss.com/mobile.html" className="waves-effect waves-teal">Mobile</a></li>
-              <li className="bold"><a href="showcase.html" className="waves-effect waves-teal">Showcase</a></li>
+              <li className="bold"><a href="/locations" className="waves-effect waves-light">Clubs, Kneipen & Co</a></li>
+              <li className="bold"><a href="/organisers" className="waves-effect waves-light">Veranstalter</a></li>
+              <li className="bold"><a href="/festivals" className="waves-effect waves-light">Festivals</a></li>
+              <li className="bold"><a href="/about" className="waves-effect waves-light">Über uns</a></li>
             </ul>
           </header>
     );

@@ -1,5 +1,5 @@
 var React = require('react');
-var DefaultLayout = require('./layouts/loggedOut');
+var DefaultLayout = require('../layouts/loggedOut');
 
 var Login = React.createClass({
 

@@ -10,7 +10,8 @@ var FE_Layout = React.createClass({
       <html>
       <Header title={this.props.title}/>
         <body className="blue-grey lighten-3">
-          <SideNav></SideNav>
+          <SideNav title={this.props.title}></SideNav>
+          {this.props.children}
         </body>
 
       </html>

@@ -15,7 +15,11 @@ module.exports = function(app, passport) {
     // =====================================
     app.get('/', function(req, res) {
         console.log('get frontpage');
-        res.render('index', {title: 'Aktuelle Events' + pagetitle});
+        res.render('home/index', {title: 'Aktuelle Events'});
+    });
+
+    app.get('/locations', function(req, res) {
+      res.render('location/locations', {title: 'Clubs, Kneipen & Co'})
     });
 
     // =====================================
@@ -25,7 +29,7 @@ module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login', {title: 'Login' + pagetitle});
+        res.render('admin/login', {title: 'Login' + pagetitle});
     });
 
     // process the login form
@@ -40,7 +44,7 @@ module.exports = function(app, passport) {
     // show the signup form
     app.get('/signup', function(req, res) {
         // render the page and pass in any flash data if it exists
-        res.render('signup');
+        res.render('admin/signup');
     });
 
     // process the signup form
@@ -57,7 +61,7 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/dashboard', isLoggedIn, function(req, res) {
-        res.render('dashboard', {
+        res.render('admin/dashboard', {
           title : 'Dashboard' + pagetitle,
           user : req.user.local // get the user out of session and pass to template
         });

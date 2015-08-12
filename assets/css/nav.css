@@ -1,0 +1,81 @@
+
+header,
+main {
+  padding-left: 240px;
+}
+
+nav {
+  line-height: 97px;
+}
+
+nav.top-nav {
+  height: 97px;
+  box-shadow: none;
+  background-color: #55C954;
+}
+
+nav.top-nav a.page-title {
+  line-height: 97px;
+  font-size: 48px;
+}
+
+.side-nav {
+    background-color: #272F38;
+}
+
+.side-nav.fixed a {
+  color: #fff;
+}
+
+.side-nav li:hover, .side-nav li.active {
+  background-color: #353E49; }
+
+a.button-collapse.top-nav.full {
+  line-height: 97px;
+}
+
+a.button-collapse.top-nav {
+  position: absolute;
+  text-align: center;
+  height: 48px;
+  width: 48px;
+  left: 7.5%;
+  top: 5px;
+  float: none;
+  /*margin-left: 1.5rem;*/
+  color: #fff;
+  font-size: 32px;
+  z-index: 2;
+}
+
+@media only screen and (min-width: 993px) {
+  .container {
+    width: 85%;
+  }
+
+  .container .row {
+    margin-left: 0px;
+  }
+}
+
+
+@media only screen and (max-width: 992px) {
+  header,
+  main {
+    padding-left: 0px;
+  }
+
+  nav .nav-wrapper a.page-title {
+    font-size: 30px;
+  }
+
+  nav .nav-wrapper {
+    text-align: right;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  a.button-collapse.top-nav {
+    left: 1%;
+  }
+}
