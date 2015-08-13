@@ -15,7 +15,8 @@ module.exports = function(app, passport) {
     // =====================================
     app.get('/', function(req, res) {
         console.log('get frontpage');
-        res.render('home/index', {title: 'Aktuelle Events'});
+        em.getTodayWhitelisted(res, 'home/index', {title: 'Aktuelle Events'});
+        //res.render('home/index', {title: 'Aktuelle Events', todayEvents : em.getTodayWhitelisted()});
     });
 
     app.get('/locations', function(req, res) {

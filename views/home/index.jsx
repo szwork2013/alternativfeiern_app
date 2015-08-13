@@ -10,7 +10,7 @@ var Frontpage = React.createClass({
           <div className="container">
             <div className="row">
               <div className="s12 m9 l10">
-                <FrontEvents></FrontEvents>
+                <FrontEvents events={this.props.todayEvents}></FrontEvents>
               </div>
             </div>
           </div>

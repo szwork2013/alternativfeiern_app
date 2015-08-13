@@ -10,7 +10,6 @@ nav {
 
 nav.top-nav {
   height: 97px;
-  box-shadow: none;
   background-color: #55C954;
 }
 
@@ -48,11 +47,11 @@ a.button-collapse.top-nav {
   z-index: 2;
 }
 
-@media only screen and (min-width: 993px) {
-  .container {
-    width: 85%;
-  }
+.card.small{
+  height: 275px;
+}
 
+@media only screen and (min-width: 993px) {
   .container .row {
     margin-left: 0px;
   }

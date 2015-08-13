@@ -6,7 +6,7 @@ var Header = React.createClass({
   render: function() {
     return (
       <head>
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
         <link type="text/css" rel="stylesheet" href="css/nav.css" />
 
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>

@@ -11,6 +11,7 @@ var SideNavigation = React.createClass({
       textAlign: 'center',
       paddingTop: 16,
       paddingBottom: 16,
+      marginBottom: 16
     };
     return (
       <header>

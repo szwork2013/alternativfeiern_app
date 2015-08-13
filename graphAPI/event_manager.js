@@ -86,7 +86,7 @@ module.exports = {
     });
   },
 
-  getTodayWhitelisted : function(response) {
+  getTodayWhitelisted : function(response, view, props) {
     var todayWhitelisted = [];
     var now = new Date((Date.now() - Date.now()%1000));
     now.setDate(now.getDate());
@@ -107,7 +107,12 @@ module.exports = {
           }
         });
       });
-      response.send(todayWhitelisted);
+      if (view && props){
+        props.todayEvents = todayWhitelisted;
+        response.render(view, props);
+      } else {
+        response.send(todayWhitelisted);
+      }
     });
   },
 
