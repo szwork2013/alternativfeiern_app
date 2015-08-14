@@ -14,9 +14,8 @@ module.exports = function(app, passport) {
     // HOME PAGE    ========================
     // =====================================
     app.get('/', function(req, res) {
-        console.log('get frontpage');
-        em.getTodayWhitelisted(res, 'home/index', {title: 'Aktuelle Events'});
-        //res.render('home/index', {title: 'Aktuelle Events', todayEvents : em.getTodayWhitelisted()});
+        //em.getTodayWhitelisted(res, 'home/index', {title: 'Aktuelle Events'});
+        res.render('home/index', {title: 'Aktuelle Events'});
     });
 
     app.get('/locations', function(req, res) {
@@ -127,6 +126,12 @@ module.exports = function(app, passport) {
     app.get('/api/events/whitelisted/today', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
       em.getTodayWhitelisted(res);
+    });
+
+    //returns a array of events sorted after starttime (without today events)
+    app.get('/api/events/whitelisted/sorted', function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      em.getSorted(res);
     });
 
     // returns a shorter version of all events from the db

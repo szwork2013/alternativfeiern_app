@@ -1,6 +1,9 @@
 const graph = require('fbgraph');
 const Page = require('../models/fb_page');
 const BlackListEvent = require('../models/blackListEvent');
+const fs = require('fs');
+const request = require('request');
+const path = require('path');
 
 const eventEdge = '/events';
 const eventFields = '?fields=description,cover';
@@ -86,7 +89,7 @@ module.exports = {
     });
   },
 
-  getTodayWhitelisted : function(response, view, props) {
+  getTodayWhitelisted : function(response) {
     var todayWhitelisted = [];
     var now = new Date((Date.now() - Date.now()%1000));
     now.setDate(now.getDate());
@@ -100,20 +103,57 @@ module.exports = {
         page.events.forEach(function(event, index){
           if(!event.isBlacklisted) {
             var startTime = new Date(Date.parse(event.start));
-            var endTime = event.end ? new Date(Date.parse(event.end)) : startTime + 43200;
-            if(startTime.toDateString() == now.toDateString()){
-              todayWhitelisted.push(event);
+            var endTime = event.end ? new Date(Date.parse(event.end)) : null;
+            console.log(event.name);
+            console.log(event.end);
+            if(endTime){
+              if(startTime <= now && endTime >= now){
+                todayWhitelisted.push(event);
+              }
+            } else {
+              if(startTime.toDateString() == now.toDateString()){
+                todayWhitelisted.push(event);
+              }
             }
           }
         });
       });
-      if (view && props){
-        props.todayEvents = todayWhitelisted;
-        response.render(view, props);
-      } else {
         response.send(todayWhitelisted);
-      }
     });
+  },
+
+  getSorted : function(response){
+    var sortedEvents = [[]];
+    for(var i = 0; i < 12; i++){
+      sortedEvents[i] =[];
+    }
+    var now = new Date((Date.now() - Date.now()%1000));
+    now.setDate(now.getDate());
+    Page.find(function(err, pages){
+      if(err){
+        console.error(err);
+        return [];
+      }
+      pages.forEach(function(page){
+        page.events.forEach(function(event){
+          if(!event.isBlacklisted){
+            var startTime = new Date(Date.parse(event.start));
+            if(startTime.toDateString() != now.toDateString()){
+              if(startTime > now){
+                sortedEvents[startTime.getMonth()].push(event);
+              }
+            }
+          }
+        })
+      });
+      //sort inner arrays near future ----> far future
+      sortedEvents.forEach(function(events){
+        events.sort(function(a, b){
+          return Date.parse(a.start) - Date.parse(b.start);
+        });
+      })
+      response.send(sortedEvents);
+    })
   },
 
   blacklist : function(pageId, eventId, response) {
@@ -135,6 +175,18 @@ module.exports = {
           });
         });
       })
+  },
+
+  downloadImage : function(imgUrl, eventId) {
+    const downloadDir = path.join(__dirname, '../assets/images/events/');
+    var fileExt = path.extname(imgUrl);
+    fileExt = /\.(jpg|png)/.exec(fileExt)[0];
+    fs.exists(downloadDir + eventId + fileExt, function(exists){
+      if(!exists){
+        request(imgUrl).pipe(fs.createWriteStream(downloadDir + eventId + fileExt)).on('close', function(){
+        });
+      }
+    });
   }
 
 }

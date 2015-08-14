@@ -45,6 +45,7 @@ module.exports = {
               eventData.data.forEach(function(event){
                 var singleEvent = {};
                 if(Date.parse(event.start_time) > Date.now()){
+                  em.downloadImage(event.cover.source, event.id);
                   singleEvent = {
                     fbid          :   event.id,
                     name          :   event.name,
@@ -125,8 +126,8 @@ module.exports = {
       res.data.forEach(function(newEvent){
         var isInArray = false;
         page.events.forEach(function(oldEvent){
+          em.downloadImage(newEvent.cover.source, newEvent.id);
           if(newEvent.id == oldEvent.fbid){
-            console.log('isInArray');
             isInArray = true;
           }
         });
@@ -148,7 +149,6 @@ module.exports = {
       page.save(function(err){
         if(err)
           console.error(err);
-        console.log('save new events');
       })
     });
   },

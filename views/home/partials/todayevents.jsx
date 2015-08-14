@@ -1,21 +1,29 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var EventManager = require('../../../graphAPI/event_manager.js');
 var EventItem = require('./eventitem.jsx');
+var $ = window.jQuery;
 
 var FrontEvents = React.createClass({
   getInitialState: function() {
     return {
-      events : this.props.events,
-      col1 : [],
-      col2 : [],
-      col3 : [],
+      col1   : [],
+      col2   : [],
+      col3   : [],
     };
   },
 
   componentWillMount: function() {
-    //console.log(this.state.events);
-    var col1 = [];
+    $.ajax({
+      type : 'GET',
+      url  : 'localhost:8080/api/events/whitelisted/today',
+      success : function(data){
+        console.log(data);
+      },
+      error : function(err){
+        console.log(err);
+      }
+    });
+    /*var col1 = [];
     var col2 = [];
     var col3 = [];
     for(var i = 0; i < this.state.events.length; i++){
@@ -33,7 +41,7 @@ var FrontEvents = React.createClass({
       col1 : col1,
       col2 : col2,
       col3 : col3
-    });
+    });*/
   },
 
   render: function() {
@@ -74,7 +82,6 @@ var FrontEvents = React.createClass({
             </div>
           </div>
         </div>
-        <div className="divider"></div>
       </div>
     );
   }

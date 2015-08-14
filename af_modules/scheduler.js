@@ -6,7 +6,7 @@ module.exports = {
   setupSchedule : function() {
     console.log('test123');
     var self = this;
-    var job = schedule.scheduleJob('* 5 * * * *', function(){
+    var job = schedule.scheduleJob('* 1 * * * *', function(){
       console.log('getting new events');
       self.getNewEvents();
     });

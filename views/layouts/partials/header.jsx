@@ -13,6 +13,10 @@ var Header = React.createClass({
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <script type="text/javascript" src="js/sidenav.js"></script>
 
+        {this.props.scripts.map(function(script){
+          return <script type="text/javascript" src={script}></script>
+        })}
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>{this.props.title}</title>
       </head>

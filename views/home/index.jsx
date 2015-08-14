@@ -1,17 +1,17 @@
 var React = require('react');
 var FE_Layout = require('../layouts/frontend.jsx');
-var FrontEvents = require('./partials/frontevents.jsx');
 
 var Frontpage = React.createClass({
   render: function() {
     return (
-      <FE_Layout title={this.props.title}>
+      <FE_Layout title={this.props.title} scripts={['js/frontpage.js']}>
         <main>
           <div className="container">
-            <div className="row">
-              <div className="s12 m9 l10">
-                <FrontEvents events={this.props.todayEvents}></FrontEvents>
-              </div>
+            <div className="row" id="todayevents">
+              {/* today events client side*/}
+            </div>
+            <div className="row" id="futureevents">
+              {/* future events client side*/}
             </div>
           </div>
         </main>

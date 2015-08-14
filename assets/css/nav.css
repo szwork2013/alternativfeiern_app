@@ -1,7 +1,27 @@
+@font-face {
+  font-family: beastwars;
+  src: url('../font/beastwars.ttf');
+}
 
 header,
 main {
   padding-left: 240px;
+}
+
+.container {
+  width: 85%;
+}
+
+.backgroundFonts {
+  position: fixed;
+  padding-left: 250px;
+  padding-top: 5px;
+  height: 100%;
+  font-family: beastwars;
+  font-size: 3em;
+  line-height: 1em;
+  opacity: 0.1;
+  z-index: -10;
 }
 
 nav {
@@ -48,7 +68,31 @@ a.button-collapse.top-nav {
 }
 
 .card.small{
-  height: 275px;
+  height: 230px;
+}
+
+.card.medium{
+  height: 330px;
+}
+.card .card-title {
+  color: #000;
+  font-size: 20px;
+  white-space: nowrap;
+}
+.card .card-content{
+  padding-top: 0px
+}
+
+@media only screen and (max-width: 1670px){
+  .card .card-title {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 1400px){
+  .card .card-title {
+    font-size: 13px;
+  }
 }
 
 @media only screen and (min-width: 993px) {
@@ -76,5 +120,9 @@ a.button-collapse.top-nav {
 @media only screen and (max-width: 600px) {
   a.button-collapse.top-nav {
     left: 1%;
+  }
+
+  .card .card-title {
+    font-size: 16px;
   }
 }
