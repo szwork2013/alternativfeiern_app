@@ -72,8 +72,20 @@ a.button-collapse.top-nav {
 }
 
 .card.medium{
-  height: 330px;
+  max-height: 330px;
+  min-height: 230px;
+  height: 100%;
 }
+
+.card.medium .card-image {
+  max-height: 250px;
+  height: 100%;
+}
+
+.card.medium .card-content {
+  height: 100%;
+}
+
 .card .card-title {
   color: #000;
   font-size: 20px;

@@ -5,22 +5,33 @@ var tz = require('moment-timezone');
 var PropTypes = React.PropTypes;
 
 var EventItem = React.createClass({
-  handleCardClick : function(event){
-    console.log('click');
-    window.location('http://alternativ-feiern.de');
+  getInitialState: function() {
+    return {
+      extSwitched : false,
+    };
   },
-  
+  changeImageExt : function(event){
+    if(!this.state.extSwitched){
+      var img = React.findDOMNode(this.refs.cardImage);
+      img.src = img.src.replace(/\.jpg/, '.png');
+      this.setState({
+        extSwitched : true
+      });
+    }
+  },
+
   render: function() {
     var eventName = this.props.event.name;
     if(this.props.event.name.length > 25){
       eventName = eventName.substring(0, 25) + '...';
     }
     var sizeIndex = Math.floor((Math.random() * 3) + 1);
-    var cardSize = sizeIndex == 3 ? "card medium" : "card small";
+    //var cardSize = sizeIndex == 3 ? "card medium" : "card small";
+    var cardSize = 'card medium';
     var imgUrl = 'images/events/' + this.props.event.fbid + '.jpg';
     return (
-      <div className={cardSize} onClick={this.handleCardClick}>
-        <div className="card-image"><img src={imgUrl}></img>
+      <div className={cardSize}>
+        <div className="card-image"><img src={imgUrl} onError={this.changeImageExt} ref="cardImage"></img>
         </div>
         <div className="card-content">
           <span className="card-title">{eventName}</span>

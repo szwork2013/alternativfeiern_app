@@ -4,6 +4,7 @@ const BlackListEvent = require('../models/blackListEvent');
 const fs = require('fs');
 const request = require('request');
 const path = require('path');
+const easyimg = require('easyimage');
 
 const eventEdge = '/events';
 const eventFields = '?fields=description,cover';
@@ -178,15 +179,27 @@ module.exports = {
   },
 
   downloadImage : function(imgUrl, eventId) {
+    var self = this;
     const downloadDir = path.join(__dirname, '../assets/images/events/');
     var fileExt = path.extname(imgUrl);
     fileExt = /\.(jpg|png)/.exec(fileExt)[0];
     fs.exists(downloadDir + eventId + fileExt, function(exists){
       if(!exists){
         request(imgUrl).pipe(fs.createWriteStream(downloadDir + eventId + fileExt)).on('close', function(){
+          self.resizeImage(downloadDir + eventId + fileExt, 450);
         });
       }
     });
-  }
+  },
+
+  resizeImage : function(file, width){
+    //Resize pngs after conversion
+    easyimg.resize({src: file, dst: file, width: width}, function(err, stdout, stderr){
+      if(err){
+        console.error(err);
+        throw err;
+      }
+    });
+  },
 
 }
