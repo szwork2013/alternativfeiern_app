@@ -18,6 +18,20 @@ module.exports = function(app, passport) {
         res.render('home/index', {title: 'Aktuelle Events'});
     });
 
+  /*  app.param('eventId', function(req, res, next, id){
+
+  });*/
+
+    app.get('/events/:eventId', function(req, res){
+      var eventId = req.params.eventId;
+      if(!isNaN(eventId)){
+        em.getSingle(eventId, res);
+      } else {
+        console.log('sth wrong with the parameter');
+        res.send('eventId is not a number');
+      }
+    });
+
     app.get('/locations', function(req, res) {
       res.render('location/locations', {title: 'Clubs, Kneipen & Co'})
     });

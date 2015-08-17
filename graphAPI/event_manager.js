@@ -157,6 +157,23 @@ module.exports = {
     })
   },
 
+  getSingle : function(eventId, response) {
+    Page.find(function(err, pages){
+      if(err){
+        console.error(err);
+        reponse.render('home/index');
+      }
+      pages.forEach(function(page){
+        page.events.forEach(function(event){
+          if(event.fbid == eventId){
+            console.log('found event: ' + event.fbid);
+            response.render('events/event', {title : event.name, event : event});
+          }
+        });
+      });
+    })
+  },
+
   blacklist : function(pageId, eventId, response) {
       Page.findOne({'fbid' : pageId}, function(err, page){
         if(err)
@@ -194,7 +211,9 @@ module.exports = {
 
   resizeImage : function(file, width){
     //Resize pngs after conversion
-    easyimg.resize({src: file, dst: file, width: width}, function(err, stdout, stderr){
+    var dirname = path.dirname(file);
+    var filename = path.basename(file);
+    easyimg.resize({src: file, dst: dirname + '/small_' + filename, width: width}, function(err, stdout, stderr){
       if(err){
         console.error(err);
         throw err;

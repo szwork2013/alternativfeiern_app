@@ -123,33 +123,35 @@ module.exports = {
 
   getNewEvents : function(page) {
     graph.get(page.fbid + '/events?fields=name,start_time,end_time,description,place,cover,id', function(err, res){
-      res.data.forEach(function(newEvent){
-        var isInArray = false;
-        page.events.forEach(function(oldEvent){
-          em.downloadImage(newEvent.cover.source, newEvent.id);
-          if(newEvent.id == oldEvent.fbid){
-            isInArray = true;
+      if(res.data){
+        res.data.forEach(function(newEvent){
+          var isInArray = false;
+          page.events.forEach(function(oldEvent){
+            em.downloadImage(newEvent.cover.source, newEvent.id);
+            if(newEvent.id == oldEvent.fbid){
+              isInArray = true;
+            }
+          });
+          if(!isInArray && Date.parse(newEvent.start_time) > Date.now()){
+            console.log('new event found');
+            var event = {
+              fbid   :   newEvent.id,
+              name   :   newEvent.name,
+              start  :   newEvent.start_time,
+              end    :   newEvent.end_time,
+              location  :   newEvent.place.name,
+              description   :   newEvent.description,
+              cover   :   newEvent.cover.source,
+              isBlacklisted : true,
+            }
+            page.events.push(event);
           }
         });
-        if(!isInArray && Date.parse(newEvent.start_time) > Date.now()){
-          console.log('new event found');
-          var event = {
-            fbid   :   newEvent.id,
-            name   :   newEvent.name,
-            start  :   newEvent.start_time,
-            end    :   newEvent.end_time,
-            location  :   newEvent.place.name,
-            description   :   newEvent.description,
-            cover   :   newEvent.cover.source,
-            isBlacklisted : true,
-          }
-          page.events.push(event);
-        }
-      });
-      page.save(function(err){
-        if(err)
-          console.error(err);
-      })
+        page.save(function(err){
+          if(err)
+            console.error(err);
+        });
+      }
     });
   },
 }

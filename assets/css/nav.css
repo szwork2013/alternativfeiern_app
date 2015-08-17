@@ -38,6 +38,10 @@ nav.top-nav a.page-title {
   font-size: 48px;
 }
 
+#sidenav-overlay {
+  z-index: 1;
+}
+
 .side-nav {
     background-color: #272F38;
 }
@@ -67,13 +71,13 @@ a.button-collapse.top-nav {
   z-index: 2;
 }
 
+
 .card.small{
   height: 230px;
 }
 
 .card.medium{
   max-height: 330px;
-  min-height: 230px;
   height: 100%;
 }
 
@@ -125,16 +129,25 @@ a.button-collapse.top-nav {
   }
 
   nav .nav-wrapper {
-    text-align: right;
+    text-align: left;
   }
 }
 
 @media only screen and (max-width: 600px) {
   a.button-collapse.top-nav {
-    left: 1%;
+    left: 84%;
   }
 
   .card .card-title {
     font-size: 16px;
+  }
+
+  .card.medium{
+    max-height: 230px;
+    height: 100%;
+  }
+
+  .card.medium .card-image {
+    max-height: 150px;
   }
 }

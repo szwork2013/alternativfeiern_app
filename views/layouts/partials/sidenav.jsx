@@ -32,7 +32,7 @@ var SideNavigation = React.createClass({
             <ul id="nav-mobile" className="side-nav fixed" style={{width: 240 + 'px'}}>
               <li class="logo" style={logoContainerStyle}>
                 <a id="logo-container" href="http://localhost:8080" class="brand-logo">
-                  <img src="images/logos/brand_logo.png" style={logoStyle}></img>
+                  <img src="/images/logos/brand_logo.png" style={logoStyle}></img>
                 </a>
              </li>
               <li className="bold"><a href="/locations" className="waves-effect waves-light">Clubs, Kneipen & Co</a></li>

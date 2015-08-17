@@ -10,7 +10,8 @@ var EventItem = React.createClass({
       extSwitched : false,
     };
   },
-  changeImageExt : function(event){
+
+  changeImageExt : function(event) {
     if(!this.state.extSwitched){
       var img = React.findDOMNode(this.refs.cardImage);
       img.src = img.src.replace(/\.jpg/, '.png');
@@ -25,14 +26,16 @@ var EventItem = React.createClass({
     if(this.props.event.name.length > 25){
       eventName = eventName.substring(0, 25) + '...';
     }
-    var sizeIndex = Math.floor((Math.random() * 3) + 1);
-    //var cardSize = sizeIndex == 3 ? "card medium" : "card small";
     var cardSize = 'card medium';
-    var imgUrl = 'images/events/' + this.props.event.fbid + '.jpg';
+    var imgUrl = 'images/events/small_' + this.props.event.fbid + '.jpg';
+    var eventUrl = '/events/' + this.props.event.fbid;
     return (
       <div className={cardSize}>
-        <div className="card-image"><img src={imgUrl} onError={this.changeImageExt} ref="cardImage"></img>
-        </div>
+        <a href={eventUrl}>
+          <div className="card-image">
+            <img src={imgUrl} onError={this.changeImageExt} ref="cardImage"></img>
+          </div>
+        </a>
         <div className="card-content">
           <span className="card-title">{eventName}</span>
           <p>
