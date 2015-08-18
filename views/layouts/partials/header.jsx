@@ -9,9 +9,15 @@ var Header = React.createClass({
         <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
         <link type="text/css" rel="stylesheet" href="/css/nav.css" />
 
+        {this.props.stylesheets.map(function(css){
+          return <link type="text/css" rel="stylesheet" href={css} />
+        })}
+
         <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="/js/materialize.min.js"></script>
         <script type="text/javascript" src="/js/sidenav.js"></script>
+        <script type="text/javascript" src="/js/moment-with-locales.js"></script>
+        <script type="text/javascript" src="/js/moment-timezone.js"></script>
 
         {this.props.scripts.map(function(script){
           return <script type="text/javascript" src={script}></script>

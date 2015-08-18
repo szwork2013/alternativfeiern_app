@@ -62,17 +62,17 @@ var MonthContainer = React.createClass({
           <h4>{this.state.monthName}</h4>
           <div className="col s12 m6 l4">
             {this.state.col1.map(function(event, index){
-                return <EventItem key={index} image event={event}></EventItem>
+                return <EventItem key={event.fbid} image event={event}></EventItem>
             })}
           </div>
           <div className="col s12  m6 l4">
             {this.state.col2.map(function(event, index){
-                return <EventItem image event={event}></EventItem>
+                return <EventItem key={event.fbid} image event={event}></EventItem>
             })}
           </div>
           <div className="col s12  m6 l4">
             {this.state.col3.map(function(event, index){
-                return <EventItem image event={event}></EventItem>
+                return <EventItem key={event.fbid} image event={event}></EventItem>
             })}
           </div>
         </div>

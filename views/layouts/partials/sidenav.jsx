@@ -1,5 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var TopNav = require('./topnav.jsx');
 
 var SideNavigation = React.createClass({
   render: function() {
@@ -15,18 +16,12 @@ var SideNavigation = React.createClass({
     };
     return (
       <header>
-            <nav className="top-nav af_green">
-              <div className="container">
-                <div className="nav-wrapper">
-                  <a className="page-title">{this.props.title}</a>
-                </div>
-              </div>
-              <div className="container">
-                <a href="#" data-activates="nav-mobile" className="button-collapse top-nav full hide-on-large-only">
-                  <i className="mdi-navigation-menu"></i>
-                </a>
-              </div>
-            </nav>
+        {this.props.children}
+            <div className="container">
+              <a href="#" data-activates="nav-mobile" className="btn sideNavBtn top-nav full hide-on-large-only">
+                Menü
+              </a>
+            </div>
             <div className="container">
             </div>
             <ul id="nav-mobile" className="side-nav fixed" style={{width: 240 + 'px'}}>

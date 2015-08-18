@@ -1,0 +1,8 @@
+.card-image.singleEvent {
+  max-height: 175px;
+  overflow: hidden;
+}
+
+.card-content {
+  font-size: 13px;
+}

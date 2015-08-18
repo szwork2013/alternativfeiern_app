@@ -1,6 +1,6 @@
 var React = require('react');
-var moment = require('moment');
-moment.locale('de')
+var moment = window.moment;
+moment.locale('de');
 var tz = require('moment-timezone');
 var PropTypes = React.PropTypes;
 

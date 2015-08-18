@@ -167,7 +167,7 @@ module.exports = {
         page.events.forEach(function(event){
           if(event.fbid == eventId){
             console.log('found event: ' + event.fbid);
-            response.render('events/event', {title : event.name, event : event});
+            response.render('events/eventPage', {title : event.name, event : event});
           }
         });
       });
