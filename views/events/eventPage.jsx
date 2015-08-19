@@ -13,11 +13,8 @@ var EventPage = React.createClass({
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={['/css/events.css']}>
         <main>
-          <div className="container">
-            <div className="row">
-              <div className="col s12 m12 l12">
-                <div className="card">
-                  <div className="card-image singleEvent">
+                <div className="card eventpage__card">
+                  <div className="card-image eventpage__img">
                     <img src={imgUrl}></img>
                   </div>
                   <div className="card-content">
@@ -34,9 +31,6 @@ var EventPage = React.createClass({
                     <a href={fbUrl} target="_blank">Facebook Event</a>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
         </main>
       </FE_Layout>
     );

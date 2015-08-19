@@ -47,9 +47,9 @@ nav.top-nav a.page-title {
 }
 
 .sideNavBtn {
-  position: fixed;
-  right: -1%;
-  bottom: 14%;
+  position: absolute;
+  right: 15px;
+  top: 15px;
   z-index: 2;
 }
 
@@ -78,13 +78,16 @@ a.button-collapse.top-nav {
   z-index: 2;
 }
 
+.container__title {
+  color: white;
+}
 
 .card.small{
   height: 230px;
 }
 
 .card.medium{
-  max-height: 330px;
+  max-height: 350px;
   height: 100%;
 }
 
@@ -141,6 +144,18 @@ a.button-collapse.top-nav {
 }
 
 @media only screen and (max-width: 600px) {
+  nav {
+    line-height: 68px;
+  }
+
+  nav.top-nav {
+    height: 68px;
+  }
+
+  nav.top-nav a.page-title {
+    line-height: 68px;
+  }
+
   a.button-collapse.top-nav {
     left: 84%;
   }
@@ -150,11 +165,13 @@ a.button-collapse.top-nav {
   }
 
   .card.medium{
-    max-height: 230px;
+    max-height: 292px;
     height: 100%;
   }
 
-  .card.medium .card-image {
-    max-height: 150px;
+  .card.medium .card-image,
+  .card-image.eventpage__img {
+    max-height: 180px;
+    overflow: hidden;
   }
 }

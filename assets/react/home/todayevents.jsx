@@ -63,7 +63,7 @@ var TodayEvents = React.createClass({
         <div>
           <div className="section">
             <div className="row">
-              <h4>Heute</h4>
+              <h4 className="container__title">Heute</h4>
               <div className="col s12 m6 l4">
                 {this.state.col1.map(function(event, index){
                     return <EventItem key={index} image event={event}></EventItem>

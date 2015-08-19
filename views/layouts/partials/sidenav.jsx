@@ -18,8 +18,8 @@ var SideNavigation = React.createClass({
       <header>
         {this.props.children}
             <div className="container">
-              <a href="#" data-activates="nav-mobile" className="btn sideNavBtn top-nav full hide-on-large-only">
-                Menü
+              <a href="#" data-activates="nav-mobile" className="btn-floating sideNavBtn top-nav full hide-on-large-only">
+                <i className="mdi-navigation-menu"></i>
               </a>
             </div>
             <div className="container">

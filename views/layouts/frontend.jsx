@@ -10,7 +10,7 @@ var FE_Layout = React.createClass({
     return (
       <html>
       <Header title={this.props.title} scripts={this.props.scripts} stylesheets={this.props.stylesheets}/>
-        <body className="blue-grey lighten-3">
+        <body className="blue-grey darken-2">
           {/*<div className="backgroundFonts">
           nürnberg<br />
           feiern<br />

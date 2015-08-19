@@ -59,7 +59,7 @@ var MonthContainer = React.createClass({
     return (
       <div className="section">
         <div className="row">
-          <h4>{this.state.monthName}</h4>
+          <h4 className="container__title">{this.state.monthName}</h4>
           <div className="col s12 m6 l4">
             {this.state.col1.map(function(event, index){
                 return <EventItem key={event.fbid} image event={event}></EventItem>

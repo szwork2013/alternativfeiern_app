@@ -39,7 +39,10 @@ var EventItem = React.createClass({
         <div className="card-content">
           <span className="card-title">{eventName}</span>
           <p>
-          {moment(this.props.event.start).tz('Europe/Berlin').calendar()}
+            {moment(this.props.event.start).tz('Europe/Berlin').calendar()}
+          </p>
+          <p>
+            {this.props.event.location}
           </p>
         </div>
       </div>
