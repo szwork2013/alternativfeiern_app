@@ -1,6 +1,8 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var FE_Layout = require('../layouts/frontend.jsx');
+var fs = require('fs');
+var path = require('path');
 var moment = require('moment');
 moment.locale('de')
 var tz = require('moment-timezone');
@@ -10,6 +12,10 @@ var EventPage = React.createClass({
   render: function() {
     var imgUrl = '/images/events/' + this.props.event.fbid + '.jpg';
     var fbUrl = 'https://facebook.com/' + this.props.event.fbid;
+    /* live: '/var/www/AF_Backend/assets' */
+    if(!fs.existsSync(path.resolve(__dirname, '../../assets' + imgUrl))){
+      imgUrl = '/images/events/' + this.props.event.fbid + '.png';
+    }
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={['/css/events.css']}>
         <main>

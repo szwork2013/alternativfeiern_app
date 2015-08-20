@@ -8,6 +8,7 @@ var FutureEvents = React.createClass({
   getInitialState: function() {
     return {
       events : [[]],
+      containerCount : 1
     };
   },
 
@@ -23,7 +24,31 @@ var FutureEvents = React.createClass({
         console.log(err);
       }
     });
+  },
 
+  componentDidMount: function() {
+    var self = this;
+    $(window).scroll(function(){
+      if($(window).scrollTop() + $(window).height() == $(document).height()){
+        self.incrContainerCount();
+      }
+    });
+  },
+
+  incrContainerCount : function (event) {
+    console.log(this.state.events.length);
+    var count = this.state.containerCount + 1;
+    console.log(count);
+    if(count >= this.state.events.length){
+      $('#noMore').css('display', 'block');
+    }
+    this.setState({
+      containerCount : count
+    });
+  },
+
+  scrollToTop : function(){
+    window.scrollTo(0,0);
   },
 
   sortMonths : function(events){
@@ -32,7 +57,7 @@ var FutureEvents = React.createClass({
     var sortedEvents = [];
     for(var i = monthNow; i < monthNow + events.length; i++){
       if(events[i] == undefined){
-        sortedEvents.push([]);
+        //sortedEvents.push([]);
       } else {
         sortedEvents.push(events[i]);
       }
@@ -43,13 +68,20 @@ var FutureEvents = React.createClass({
   },
 
   render: function() {
+    var self = this;
     if(this.state.events.length > 0){
       return (
         <div>
           {this.state.events.map(function(monthlyEvents, index){
-            console.log(monthlyEvents.length);
-            return (monthlyEvents.length > 0) ? <MonthContainer key={index} events={monthlyEvents}></MonthContainer> : null
+            return (monthlyEvents.length > 0 && self.state.containerCount > index) ? <MonthContainer key={index} events={monthlyEvents}></MonthContainer> : null
           })}
+          <div className="row" id="noMore" style={{textAlign : 'center', display : 'none', color : '#fff'}}>
+            <p>
+            Mehr gibt's nicht!<br />
+            Du vermisst ein Event? Kontaktiere uns!
+            </p>
+            <a className="btn waves-effect" id="scrollBackBtn" onClick={self.scrollToTop}>Nach oben</a>
+          </div>
         </div>
       );
     } else {

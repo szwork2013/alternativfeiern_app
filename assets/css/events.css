@@ -2,9 +2,29 @@
   margin: 23px 20%;
 }
 
+.card.eventpage__card h5 {
+  text-align: center;
+  margin-top: 25px;
+  padding: 0 13px;
+}
+
 .card-image.eventpage__img {
   max-height: 450px;
   overflow: hidden;
+}
+
+.sideNavBtn {
+  top: 128px;
+}
+
+.btn-floating {
+  height: 42px;
+  width: 42px;
+}
+
+.btn-floating i {
+  font-size: 2rem;
+  line-height: 42px;
 }
 
 @media screen and (max-width: 1400px){
@@ -28,6 +48,6 @@
   }
 
   .card-image.eventpage__img {
-    max-height: 175px;
+    height: 150px;
   }
 }

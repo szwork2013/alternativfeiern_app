@@ -109,6 +109,10 @@ a.button-collapse.top-nav {
   padding-top: 0px
 }
 
+#scrollBackBtn {
+  background-color: #55C954;
+}
+
 @media only screen and (max-width: 1670px){
   .card .card-title {
     font-size: 16px;
