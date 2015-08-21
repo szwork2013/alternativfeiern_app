@@ -2,7 +2,7 @@ const React = require('react');
 const PageManager = require('./pageManager.jsx');
 const Blacklist = require('./blacklist.jsx');
 const Whitelist = require('./whitelist.jsx');
-const $ = window.jQuery;
+const LocationManager = require('./locationManager.jsx');
 
 React.render(
   <PageManager></PageManager>,
@@ -17,4 +17,9 @@ React.render(
 React.render(
   <Whitelist></Whitelist>,
   document.getElementById('event__container-wl')
+);
+
+React.render(
+  <LocationManager></LocationManager>,
+  document.getElementById('location__container')
 );

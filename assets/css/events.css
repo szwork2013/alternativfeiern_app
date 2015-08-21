@@ -17,16 +17,6 @@
   top: 128px;
 }
 
-.btn-floating {
-  height: 42px;
-  width: 42px;
-}
-
-.btn-floating i {
-  font-size: 2rem;
-  line-height: 42px;
-}
-
 @media screen and (max-width: 1400px){
   .card.eventpage__card {
     margin: 23px 15%;

@@ -18,7 +18,7 @@ const PageManager = React.createClass({
   getPages : function() {
     var self = this;
     $.ajax({
-      url: apiUrl.host + '/api/pages',
+      url : apiUrl.host + '/api/pages',
       success : function(pages) {
         console.log(pages);
         self.setState({
@@ -34,9 +34,9 @@ const PageManager = React.createClass({
     var inputField = React.findDOMNode(this.refs.page_name);
     var pageName = inputField.value;
     $.ajax({
-      method  : 'POST',
-      url     : apiUrl.host + '/api/pages/add',
-      data    : {
+      method : 'POST',
+      url : apiUrl.host + '/api/pages/add',
+      data : {
         pageName : pageName
       },
       success : function() {

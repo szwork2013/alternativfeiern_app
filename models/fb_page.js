@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var pageSchema = mongoose.Schema({
-  fbid        :   String,
+  fbid      :   String,
   name      :   String,
   picture   :   String,
   events    :   [

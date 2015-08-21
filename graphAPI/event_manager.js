@@ -1,6 +1,5 @@
 const graph = require('fbgraph');
 const Page = require('../models/fb_page');
-const BlackListEvent = require('../models/blackListEvent');
 const fs = require('fs');
 const request = require('request');
 const path = require('path');
@@ -12,7 +11,7 @@ const eventFields = '?fields=description,cover';
 var pages;
 
 module.exports = {
-
+  //responds with an array of all events of a given page
   getPageEvents : function(pageId, response) {
     Page.findOne({'fbid' : pageId}, function(err, page){
       if(err){
@@ -27,17 +26,7 @@ module.exports = {
     });
   },
 
-  getExtendedEvent : function(eventId, callback) {
-    graph.get(eventId + eventFields, function(err, res){
-      if(err){
-        console.error(err);
-        callback(null, err);
-      }
-      console.log(res);
-      callback(res);
-    });
-  },
-
+  //responds with a short version of all events. mainly omitting the event description.
   getAllEventsShort : function(response) {
     return response.send([]);
     var self = this;
@@ -70,6 +59,7 @@ module.exports = {
     });
   },
 
+  //responds with an array of all whitelisted events
   getWhitelisted : function(response) {
     var whitelisted = [];
     Page.find(function(err, pages){
@@ -90,6 +80,7 @@ module.exports = {
     });
   },
 
+  //responds with an array of alle whitelisted events happening today
   getTodayWhitelisted : function(response) {
     var todayWhitelisted = [];
     var now = new Date((Date.now() - Date.now()%1000));
@@ -123,6 +114,15 @@ module.exports = {
     });
   },
 
+  /*
+    returns a two-dimensional array of all whitelisted events sorted after month.
+    Example:
+      [
+        [events for january],
+        [events for february],
+        ...
+      ]
+  */
   getSorted : function(response){
     var sortedEvents = [[]];
     for(var i = 0; i < 12; i++){
@@ -157,6 +157,7 @@ module.exports = {
     })
   },
 
+  //responds with a single event given the event id
   getSingle : function(eventId, response) {
     Page.find(function(err, pages){
       if(err){
@@ -174,6 +175,7 @@ module.exports = {
     })
   },
 
+  //sets the blacklist flag of an event depending on its current state
   blacklist : function(pageId, eventId, response) {
       Page.findOne({'fbid' : pageId}, function(err, page){
         if(err)
@@ -195,6 +197,8 @@ module.exports = {
       })
   },
 
+  //downloads a image for an event given the image url and event id.
+  //also triggers the resizing of that image.
   downloadImage : function(imgUrl, eventId) {
     var self = this;
     const downloadDir = path.join(__dirname, '../assets/images/events/');
@@ -209,6 +213,7 @@ module.exports = {
     });
   },
 
+  //resizes an image
   resizeImage : function(file, width){
     //Resize pngs after conversion
     var dirname = path.dirname(file);

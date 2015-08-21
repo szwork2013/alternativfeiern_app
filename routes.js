@@ -33,7 +33,7 @@ module.exports = function(app, passport) {
     });
 
     app.get('/locations', function(req, res) {
-      res.render('location/locations', {title: 'Clubs, Kneipen & Co'})
+      res.render('locations/locations', {title: 'Clubs, Kneipen & Co'});
     });
 
     // =====================================
@@ -56,7 +56,7 @@ module.exports = function(app, passport) {
     // SIGNUP ==============================
     // =====================================
     // show the signup form
-    app.get('/signup', function(req, res) {
+    /*app.get('/signup', function(req, res) {
         // render the page and pass in any flash data if it exists
         res.render('admin/signup');
     });
@@ -67,7 +67,7 @@ module.exports = function(app, passport) {
       successRedirect : '/', // redirect to the secure profile section
       failureRedirect : '/signup', // redirect back to the signup page if there is an error
       failureFlash : true // allow flash messages
-    }));
+    }));*/
 
     // =====================================
     // Dashboard SECTION =====================
