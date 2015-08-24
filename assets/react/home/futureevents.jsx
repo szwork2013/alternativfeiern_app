@@ -8,7 +8,7 @@ var FutureEvents = React.createClass({
   getInitialState: function() {
     return {
       events : [[]],
-      containerCount : 1
+      containerCount : 2
     };
   },
 

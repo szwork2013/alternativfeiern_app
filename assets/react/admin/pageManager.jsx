@@ -50,8 +50,8 @@ const PageManager = React.createClass({
     var self = this;
     $.ajax({
       method  : 'POST',
-      url   : apiUrl.host + '/api/pages/delete',
-      data  : {
+      url : apiUrl.host + '/api/pages/delete',
+      data : {
         pageId : pageId
       },
       success : function() {

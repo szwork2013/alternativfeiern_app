@@ -2,6 +2,7 @@ const React = require('react');
 const $ = window.jQuery;
 const PropTypes = React.PropTypes;
 const apiUrl = require('./apiUrl.jsx');
+const LocationItem = require('./partials/locationItem.jsx');
 
 var LocationManager = React.createClass({
   getInitialState: function() {
@@ -11,7 +12,7 @@ var LocationManager = React.createClass({
   },
 
   componentWillMount: function() {
-    //this.getLocations();
+    this.getLocations();
   },
 
   componentDidMount: function() {
@@ -58,13 +59,29 @@ var LocationManager = React.createClass({
         address.value = '';
         description.value = '';
         city.value = 'Nürnberg';
+        self.getLocations();
       }
     });
 
     console.log(location);
   },
 
+  removeLocation : function(id) {
+    var self = this;
+    $.ajax({
+      method : 'POST',
+      url : apiUrl.host + '/api/locations/delete',
+      data : {
+        id : id
+      },
+      success : function(){
+        self.getLocations();
+      }
+    });
+  },
+
   render: function() {
+    var removeLocation = this.removeLocation;
     return (
       <div>
         <h3>Locations (Clubs, Kneipen & Co)</h3>
@@ -104,6 +121,13 @@ var LocationManager = React.createClass({
         <button className="btn waves-effect" onClick={this.addLocation}>
           Hinzufügen
         </button>
+        <h4>Added Locations</h4>
+        <ul className="collection">
+          {this.state.locations.map(function(location, index){
+            location.remove = removeLocation;
+            return <LocationItem location={location} key={index}></LocationItem>
+          })}
+        </ul>
       </div>
     );
   }

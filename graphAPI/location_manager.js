@@ -1,11 +1,18 @@
 const Location = require('../models/location');
 const path = require('path');
-const easyimg = require('easyimg');
+const easyimg = require('easyimage');
 
 module.exports = {
   //responds with an array of all locations
   getLocations : function(response) {
-
+    Location.find(function(err, locations){
+      if(err) {
+        response.send({
+          msg : 'no locations',
+        });
+      }
+      response.send(locations);
+    });
   },
 
   //responds with an array of all locations of a given city
@@ -30,37 +37,83 @@ module.exports = {
     }
 
   */
-  addLocation : function(location, response) {
+  addLocation : function(newLocation, response) {
     var errResponse = {
       added : true,
       msg   : ''
     };
 
-    if (!location.name | location.name.length < 1) {
+    if (!newLocation.name | newLocation.name.length < 1) {
       errResponse.added = false;
       errResponse.msg = 'No name given or name too short (<0).';
     }
-    else if (!location.description) {
+    else if (!newLocation.description) {
       errResponse.added = false;
       errResponse.msg = 'No description given.'
     }
-    else if (!location.address | location.address.length < 1) {
+    else if (!newLocation.address | newLocation.address.length < 1) {
       errResponse.added = false;
       errResponse.msg = 'No address given or address too short (<0)';
     }
-    else if (!location.city | location.city.length < 1) {
+    else if (!newLocation.city | newLocation.city.length < 1) {
       errResponse.added = false;
-      errResponse.msg = 'No city given or city name too short (<0)':
+      errResponse.msg = 'No city given or city name too short (<0)';
     }
-    else if (!location.website | location.website.length < 1) {
+    else if (!newLocation.website | newLocation.website.length < 1) {
       errResponse.added = false;
       errResponse.msg = 'No website given or website url too short (<0)';
     }
 
     if(errResponse.added){
-
+      Location.findOne({'name' : newLocation.name}, function(err, location){
+        if(err) {
+          errResponse.added = false;
+          errResponse.msg = "error adding location.";
+          return response.send(errResponse);
+        }
+        if(location) {
+          errResponse.added = false;
+          errResponse.msg = "location already exists";
+          errResponse.location = location;
+          return response.send(errResponse);
+        }
+        var location = new Location();
+        location.name = newLocation.name;
+        location.description = newLocation.description;
+        location.address = newLocation.address;
+        location.city = newLocation.city;
+        location.website = newLocation.website;
+        location.alias = newLocation.name.replace(/ /g,'').toLowerCase();
+        location.save(function(err) {
+          if(err) {
+            errResponse.added = false;
+            errResponse.msg = "error saving location";
+          }
+          console.log('added location: ', location);
+          response.send(errResponse);
+        });
+      });
     } else {
       response.send(errResponse);
     }
-  },
+  }, /* end addLocation */
+
+  removeLocation : function(id, response) {
+    var errResponse = {
+      removed : true,
+      msg   : ''
+    };
+
+    if(id) {
+      Location.remove({'_id' : id}, function(err){
+        if(err){
+          errResponse.remove = false;
+          errResponse.msg = 'could not remove location.';
+          return response.send(errResponse);
+        }
+        console.log('removed location', id);
+        response.send(errResponse);
+      });
+    }
+  }
 }

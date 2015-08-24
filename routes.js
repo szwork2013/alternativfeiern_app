@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const auth = require('./config/auth');
 const pm = require('./graphAPI/page_manager');
 const em = require('./graphAPI/event_manager');
+const lm = require('./graphAPI/location_manager');
 
 pm.setAuthToken(auth.token);
 
@@ -167,6 +168,25 @@ module.exports = function(app, passport) {
           error : 'insufficient ids supplied'
         });
       }
+    });
+
+    // =====================================
+    // API Methods ======   LOCATIONS   ====
+    // =====================================
+
+    app.get('/api/locations', function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      lm.getLocations(res);
+    });
+
+    app.post('/api/locations/add', isLoggedIn, function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      lm.addLocation(req.body, res);
+    });
+
+    app.post('/api/locations/delete', isLoggedIn, function(req, res){
+      res.setHeader('Content-Type', 'application/json');
+      lm.removeLocation(req.body.id, res);
     });
 };
 
