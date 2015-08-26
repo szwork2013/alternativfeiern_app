@@ -1,28 +1,28 @@
-.card.eventpage__card {
+.card__link {
+  color : #000;
+}
+
+.card.singlePage__card {
   margin: 23px 20%;
 }
 
-.card.eventpage__card h5 {
+.card.singlePage__card h5 {
   text-align: center;
   margin-top: 25px;
   padding: 0 13px;
 }
 
-.card-image.eventpage__img {
+.card-image.singlePage__img {
   max-height: 450px;
   overflow: hidden;
 }
 
-.sideNavBtn {
-  top: 128px;
-}
-
-@media screen and (max-width: 1400px){
-  .card.eventpage__card {
+@media screen and (max-width: 1400px) {
+  .card.singlePage__card {
     margin: 23px 15%;
   }
 
-  .card-image.eventpage__img {
+  .card-image.singlePage__img {
     max-height: 500px;
     overflow: hidden;
   }
@@ -33,11 +33,11 @@
     font-size: 13px;
   }
 
-  .card.eventpage__card {
+  .card.singlePage__card {
     margin: 0px;
   }
 
-  .card-image.eventpage__img {
+  .card-image.singlePage__img {
     height: 150px;
   }
 }

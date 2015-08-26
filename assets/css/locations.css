@@ -1,0 +1,43 @@
+.tabs {
+  height: 60px;
+}
+
+ul.tabs {
+  padding-top: 16px;
+  background-color: #55c954;
+  margin-bottom: 15px;
+}
+
+.tabs .tab a {
+  color: #fff;
+}
+
+.tabs .tab a.active {
+  color: #55c954;
+}
+
+.tabs .tab a:hover {
+  color: #55c954;
+}
+
+.tabs .indicator {
+  background-color: #55c954;
+  bottom: -3px;
+}
+
+p.cityDescription {
+  color: #fff;
+  text-align: center;
+}
+
+@media screen and (min-width: 1400px) {
+  .tabContent {
+    padding: 0 13%;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  p.cityDescription {
+    font-size: 17px;
+  }
+}

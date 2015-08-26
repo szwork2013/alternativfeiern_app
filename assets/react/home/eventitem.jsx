@@ -26,17 +26,15 @@ var EventItem = React.createClass({
     if(this.props.event.name.length > 25){
       eventName = eventName.substring(0, 25) + '...';
     }
-    var cardSize = 'card medium';
     var imgUrl = 'images/events/small_' + this.props.event.fbid + '.jpg';
     var eventUrl = '/events/' + this.props.event.fbid;
     return (
-      <div className={cardSize}>
-        <a href={eventUrl}>
+      <div className="card medium hoverable">
+        <a href={eventUrl} className="card__link">
           <div className="card-image">
             <img src={imgUrl} onError={this.changeImageExt} ref="cardImage"></img>
           </div>
-        </a>
-        <div className="card-content">
+          <div className="card-content">
           <span className="card-title">{eventName}</span>
           <p>
             {moment(this.props.event.start).tz('Europe/Berlin').calendar()}
@@ -44,7 +42,8 @@ var EventItem = React.createClass({
           <p>
             {this.props.event.location}
           </p>
-        </div>
+          </div>
+        </a>
       </div>
     );
   }

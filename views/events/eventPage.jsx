@@ -1,11 +1,11 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var FE_Layout = require('../layouts/frontend.jsx');
-var fs = require('fs');
-var path = require('path');
+const React = require('react');
+const PropTypes = React.PropTypes;
+const FE_Layout = require('../layouts/frontend.jsx');
+const fs = require('fs');
+const path = require('path');
 var moment = require('moment');
 moment.locale('de')
-var tz = require('moment-timezone');
+const tz = require('moment-timezone');
 
 var EventPage = React.createClass({
 
@@ -17,10 +17,10 @@ var EventPage = React.createClass({
       imgUrl = '/images/events/' + this.props.event.fbid + '.png';
     }
     return (
-      <FE_Layout title={this.props.title} scripts={[]} stylesheets={['/css/events.css']}>
+      <FE_Layout title={this.props.title} scripts={[]} stylesheets={['/css/sideNavBtn.css']}>
         <main>
-                <div className="card eventpage__card">
-                  <div className="card-image eventpage__img">
+                <div className="card singlePage__card">
+                  <div className="card-image singlePage__img">
                     <img src={imgUrl}></img>
                   </div>
                   <div className="card-content">

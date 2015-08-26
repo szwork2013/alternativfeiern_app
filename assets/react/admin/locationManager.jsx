@@ -40,13 +40,15 @@ var LocationManager = React.createClass({
     var address = React.findDOMNode(this.refs.location_address);
     var city = React.findDOMNode(this.refs.location_city);
     var description = React.findDOMNode(this.refs.location_description);
+    var img = React.findDOMNode(this.refs.location_img);
 
     var location = {
       name : name.value,
       description : description.value,
       address : address.value,
       city : city.value,
-      website : website.value
+      website : website.value,
+      img : img.value,
     }
 
     $.ajax({
@@ -58,12 +60,10 @@ var LocationManager = React.createClass({
         website.value = '';
         address.value = '';
         description.value = '';
-        city.value = 'Nürnberg';
+        img.value = '';
         self.getLocations();
       }
     });
-
-    console.log(location);
   },
 
   removeLocation : function(id) {
@@ -109,6 +109,12 @@ var LocationManager = React.createClass({
                 <option value="Ansbach">Ansbach</option>
               </select>
               <label>Stadt</label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s6">
+              <input id="location_img" type="url" className="validate" ref="location_img"></input>
+              <label htmlFor="location_img">Bild URL</label>
             </div>
           </div>
           <div className="row">

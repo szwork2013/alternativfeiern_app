@@ -8,6 +8,7 @@ var Header = React.createClass({
       <head>
         <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
         <link type="text/css" rel="stylesheet" href="/css/nav.css" />
+        <link type="text/css" rel="stylesheet" href="/css/global.css" />
 
         {this.props.stylesheets.map(function(css){
           return <link type="text/css" rel="stylesheet" href={css} />

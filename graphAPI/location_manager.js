@@ -1,6 +1,7 @@
 const Location = require('../models/location');
 const path = require('path');
-const easyimg = require('easyimage');
+const fs = require('fs');
+const request = require('request');
 
 module.exports = {
   //responds with an array of all locations
@@ -21,8 +22,28 @@ module.exports = {
   },
 
   //reponds with a single location given an id
-  getLocation : function(locationId) {
+  getLocation : function(alias, response) {
+    var self = this;
 
+    var errResponse = {
+      found : true,
+      msg : ''
+    };
+
+    if(!alias | alias.length < 1) {
+      errResponse.found = false;
+      errResponse.msg = 'no alias supplied';
+    } else {
+      Location.findOne({'alias' : alias}, function(err, location){
+        if(err) {
+          errResponse.found = false;
+          errResponse.msg = 'could not found location with alias: ' + alias;
+          return response.send(errResponse);
+        }
+        console.log('found location: ', location.name);
+        response.render('locations/locationPage', {title : location.name, location: location});
+      });
+    }
   },
 
   /*
@@ -33,11 +54,14 @@ module.exports = {
       description : String, required
       address     : String, required
       city        : String, required
-      website     : String, required
+      website     : Url, required
+      img         : Url, required
     }
 
   */
   addLocation : function(newLocation, response) {
+    var self = this;
+
     var errResponse = {
       added : true,
       msg   : ''
@@ -63,6 +87,10 @@ module.exports = {
       errResponse.added = false;
       errResponse.msg = 'No website given or website url too short (<0)';
     }
+    else if (!newLocation.img | newLocation.img.length < 1) {
+      errResponse.added = false;
+      errResponse.msg = 'No img url supplied';
+    }
 
     if(errResponse.added){
       Location.findOne({'name' : newLocation.name}, function(err, location){
@@ -83,6 +111,7 @@ module.exports = {
         location.address = newLocation.address;
         location.city = newLocation.city;
         location.website = newLocation.website;
+        location.img = newLocation.img;
         location.alias = newLocation.name.replace(/ /g,'').toLowerCase();
         location.save(function(err) {
           if(err) {
@@ -90,6 +119,7 @@ module.exports = {
             errResponse.msg = "error saving location";
           }
           console.log('added location: ', location);
+          self.downloadImage(location.img, location.alias);
           response.send(errResponse);
         });
       });
@@ -115,5 +145,22 @@ module.exports = {
         response.send(errResponse);
       });
     }
+  },
+
+  downloadImage : function(imgUrl, locationAlias) {
+    var self = this;
+    const downloadDir = path.join(__dirname, '../assets/images/locations/');
+    fileExt = /\.(jpg|png)/.exec(path.extname(imgUrl))[0];
+    fs.exists(downloadDir + locationAlias + fileExt, function(exists){
+      if(!exists) {
+        request(imgUrl).pipe(fs.createWriteStream(downloadDir + locationAlias + fileExt)).on('close', function(){
+          console.log('downloaded location image');
+          return;
+        });
+      } else {
+        console.log('image already exists');
+        return;
+      }
+    });
   }
 }

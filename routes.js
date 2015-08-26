@@ -37,6 +37,11 @@ module.exports = function(app, passport) {
       res.render('locations/locations', {title: 'Clubs, Kneipen & Co'});
     });
 
+    app.get('/locations/:locationAlias', function(req, res){
+      var alias = req.params.locationAlias;
+      lm.getLocation(alias, res);
+    });
+
     // =====================================
     // LOGIN ===============================
     // =====================================

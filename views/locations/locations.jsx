@@ -6,7 +6,7 @@ var Locations = React.createClass({
 
   render: function() {
     return (
-      <FE_Layout title={this.props.title} scripts={['/js/locations.js']} stylesheets={[]} withTopNav>
+      <FE_Layout title={this.props.title} scripts={['/js/locations.js']} stylesheets={['/css/locations.css']} withTopNav>
         <main id="locationOverview">
         </main>
       </FE_Layout>
