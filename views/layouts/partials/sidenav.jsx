@@ -35,7 +35,17 @@ var SideNavigation = React.createClass({
               <li className="bold"><a href="/festivals" className="waves-effect waves-light">Festivals</a></li>
               <li className="bold"><a href="/about" className="waves-effect waves-light">Über uns</a></li>*/}
               <li><a href="/login">Login</a></li>
+
+                <hr />
+
+              <li>
+                <a href="/about" style={{fontSize : '12px'}}>Über uns</a>
+              </li>
+              <li>
+                <a href="/impressum" style={{fontSize : '12px'}}>Impressum</a>
+              </li>
             </ul>
+
           </header>
     );
   }

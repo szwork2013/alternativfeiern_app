@@ -33,6 +33,10 @@
     font-size: 13px;
   }
 
+  .card-content.singlePage__content {
+    min-height: 330px;
+  }
+
   .card.singlePage__card {
     margin: 0px;
   }

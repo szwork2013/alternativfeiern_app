@@ -1,6 +1,7 @@
 const React = require('react');
 const PropTypes = React.PropTypes;
 const FE_Layout = require('../layouts/frontend.jsx');
+const BackButton = require('../layouts/partials/backbutton.jsx');
 const fs = require('fs');
 const path = require('path');
 var moment = require('moment');
@@ -18,12 +19,13 @@ var EventPage = React.createClass({
     }
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={['/css/sideNavBtn.css']}>
+        <BackButton></BackButton>
         <main>
                 <div className="card singlePage__card">
                   <div className="card-image singlePage__img">
                     <img src={imgUrl}></img>
                   </div>
-                  <div className="card-content">
+                  <div className="card-content singlePage__content">
                     <h5>{this.props.event.name}</h5>
                     <ul className="collection">
                       <li className="collection-item">Start: <b>{moment(this.props.event.start).tz('Europe/Berlin').calendar()}</b></li>

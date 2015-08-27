@@ -19,10 +19,14 @@ module.exports = function(app, passport) {
         res.render('home/index', {title: 'Aktuelle Events'});
     });
 
-  /*  app.param('eventId', function(req, res, next, id){
+    app.get('/about', function(req, res) {
+      res.render('home/about', {title : 'Über uns'});
+    });
 
-  });*/
-
+    app.get('/impressum', function(req, res) {
+      res.render('home/impressum', {title : 'Impressum'});
+    });
+    
     app.get('/events/:eventId', function(req, res){
       var eventId = req.params.eventId;
       if(!isNaN(eventId)){

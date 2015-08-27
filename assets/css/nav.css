@@ -46,7 +46,13 @@ nav.top-nav a.page-title {
     background-color: #272F38;
 }
 
-.sideNavBtn {
+.btn-floating {
+  height: 42px;
+  width: 42px;
+}
+
+.sideNavBtn,
+.backButton {
   position: absolute;
   right: 13px;
   top: 48px;
@@ -54,10 +60,20 @@ nav.top-nav a.page-title {
   background-color: #272F38;
 }
 
-.btn-floating {
-  height: 42px;
-  width: 42px;
+.backButton {
+  top: 55px;
+  left: 280px;
+  padding: 3px;
+  height: 50px;
+  width: 50px;
+  background-color: #55c954;
 }
+
+.backButton img {
+  height: 100%;
+  width: 100%;
+}
+
 
 .btn-floating i {
   font-size: 2rem;
@@ -120,6 +136,10 @@ a.button-collapse.top-nav {
   padding-top: 0px
 }
 
+.card .card-action a {
+  color: #55c954;
+}
+
 #scrollBackBtn {
   background-color: #55C954;
 }
@@ -156,6 +176,13 @@ a.button-collapse.top-nav {
   nav .nav-wrapper {
     text-align: left;
   }
+
+  .backButton {
+    left: 13px;
+    padding: 3px;
+    height: 42px;
+    width: 42px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -174,6 +201,8 @@ a.button-collapse.top-nav {
   a.button-collapse.top-nav {
     left: 84%;
   }
+
+
 
   .card .card-title {
     font-size: 16px;

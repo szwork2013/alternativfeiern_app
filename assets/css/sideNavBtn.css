@@ -1,3 +1,9 @@
 .sideNavBtn {
   top: 128px;
 }
+
+@media screen and (max-width: 992px) {
+  .backButton {
+    top: 128px;
+  }
+}
