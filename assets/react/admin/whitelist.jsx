@@ -44,6 +44,23 @@ const Whitelist = React.createClass({
     });
   },
 
+  addEvent : function(event) {
+    event.preventDefault();
+    var self = this;
+    var id = React.findDOMNode(this.refs.event_id);
+    $.ajax({
+      method  : 'POST',
+      url : apiUrl.host + '/api/events/addPrivate',
+      data : {
+        id : id.value
+      },
+      success : function() {
+        self.getPages();
+        id.value = ''
+      },
+    });
+  },
+
   render: function() {
     var blackList = this.blackListEvent;
     return (
@@ -54,6 +71,11 @@ const Whitelist = React.createClass({
               <div className="input-field col s6">
                 <input id="page_name" type="text" className="validate" ref="page_name" onChange={this.handleInput}></input>
                 <label htmlFor="page_name">Suche Seiten</label>
+              </div>
+              <div className="input-field col s4">
+                <input id="event_id" type="text" className="validate" ref="event_id"></input>
+                <label htmlFor="event_id">Event hinzufügen (via Facebook-ID)</label>
+                <a className="btn" onClick={this.addEvent}>Hinzufügen</a>
               </div>
             </div>
           </form>

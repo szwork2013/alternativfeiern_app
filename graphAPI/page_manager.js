@@ -124,6 +124,8 @@ module.exports = {
 
   getNewEvents : function(page) {
     graph.get(page.fbid + '/events?fields=name,start_time,end_time,description,place,cover,id', function(err, res){
+      if(err)
+        return console.error(err);
       if(res.data){
         res.data.forEach(function(newEvent){
           var isInArray = false;

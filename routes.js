@@ -26,7 +26,7 @@ module.exports = function(app, passport) {
     app.get('/impressum', function(req, res) {
       res.render('home/impressum', {title : 'Impressum'});
     });
-    
+
     app.get('/events/:eventId', function(req, res){
       var eventId = req.params.eventId;
       if(!isNaN(eventId)){
@@ -176,6 +176,16 @@ module.exports = function(app, passport) {
           isBlacklisted : false,
           error : 'insufficient ids supplied'
         });
+      }
+    });
+
+    app.post('/api/events/addPrivate', isLoggedIn, function(req, res){
+      console.log(req.body);
+      if(req.body.id) {
+        em.pushPrivateEvent(req.body.id);
+        res.end('done.');
+      } else {
+        res.send('no id supplied.');
       }
     });
 

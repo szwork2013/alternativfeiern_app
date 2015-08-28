@@ -175,26 +175,73 @@ module.exports = {
     })
   },
 
-  //sets the blacklist flag of an event depending on its current state
-  blacklist : function(pageId, eventId, response) {
-      Page.findOne({'fbid' : pageId}, function(err, page){
-        if(err)
-          return response.send(err);
-        var state = null;
+  pushPrivateEvent : function(eventId) {
+    var self = this;
+    Page.findOne({'fbid' : '703596129748908'}, function(err, page){
+      if(err) {
+        console.error(err);
+        return;
+      }
+      graph.get(eventId + '?fields=id,name,start_time,end_time,place,description,cover', function(err, res){
+        if(err){
+          console.error(err);
+          return;
+        }
+        console.log('Private Event: ', res);
+        var newEvent = {};
+        newEvent.fbid = res.id;
+        newEvent.name = res.name;
+        newEvent.start = res.start_time;
+        if(res.end_time)
+          newEvent.end = res.end_time;
+        newEvent.location = res.place.name;
+        newEvent.description = res.description;
+        if(res.cover) {
+          newEvent.cover = res.cover.source;
+          self.downloadImage(newEvent.cover, newEvent.fbid);
+        }
+        var isAdded = false;
         page.events.forEach(function(event){
-          if(event.fbid == eventId){
-            event.isBlacklisted = event.isBlacklisted ? false : true;
-            state = event.isBlacklisted;
+          if(event.fbid == newEvent.fbid) {
+            isAdded = true;
+            return console.log('event already in array: ', event);
           }
         });
-        page.save(function(err){
-          if(err)
-            console.error(err);
-          return response.send({
-              isBlacklisted : state
+        if(!isAdded){
+          page.events.push(newEvent);
+          page.save(function(err){
+            if(err)
+              console.error(err);
           });
+        }
+      });
+    });
+  },
+
+  //sets the blacklist flag of an event depending on its current state
+  blacklist : function(pageId, eventId, response) {
+    var self = this;
+    Page.findOne({'fbid' : pageId}, function(err, page){
+      if(err)
+        return response.send(err);
+      var state = null;
+      page.events.forEach(function(event){
+        if(event.fbid == eventId){
+          event.isBlacklisted = event.isBlacklisted ? false : true;
+          state = event.isBlacklisted;
+          if(!event.isBlacklisted)
+            if(event.cover)
+              self.downloadImage(event.cover, event.fbid);
+        }
+      });
+      page.save(function(err){
+        if(err)
+          console.error(err);
+        return response.send({
+            isBlacklisted : state
         });
-      })
+      });
+    });
   },
 
   //downloads a image for an event given the image url and event id.
