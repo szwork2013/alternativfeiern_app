@@ -2,6 +2,8 @@
 
 This will be the new page replacing current http://alternativ-feiern.de
 
+--> BETA: http://alternativ-feiern.de:8080/
+
 
 Resources:
 - NodeJS/npm - https://nodejs.org/
