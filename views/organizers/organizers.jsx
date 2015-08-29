@@ -7,7 +7,7 @@ var Organizers = React.createClass({
 
   render: function() {
     return (
-      <FE_Layout title={this.props.title} scripts={[]} stylesheets={['/css/locations.css', '/css/organizers.css']} withTopNav>
+      <FE_Layout title={this.props.title} scripts={[]} stylesheets={['/css/organizers.css']} withTopNav>
         <main id="organizers__overview">
           <div className="container">
             <p className="cityDescription">

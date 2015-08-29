@@ -34,12 +34,13 @@ var SideNavigation = React.createClass({
              </li>
               <li className="bold"><a href="/locations">Clubs, Kneipen & Co</a></li>
               <li className="bold"><a href="/organizers">Veranstalter</a></li>
-            {/*<li className="bold"><a href="/festivals" className="waves-effect waves-light">Festivals</a></li>
-              <li className="bold"><a href="/about" className="waves-effect waves-light">Über uns</a></li>*/}
+              <li className="bold"><a href="/festivals">Festivals</a></li>
               <li><a href="/login">Login</a></li>
 
                 <hr />
-
+              <li>
+                <a href="/newsletter" style={{fontSize : '12px'}}>Newsletter</a>
+              </li>
               <li>
                 <a href="/about" style={{fontSize : '12px'}}>Über uns</a>
               </li>

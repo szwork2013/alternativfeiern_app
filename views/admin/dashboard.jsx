@@ -21,6 +21,9 @@ var Dashboard = React.createClass({
               <li className="tab col s3">
                 <a href="#location__container">Locations</a>
               </li>
+              <li className="tab col s3">
+                <a href="#festival__container">Festivals</a>
+              </li>
             </ul>
           </div>
           {/* tab content */}
@@ -35,6 +38,9 @@ var Dashboard = React.createClass({
           </div>
           <div className="container">
             <div className="col s12" id="location__container"></div>
+          </div>
+          <div className="container">
+            <div className="col s12" id="festival__container"></div>
           </div>
         </div>
       </DashboardLayout>

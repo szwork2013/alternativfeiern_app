@@ -17,6 +17,20 @@
   overflow: hidden;
 }
 
+.card .card-action {
+  text-align: center;
+}
+
+p.cityDescription {
+  color: #fff;
+  text-align: center;
+}
+@media screen and (min-width: 1400px) {
+  p.cityDescription {
+    padding: 0 305px;
+  }
+}
+
 @media screen and (max-width: 1400px) {
   .card.singlePage__card {
     margin: 23px 15%;
@@ -25,6 +39,12 @@
   .card-image.singlePage__img {
     max-height: 500px;
     overflow: hidden;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  p.cityDescription {
+    font-size: 17px;
   }
 }
 
@@ -39,9 +59,14 @@
 
   .card.singlePage__card {
     margin: 0px;
+    min-height: 100vh;
   }
 
   .card-image.singlePage__img {
     height: 150px;
+  }
+
+  p.cityDescription {
+    margin-top: 25px;
   }
 }

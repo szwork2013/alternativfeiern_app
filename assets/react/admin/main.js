@@ -3,6 +3,7 @@ const PageManager = require('./pageManager.jsx');
 const Blacklist = require('./blacklist.jsx');
 const Whitelist = require('./whitelist.jsx');
 const LocationManager = require('./locationManager.jsx');
+const FestivalManager = require('./festivalManager.jsx');
 
 React.render(
   <PageManager></PageManager>,
@@ -22,4 +23,9 @@ React.render(
 React.render(
   <LocationManager></LocationManager>,
   document.getElementById('location__container')
+);
+
+React.render(
+  <FestivalManager></FestivalManager>,
+  document.getElementById('festival__container')
 );

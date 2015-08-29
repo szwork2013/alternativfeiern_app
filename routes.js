@@ -4,6 +4,8 @@ const auth = require('./config/auth');
 const pm = require('./graphAPI/page_manager');
 const em = require('./graphAPI/event_manager');
 const lm = require('./graphAPI/location_manager');
+const fm = require('./graphAPI/festival_manager');
+const newsletter = require('./af_modules/newsletter');
 
 pm.setAuthToken(auth.token);
 
@@ -17,6 +19,14 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         //em.getTodayWhitelisted(res, 'home/index', {title: 'Aktuelle Events'});
         res.render('home/index', {title: 'Aktuelle Events'});
+    });
+
+    app.get('/newsletter', function(req, res){
+      res.render('home/newsletter', {title : 'Newsletter'});
+    });
+
+    app.post('/newsletter/subscribe', function(req, res){
+      newsletter.subscribe(req, res);
     });
 
     app.get('/about', function(req, res) {
@@ -54,6 +64,18 @@ module.exports = function(app, passport) {
     app.get('/locations/:locationAlias', function(req, res){
       var alias = req.params.locationAlias;
       lm.getLocation(alias, res);
+    });
+
+    // =====================================
+    // LOCATIONS ===========================
+    // =====================================
+    app.get('/festivals', function(req, res){
+      res.render('festivals/festivals', {title: 'Festivals'});
+    });
+
+    app.get('/festivals/:festivaAlias', function(req, res) {
+      var alias = req.params.festivaAlias;
+      fm.getFestival(alias, res);
     });
 
     // =====================================
@@ -216,6 +238,25 @@ module.exports = function(app, passport) {
     app.post('/api/locations/delete', isLoggedIn, function(req, res){
       res.setHeader('Content-Type', 'application/json');
       lm.removeLocation(req.body.id, res);
+    });
+
+    // =====================================
+    // API Methods ======   FESTIVALS   ====
+    // =====================================
+
+    app.get('/api/festivals', function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      fm.getFestivals(res);
+    });
+
+    app.post('/api/festivals/add', isLoggedIn, function(req, res){
+      res.setHeader('Content-Type', 'application/json');
+      fm.addFestival(req.body, res);
+    });
+
+    app.post('/api/festivals/delete', isLoggedIn, function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      fm.removeFestival(req.body.id, res);
     });
 };
 

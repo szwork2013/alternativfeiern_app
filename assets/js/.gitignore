@@ -1,0 +1,8 @@
+# Ignore everything
+bundle.js
+festivals.js
+frontpage.js
+locations.js
+newsletter.js
+# Except this file
+!.gitignore
