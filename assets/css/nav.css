@@ -38,6 +38,15 @@ nav.top-nav a.page-title {
   font-size: 48px;
 }
 
+.pageName {
+  height: 100%;
+}
+
+.pageName h5 {
+  border-bottom: 2pt solid #55c954;
+  margin-top: 17px;
+}
+
 #sidenav-overlay {
   z-index: 1;
 }
@@ -196,6 +205,10 @@ a.button-collapse.top-nav {
 
   nav.top-nav a.page-title {
     line-height: 68px;
+  }
+
+  .pageName h5 {
+    font-size: 1.74rem;
   }
 
   a.button-collapse.top-nav {

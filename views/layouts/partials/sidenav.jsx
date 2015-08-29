@@ -12,7 +12,6 @@ var SideNavigation = React.createClass({
       textAlign: 'center',
       paddingTop: 16,
       paddingBottom: 16,
-      marginBottom: 16
     };
     return (
       <header>
@@ -26,13 +25,16 @@ var SideNavigation = React.createClass({
             </div>
             <ul id="nav-mobile" className="side-nav fixed" style={{width: 240 + 'px'}}>
               <li class="logo" style={logoContainerStyle}>
-                <a id="logo-container" href="http://localhost:8080" class="brand-logo">
+                <a id="logo-container" href="/" class="brand-logo">
                   <img src="/images/logos/brand_logo.png" style={logoStyle}></img>
+                </a>
+                <a href="/" className="pageName">
+                  <h5>Alternativ-Feiern</h5>
                 </a>
              </li>
               <li className="bold"><a href="/locations">Clubs, Kneipen & Co</a></li>
-              {/*<li className="bold"><a href="/organisers" className="waves-effect waves-light">Veranstalter</a></li>
-              <li className="bold"><a href="/festivals" className="waves-effect waves-light">Festivals</a></li>
+              <li className="bold"><a href="/organizers">Veranstalter</a></li>
+            {/*<li className="bold"><a href="/festivals" className="waves-effect waves-light">Festivals</a></li>
               <li className="bold"><a href="/about" className="waves-effect waves-light">Über uns</a></li>*/}
               <li><a href="/login">Login</a></li>
 

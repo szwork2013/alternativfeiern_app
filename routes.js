@@ -36,7 +36,17 @@ module.exports = function(app, passport) {
         res.send('eventId is not a number');
       }
     });
+    // =====================================
+    // ORGANIZERS ==========================
+    // =====================================
 
+    app.get('/organizers', function(req, res){
+      res.render('organizers/organizers', {title: 'Veranstalter'});
+    });
+
+    // =====================================
+    // LOCATIONS ===========================
+    // =====================================
     app.get('/locations', function(req, res) {
       res.render('locations/locations', {title: 'Clubs, Kneipen & Co'});
     });

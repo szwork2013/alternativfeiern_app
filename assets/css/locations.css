@@ -34,10 +34,19 @@ p.cityDescription {
   .tabContent {
     padding: 0 13%;
   }
+  p.cityDescription {
+    padding: 0 305px;
+  }
 }
 
 @media screen and (min-width: 993px) {
   p.cityDescription {
     font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  p.cityDescription {
+    margin-top: 25px;
   }
 }

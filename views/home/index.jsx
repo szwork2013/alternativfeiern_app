@@ -7,7 +7,7 @@ var Frontpage = React.createClass({
       <FE_Layout title={this.props.title} scripts={['/js/frontpage.js']} stylesheets={[]} withTopNav>
         <main>
           <div className="container">
-            <div className="row" id="todayevents">
+            <div className="row" id="todayevents" style={{marginBottom : 0}}>
               {/* today events client side*/}
             </div>
             <div className="row" id="futureevents">
