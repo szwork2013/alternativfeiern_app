@@ -6,7 +6,7 @@ var Newsletter = React.createClass({
 
   render: function() {
     return (
-      <FE_Layout title={this.props.title} scripts={['/js/newsletter.js']} stylesheets={[]} withTopNav>
+      <FE_Layout title={this.props.title} scripts={['newsletter.js']} stylesheets={[]} withTopNav>
         <main id="newsletterContainer">
         </main>
       </FE_Layout>

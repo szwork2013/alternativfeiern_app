@@ -28,6 +28,9 @@ var FutureEvents = React.createClass({
 
   componentDidMount: function() {
     var self = this;
+    if($(window).scrollTop() + $(window).height() == $(document).height()){
+      self.incrContainerCount();
+    }
     $(window).scroll(function(){
       if($(window).scrollTop() + $(window).height() == $(document).height()){
         self.incrContainerCount();
@@ -36,15 +39,13 @@ var FutureEvents = React.createClass({
   },
 
   incrContainerCount : function (event) {
-    console.log(this.state.events.length);
-    var count = this.state.containerCount + 1;
-    console.log(count);
-    if(count >= this.state.events.length){
-      $('#noMore').css('display', 'block');
+    if(this.state.containerCount < this.state.events.length) {
+      var count = this.state.containerCount + 1;
+      console.log(count);
+      this.setState({
+        containerCount : count
+      });
     }
-    this.setState({
-      containerCount : count
-    });
   },
 
   scrollToTop : function(){
@@ -67,21 +68,47 @@ var FutureEvents = React.createClass({
     });
   },
 
+  returnSrollBack : function(){
+    return (
+      <div className="row" id="noMore" style={{textAlign : 'center', color : '#fff'}}>
+        <p>
+        Mehr gibt's nicht!<br />
+        Du vermisst ein Event? Kontaktiere uns!
+        </p>
+        <a className="btn waves-effect" id="scrollBackBtn" onClick={this.scrollToTop}>Nach oben</a>
+      </div>
+    )
+  },
+
+  returnPreloader : function() {
+    return (
+      <div className="row" style={{textAlign : 'center'}}>
+        <div className="preloader-wrapper small active">
+          <div className="spinner-layer spinner-green-only">
+            <div className="circle-clipper left">
+              <div className="circle"></div>
+            </div>
+            <div className="gap-patch">
+              <div className="circle"></div>
+            </div>
+            <div className="circle-clipper right">
+              <div className="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  },
+
   render: function() {
     var self = this;
     if(this.state.events.length > 0){
       return (
         <div>
           {this.state.events.map(function(monthlyEvents, index){
-            return (monthlyEvents.length > 0 && self.state.containerCount > index) ? <MonthContainer key={index} events={monthlyEvents}></MonthContainer> : null
+            return (monthlyEvents.length > 0 && self.state.containerCount >= index) ? <MonthContainer key={index} events={monthlyEvents} listView={self.props.listView}></MonthContainer> : null
           })}
-          <div className="row" id="noMore" style={{textAlign : 'center', display : 'none', color : '#fff'}}>
-            <p>
-            Mehr gibt's nicht!<br />
-            Du vermisst ein Event? Kontaktiere uns!
-            </p>
-            <a className="btn waves-effect" id="scrollBackBtn" onClick={self.scrollToTop}>Nach oben</a>
-          </div>
+          {this.state.containerCount >= this.state.events.length ? this.returnSrollBack() : this.returnPreloader()}
         </div>
       );
     } else {

@@ -1,4 +1,4 @@
-const DashboardLayout = require('../layouts/loggedIn');
+const DashboardLayout = require('../layouts/dashboard');
 const React = require('react');
 
 var Dashboard = React.createClass({

@@ -101,6 +101,10 @@ module.exports = {
     }
   },
 
+  /*
+    returns a array of all pages in the db.
+    page events will be removed, a event counter will be submitted instead.
+  */
   getAllPages : function(res){
     Page.find(function(err, pages){
       if(err) {
@@ -122,6 +126,10 @@ module.exports = {
     });
   },
 
+  /*
+    queries for new events.
+    requires a Page object.
+  */
   getNewEvents : function(page) {
     graph.get(page.fbid + '/events?fields=name,start_time,end_time,description,place,cover,id', function(err, res){
       if(err)

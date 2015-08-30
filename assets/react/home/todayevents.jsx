@@ -1,6 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var EventItem = require('./eventitem.jsx');
+var MonthContainer = require('./monthcontainer.jsx');
 var $ = window.jQuery;
 
 var TodayEvents = React.createClass({
@@ -60,28 +60,11 @@ var TodayEvents = React.createClass({
     var image3Index = Math.floor((Math.random() * this.state.col3.length));
     if(this.state.events.length > 0){
       return (
-        <div>
           <div className="section">
             <div className="row">
-              <h4 className="container__title">Heute</h4>
-              <div className="col s12 m6 l4">
-                {this.state.col1.map(function(event, index){
-                    return <EventItem key={index} image event={event}></EventItem>
-                })}
-              </div>
-              <div className="col s12  m6 l4">
-                {this.state.col2.map(function(event, index){
-                    return <EventItem key={index} image event={event}></EventItem>
-                })}
-              </div>
-              <div className="col s12  m6 l4">
-                {this.state.col3.map(function(event, index){
-                    return <EventItem key={index} image event={event}></EventItem>
-                })}
-              </div>
+              <MonthContainer events={this.state.events} monthName="Heute" />
             </div>
           </div>
-        </div>
       );
     } else {
       return (

@@ -104,6 +104,7 @@ module.exports = {
         festival.city = newFestival.city;
         festival.website = newFestival.website;
         festival.alias = newFestival.name.replace(/ /g,'').toLowerCase();
+        festival.price = newFestival.price;
         festival.save(function(err) {
           if(err) {
             errResponse.added = false;

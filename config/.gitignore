@@ -1,0 +1,6 @@
+# Ignore everything
+auth.js
+database.js
+mailchimp.js
+# Except this file
+!.gitignore

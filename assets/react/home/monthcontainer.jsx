@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var EventItem = require('./eventitem.jsx');
+var EventColumn = require('./eventcolumn.jsx');
+var EventList = require('./eventlist.jsx');
 
 const monthNames = [
   'Januar',
@@ -25,7 +26,9 @@ var MonthContainer = React.createClass({
       monthName : monthNames[date.getMonth()],
       col1 : [],
       col2 : [],
-      col3 : []
+      col3 : [],
+      list1 : [],
+      list2 : [],
     };
   },
 
@@ -37,6 +40,10 @@ var MonthContainer = React.createClass({
     var col1 = [];
     var col2 = [];
     var col3 = [];
+    var list1 = [];
+    var list2 = [];
+    var colFlag = true;
+
     for(var i = 0; i < this.props.events.length; i++){
       if(i%3 == 0){
         col1.push(this.props.events[i]);
@@ -48,11 +55,41 @@ var MonthContainer = React.createClass({
         col3.push(this.props.events[i]);
       }
     }
+
+    var i = 0;
+    for(i; i < Math.ceil(this.props.events.length/2);i++){
+      list1.push(this.props.events[i]);
+    }
+    for(i; i < this.props.events.length; i++) {
+      list2.push(this.props.events[i]);
+    }
+
     this.setState({
       col1 : col1,
       col2 : col2,
-      col3 : col3
+      col3 : col3,
+      list1 : list1,
+      list2 : list2,
     });
+  },
+
+  returnColumnView : function(){
+    return (
+      <div>
+        <EventColumn events={this.state.col1}></EventColumn>
+        <EventColumn events={this.state.col2}></EventColumn>
+        <EventColumn events={this.state.col3}></EventColumn>
+      </div>
+    );
+  },
+
+  returnListView : function(){
+    return (
+      <div>
+        <EventList events={this.state.list1}></EventList>
+        <EventList events={this.state.list2}></EventList>
+      </div>
+    )
   },
 
   render: function() {
@@ -60,20 +97,8 @@ var MonthContainer = React.createClass({
       <div className="section">
         <div className="row">
           <h4 className="container__title">{this.state.monthName}</h4>
-          <div className="col s12 m6 l4">
-            {this.state.col1.map(function(event, index){
-                return <EventItem key={event.fbid} image event={event}></EventItem>
-            })}
-          </div>
-          <div className="col s12  m6 l4">
-            {this.state.col2.map(function(event, index){
-                return <EventItem key={event.fbid} image event={event}></EventItem>
-            })}
-          </div>
-          <div className="col s12  m6 l4">
-            {this.state.col3.map(function(event, index){
-                return <EventItem key={event.fbid} image event={event}></EventItem>
-            })}
+          <div className="col s12">
+            {this.props.listView ? this.returnListView() : this.returnColumnView()}
           </div>
         </div>
       </div>

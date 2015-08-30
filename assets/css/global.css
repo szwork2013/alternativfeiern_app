@@ -1,3 +1,98 @@
+@font-face {
+  font-family: beastwars;
+  src: url('../font/beastwars.ttf');
+}
+
+header,
+main {
+  padding-left: 240px;
+}
+
+.container {
+  width: 85%;
+}
+
+.backgroundFonts {
+  position: fixed;
+  padding-left: 250px;
+  padding-top: 5px;
+  height: 100%;
+  font-family: beastwars;
+  font-size: 3em;
+  line-height: 1em;
+  opacity: 0.1;
+  z-index: -10;
+}
+
+nav {
+  line-height: 97px;
+}
+
+nav.top-nav {
+  height: 97px;
+  background-color: #55C954;
+}
+
+nav.top-nav a.page-title {
+  line-height: 97px;
+  font-size: 48px;
+}
+
+.pageName {
+  height: 100%;
+}
+
+.pageName h5 {
+  border-bottom: 2pt solid #55c954;
+  margin-top: 17px;
+}
+
+#sidenav-overlay {
+  z-index: 1;
+}
+
+.side-nav {
+    background-color: #272F38;
+}
+
+.btn-floating {
+  height: 42px;
+  width: 42px;
+}
+
+.sideNavBtn,
+.backButton {
+  position: absolute;
+  right: 13px;
+  top: 48px;
+  z-index: 2;
+  background-color: #272F38;
+}
+
+.backButton {
+  top: 55px;
+  left: 280px;
+  padding: 3px;
+  height: 50px;
+  width: 50px;
+  background-color: #55c954;
+}
+
+.backButton img {
+  height: 100%;
+  width: 100%;
+}
+
+
+.btn-floating i {
+  font-size: 2rem;
+  line-height: 42px;
+}
+
+.switch label input[type=checkbox]:checked + .lever:after {
+  background-color: #55c954;
+}
+
 .card__link {
   color : #000;
 }
@@ -68,5 +163,150 @@ p.cityDescription {
 
   p.cityDescription {
     margin-top: 25px;
+  }
+}
+
+
+.side-nav.fixed a {
+  color: #fff;
+}
+
+.side-nav li:hover, .side-nav li.active {
+  background-color: #353E49; }
+
+a.button-collapse.top-nav.full {
+  line-height: 97px;
+}
+
+a.button-collapse.top-nav {
+  position: absolute;
+  text-align: center;
+  height: 48px;
+  width: 48px;
+  left: 7.5%;
+  top: 5px;
+  float: none;
+  /*margin-left: 1.5rem;*/
+  color: #fff;
+  font-size: 32px;
+  z-index: 2;
+}
+
+.container__title {
+  color: white;
+}
+
+.card.small{
+  height: 230px;
+}
+
+.card.medium{
+  max-height: 350px;
+  height: 100%;
+}
+
+.card.medium .card-image {
+  max-height: 250px;
+  height: 100%;
+}
+
+.card.medium .card-content {
+  height: 100%;
+}
+
+.card .card-title {
+  color: #000;
+  font-size: 20px;
+  white-space: nowrap;
+}
+.card .card-content{
+  padding-top: 0px
+}
+
+.card .card-action a {
+  color: #55c954;
+}
+
+#scrollBackBtn {
+  background-color: #55C954;
+}
+
+@media only screen and (max-width: 1670px){
+  .card .card-title {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 1400px){
+  .card .card-title {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .container .row {
+    margin-left: 0px;
+  }
+}
+
+
+@media only screen and (max-width: 992px) {
+  header,
+  main {
+    padding-left: 0px;
+  }
+
+  nav .nav-wrapper a.page-title {
+    font-size: 30px;
+  }
+
+  nav .nav-wrapper {
+    text-align: left;
+  }
+
+  .backButton {
+    left: 13px;
+    padding: 3px;
+    height: 42px;
+    width: 42px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  nav {
+    line-height: 68px;
+  }
+
+  nav.top-nav {
+    height: 68px;
+  }
+
+  nav.top-nav a.page-title {
+    line-height: 68px;
+  }
+
+  .pageName h5 {
+    font-size: 1.74rem;
+  }
+
+  a.button-collapse.top-nav {
+    left: 84%;
+  }
+
+
+
+  .card .card-title {
+    font-size: 16px;
+  }
+
+  .card.medium{
+    max-height: 292px;
+    height: 100%;
+  }
+
+  .card.medium .card-image,
+  .card-image.eventpage__img {
+    max-height: 180px;
+    overflow: hidden;
   }
 }

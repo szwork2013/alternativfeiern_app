@@ -12,19 +12,21 @@ var EventItem = React.createClass({
   },
 
   changeImageExt : function(event) {
+    var img = React.findDOMNode(this.refs.cardImage);
     if(!this.state.extSwitched){
-      var img = React.findDOMNode(this.refs.cardImage);
       img.src = img.src.replace(/\.jpg/, '.png');
       this.setState({
         extSwitched : true
       });
+    } else {
+      $(img).css('display', 'none');
     }
   },
 
   render: function() {
     var eventName = this.props.event.name;
-    if(this.props.event.name.length > 25){
-      eventName = eventName.substring(0, 25) + '...';
+    if(this.props.event.name.length > 30){
+      eventName = eventName.substring(0, 30) + '...';
     }
     var imgUrl = 'images/events/small_' + this.props.event.fbid + '.jpg';
     var eventUrl = '/events/' + this.props.event.fbid;

@@ -175,6 +175,11 @@ module.exports = {
     })
   },
 
+  /*
+    adds a single event to the Alternativ-Feiern page entry.
+    triggers event cover download.
+    only requires a facebook event id, queries the data via graph api.
+  */
   pushPrivateEvent : function(eventId) {
     var self = this;
     Page.findOne({'fbid' : '703596129748908'}, function(err, page){
