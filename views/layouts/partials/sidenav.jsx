@@ -33,7 +33,7 @@ var SideNavigation = React.createClass({
                 </a>
              </li>
               <li className="bold"><a href="/locations">Clubs, Kneipen & Co</a></li>
-              <li className="bold"><a href="/organizers">Veranstalter</a></li>
+              <li className="bold"><a href="/organizers">Veranstalter & Kollektive</a></li>
               <li className="bold"><a href="/festivals">Festivals</a></li>
               <li><a href="/login">Login</a></li>
 

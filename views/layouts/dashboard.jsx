@@ -29,7 +29,7 @@ var BE_Layout = React.createClass({
             </nav>
           </div>
           {this.props.children}
-          <script src="js/bundle.js" type="text/javascript"></script>
+          <script src="js/dashboard.js" type="text/javascript"></script>
         </body>
       </html>
     );

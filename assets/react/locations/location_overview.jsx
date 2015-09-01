@@ -60,7 +60,7 @@ var LocationOverview = React.createClass({
         <div className="col s12" style={{padding : 0}}>
           <ul className="tabs blue-grey darken-2">
             <li className="tab col s3"><a href="#nbg">Nbg</a></li>
-            <li className="tab col s3"><a href="#frth">Frth</a></li>
+            <li className="tab col s3"><a href="#frth">Fü</a></li>
             <li className="tab col s3"><a href="#erlngn">Er</a></li>
             <li className="tab col s3"><a href="#ansbch">An</a></li>
           </ul>

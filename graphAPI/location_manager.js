@@ -150,7 +150,9 @@ module.exports = {
   downloadImage : function(imgUrl, locationAlias) {
     var self = this;
     const downloadDir = path.join(__dirname, '../assets/images/locations/');
-    fileExt = /\.(jpg|png)/.exec(path.extname(imgUrl))[0];
+    fileExt = /\.(jpg|png|gif)/.exec(path.extname(imgUrl))[0];
+    if(fileExt == '.gif')
+      return;
     fs.exists(downloadDir + locationAlias + fileExt, function(exists){
       if(!exists) {
         request(imgUrl).pipe(fs.createWriteStream(downloadDir + locationAlias + fileExt)).on('close', function(){
