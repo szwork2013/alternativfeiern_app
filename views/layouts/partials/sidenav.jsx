@@ -23,13 +23,15 @@ var SideNavigation = React.createClass({
             </div>
             <div className="container">
             </div>
-            <ul id="nav-mobile" className="side-nav fixed" style={{width: 240 + 'px'}}>
+            <ul id="nav-mobile" className="side-nav fixed" style={{width: 242 + 'px'}}>
               <li class="logo" style={logoContainerStyle}>
                 <a id="logo-container" href="/" class="brand-logo">
                   <img src="/images/logos/brand_logo.png" style={logoStyle}></img>
                 </a>
                 <a href="/" className="pageName">
-                  <h5>Alternativ-Feiern</h5>
+                  <h5>Alternativ-Feiern
+                    <h6 style={{fontWeight : '100', width : 184, color : '#a5a5a5'}}>Event-Kalender für Nürnberg und Umgebung</h6>
+                  </h5>
                 </a>
              </li>
               <li className="bold"><a href="/locations">Clubs, Kneipen & Co</a></li>

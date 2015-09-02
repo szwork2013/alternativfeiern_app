@@ -6,7 +6,7 @@ var TodayEvents = require('./todayevents.jsx');
 const switchRowStyle = {
   marginTop : 20,
   marginBottom : 0,
-  textAlign : 'center'
+  textAlign : 'center',
 };
 
 const switchStyle = {

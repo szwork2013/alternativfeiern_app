@@ -37,5 +37,12 @@
     "reactify": "^1.1.1",
     "request": "^2.60.0",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "connect-livereload": "^0.5.3",
+    "express-livereload": "0.0.24",
+    "gulp": "^3.9.0",
+    "gulp-develop-server": "^0.4.3",
+    "gulp-livereload": "^3.8.0"
   }
 }

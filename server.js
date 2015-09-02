@@ -18,6 +18,10 @@ var configDB = require('./config/database.js');
 var scheduler = require('./af_modules/scheduler.js');
 scheduler.setupSchedule();
 
+var livereload = require('express-livereload');
+livereload(app, config={});
+
+
 // configuration ===============================================================
 mongoose.connect(configDB.url, {auth: {authdb: 'af_backend'}}); // connect to our database
 
