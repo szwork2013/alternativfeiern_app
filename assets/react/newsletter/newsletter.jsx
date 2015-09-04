@@ -52,7 +52,7 @@ var Newsletter = React.createClass({
               <div className="card-content singlePage__content" style={{minHeight : '413'}}>
                 <h5 style={{marginBottom : 40}}>Wöchentliche Event-Empfehlung</h5>
                 <div className="row">
-                  <div className="col s12 m6 l6">
+                  <div className="col s12">
                     <p>
                       Hier kannst du dich für unseren <b>Newsletter</b> eintragen.<br /><br />
                       Was hast du davon?
@@ -64,23 +64,26 @@ var Newsletter = React.createClass({
                       Selbstverständlich schreiben wir unseren Newsletter selbst. Du bekommst keine automatisch generierte E-Mail.<br /><br />
                     </p>
                   </div>
-                  <div className="col s12 m6 l6" style={{backgroundColor : '#272F38', marginTop : 12, borderRadius : 2}}>
-                    <form>
-                      <div className="row">
-                        <div className="input-field col s12">
-                          <input type="email" id="email" ref="email" className="validate" style={{color : '#fff'}}></input>
-                          <label htmlFor="email">E-Mail</label>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="input-field col s12">
-                          <input type="text" id="name" ref="name" className="validate" style={{color : '#fff'}}></input>
-                          <label htmlFor="name">Vorname</label>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
                 </div>
+
+                  <div className="row form__row">
+                    <div className="col s12" style={{backgroundColor : '#272F38', marginTop : 12, borderRadius : 2}}>
+                      <form>
+                        <div className="row">
+                          <div className="input-field col s12">
+                            <input type="email" id="email" ref="email" className="validate" style={{color : '#fff'}}></input>
+                            <label htmlFor="email">E-Mail</label>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="input-field col s12">
+                            <input type="text" id="name" ref="name" className="validate" style={{color : '#fff'}}></input>
+                            <label htmlFor="name">Vorname</label>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
                 <div className="row" style={{textAlign : 'center'}}>
                   <div className="s12">
                     <i>Wir gehen verwantwortlich mit deinen Daten um und geben diese nicht an Dritte weiter.</i>

@@ -22,8 +22,9 @@ var MonthContainer = React.createClass({
   getInitialState: function() {
     var firstEvent = this.props.events[0];
     var date = new Date(Date.parse(firstEvent.start));
+    var mname = this.props.today ? 'Heute' : monthNames[date.getMonth()];
     return {
-      monthName : monthNames[date.getMonth()],
+      monthName : mname,
       col1 : [],
       col2 : [],
       col3 : [],

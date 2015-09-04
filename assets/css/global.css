@@ -141,6 +141,10 @@ p.cityDescription {
   p.cityDescription {
     font-size: 17px;
   }
+
+  .form__row {
+    padding : 0 57px;
+  }
 }
 
 @media screen and (max-width: 600px){

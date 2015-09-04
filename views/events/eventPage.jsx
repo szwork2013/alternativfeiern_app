@@ -32,6 +32,7 @@ var EventPage = React.createClass({
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={['sideNavBtn.css']}>
         <BackButton></BackButton>
         <main>
+                <meta property="og:image" content={imgUrl}></meta>
                 <div className="card singlePage__card">
                   <div className="card-image singlePage__img">
                     <img src={imgUrl} style={imgStyle}></img>

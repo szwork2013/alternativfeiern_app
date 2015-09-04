@@ -61,9 +61,7 @@ var TodayEvents = React.createClass({
     if(this.state.events.length > 0){
       return (
           <div className="section">
-            <div className="row">
-              <MonthContainer events={this.state.events} monthName="Heute" />
-            </div>
+              <MonthContainer events={this.state.events} listView={this.props.listView} today />
           </div>
       );
     } else {
