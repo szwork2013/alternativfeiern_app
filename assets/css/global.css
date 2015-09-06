@@ -228,6 +228,10 @@ a.button-collapse.top-nav {
   padding-top: 0px
 }
 
+.card .card-content p {
+  white-space: pre-line;
+}
+
 .card .card-action a {
   color: #55c954;
 }
