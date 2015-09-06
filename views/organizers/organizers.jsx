@@ -20,6 +20,7 @@ var Organizers = React.createClass({
                 <OrganizerItem title="Panne e.V" website="http://www.panne-ev.de/"/>
                 <OrganizerItem title="Armed with a Mind Shows" website="https://www.facebook.com/ArmedWithAMindShows"/>
                 <OrganizerItem title="Klangraum Online" website="https://www.facebook.com/k.raum"/>
+                <OrganizerItem title="Tsunami Soundsystem" website="https://www.facebook.com/Tsunami.Soundsystem.NBG" />
               </div>
               <div className="col s12 m6 l4">
                 <OrganizerItem title="5. Schaltkreis" website="http://www.5terschaltkreis.de/"/>
@@ -27,6 +28,7 @@ var Organizers = React.createClass({
                 <OrganizerItem title="Doom Over Nbg" website="http://low-frequency-assaults.blogspot.de/"/>
                 <OrganizerItem title="Homies &amp; Spasten" website="https://www.facebook.com/homiesundspasten"/>
                 <OrganizerItem title="Radio-Z" website="http://www.radio-z.net/de/"/>
+                <OrganizerItem title="KaschpaSoundz" website="https://www.mixcloud.com/kaschpasoundz" />
               </div>
               <div className="col s12 m6 l4">
                 <OrganizerItem title="BPM e.V" website="https://www.facebook.com/Bpm.Technition"/>
@@ -34,6 +36,7 @@ var Organizers = React.createClass({
                 <OrganizerItem title="Dubworxx" website="https://www.facebook.com/dubworxx"/>
                 <OrganizerItem title="Eat-the-Beat" website="http://www.eat-the-beat-records.de/"/>
                 <OrganizerItem title="Sound of Erlangen" website="http://soundoferlangen.com/"/>
+                <OrganizerItem title="Soma Events" website="https://www.facebook.com/world.of.SoMa?fref=ts" />
               </div>
             </div>
           </div>

@@ -1,8 +1,9 @@
-var React = require('react');
+var React = require('react/addons');
 var PropTypes = React.PropTypes;
 var MonthContainer = require('./monthcontainer.jsx');
 var EventItem = require('./eventitem.jsx');
 var $ = window.jQuery;
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var FutureEvents = React.createClass({
   getInitialState: function() {
@@ -108,7 +109,9 @@ var FutureEvents = React.createClass({
           {this.state.events.map(function(monthlyEvents, index){
             return (monthlyEvents.length > 0 && self.state.containerCount >= index) ? <MonthContainer key={index} events={monthlyEvents} listView={self.props.listView}></MonthContainer> : null
           })}
-          {this.state.containerCount >= this.state.events.length ? this.returnSrollBack() : this.returnPreloader()}
+          <ReactCSSTransitionGroup transitionAppear={true} transitionName="frontpage">
+            {this.state.containerCount >= this.state.events.length ? this.returnSrollBack() : this.returnPreloader()}
+          </ReactCSSTransitionGroup>
         </div>
       );
     } else {

@@ -145,6 +145,7 @@ p.cityDescription {
   .form__row {
     padding : 0 57px;
   }
+
 }
 
 @media screen and (max-width: 600px){
@@ -242,7 +243,7 @@ a.button-collapse.top-nav {
 }
 
 @media only screen and (max-width: 1400px){
-  .card .card-title {
+  .card {
     font-size: 13px;
   }
 }
@@ -313,4 +314,26 @@ a.button-collapse.top-nav {
     max-height: 180px;
     overflow: hidden;
   }
+}
+
+/*
+  Test Animations
+*/
+
+.frontpage-enter {
+  opacity: 0.01;
+}
+
+.frontpage-enter.frontpage-enter-active {
+  opacity: 1;
+  transition: opacity .3s ease-in;
+}
+
+.frontpage-appear {
+  opacity: 0.01;
+  transition: opacity .3s ease-in;
+}
+
+.frontpage-appear.frontpage-appear-active {
+  opacity: 1;
 }

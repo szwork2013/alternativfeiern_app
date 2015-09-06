@@ -94,7 +94,7 @@ var Newsletter = React.createClass({
               <div className="row" style={{textAlign : 'center'}}>
                 <button className="btn" style={{display : 'inline-block', backgroundColor : '#55c954'}} onClick={this.subscribe} ref="submitBtn">Abonnieren</button>
                 {this.state.subscribed ? <p>In Kürze erhälst du eine Bestätigungs-Mail.</p> : null}
-                {this.state.alreadySubscribed ? <p>Du erhälst unseren Newsletter schon. Checke doch mal deinen Spam-Ordner.</p> : null}
+                {this.state.alreadySubscribed ? <p>Du erhälst unseren Newsletter schon. Check doch mal deinen Spam-Ordner.</p> : null}
               </div>
             </div>
           </div>

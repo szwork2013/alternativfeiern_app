@@ -7,11 +7,11 @@ var Header = React.createClass({
     return (
       <head>
         <link rel="icon" href="/images/logos/brand_logo.png" type="img/png" />
-        <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="/css/global.css" />
+        <link type="text/css" rel="stylesheet" href="/css/dist/materialize.css" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="/css/dist/global.css" />
 
         {this.props.stylesheets.map(function(css){
-          return <link type="text/css" rel="stylesheet" href={'/css/' + css} />
+          return <link type="text/css" rel="stylesheet" href={'/css/dist/' + css} />
         })}
 
         <script type="text/javascript" src="/js/jquery-2.1.4.min.js"></script>

@@ -1,6 +1,7 @@
-var React = require('react');
+var React = require('react/addons');
 var PropTypes = React.PropTypes;
 var EventListItem = require('./eventlistitem.jsx');
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var EventList = React.createClass({
 
@@ -8,9 +9,11 @@ var EventList = React.createClass({
     return (
       <div className="col s12 m12 l6">
         <div className="collection" style={{border : 'none'}}>
-          {this.props.events.map(function(event, index){
-            return <EventListItem data={event} key={index}/>
-          })}
+          <ReactCSSTransitionGroup transitionName="frontpage" transitionAppear={true}>
+            {this.props.events.map(function(event, index){
+              return <EventListItem data={event} key={index}/>
+            })}
+          </ReactCSSTransitionGroup>
         </div>
       </div>
     );
