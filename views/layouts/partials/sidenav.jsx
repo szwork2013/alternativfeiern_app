@@ -22,7 +22,7 @@ var SideNavigation = React.createClass({
               </a>
             </div>
             <div className="container">
-            </div>
+
             <ul id="nav-mobile" className="side-nav fixed" style={{width: 242 + 'px'}}>
               <li class="logo" style={logoContainerStyle}>
                 <a id="logo-container" href="/" class="brand-logo">
@@ -30,7 +30,6 @@ var SideNavigation = React.createClass({
                 </a>
                 <a href="/" className="pageName">
                   <h5>Alternativ-Feiern
-                    <h6 style={{fontWeight : '300', width : 186, color : '#a5a5a5'}}>Event-Kalender für Nürnberg und Umgebung</h6>
                   </h5>
                 </a>
              </li>
@@ -50,6 +49,7 @@ var SideNavigation = React.createClass({
                 <a href="/impressum" style={{fontSize : '12px'}}>Impressum</a>
               </li>
             </ul>
+            </div>
 
           </header>
     );

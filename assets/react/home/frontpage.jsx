@@ -39,7 +39,10 @@ var Frontpage = React.createClass({
   render: function() {
     return (
       <div className="container">
+        <div className="row">
+        </div>
         <div className="row" style={switchRowStyle}>
+          <p className="cityDescription" style={{color : '#272F38'}}>Event-Kalender für Nürnberg und Umgebung</p>
           <div className="switch" style={switchStyle}>
             <label style={switchLabelStyle}>
               Karten
