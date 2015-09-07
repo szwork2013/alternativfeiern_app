@@ -1,7 +1,9 @@
-var React = require('react');
+var React = require('react/addons');
 var PropTypes = React.PropTypes;
 var LocationItem = require('./locationItem.jsx');
 var $ = window.jQuery;
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 
 var LocationOverview = React.createClass({
   getInitialState: function() {
@@ -72,16 +74,18 @@ var LocationOverview = React.createClass({
             <p className="cityDescription">
               Alternative Locations in <b>Nürnberg</b>.<br />Alles was das Herz begehrt! Von der Kneipe über den Club ist für jeden Geschmack etwas dabei.
             </p>
-            <div className="col s12 m6 l6">
-              {this.state.nbg.map(function(location, index){
-                return (location.city == "Nürnberg" && index%2 == 0) ? <LocationItem location={location} key={index}></LocationItem> : null;
-              })}
-            </div>
-            <div className="col s12 m6 l6">
-              {this.state.nbg.map(function(location, index){
-                return (location.city == "Nürnberg" && index%2 == 1) ? <LocationItem location={location} key={index}></LocationItem> : null;
-              })}
-            </div>
+            <ReactCSSTransitionGroup transitionName="easeIn" transitionAppear={true}>
+              <div className="col s12 m6 l6">
+                {this.state.nbg.map(function(location, index){
+                  return (location.city == "Nürnberg" && index%2 == 0) ? <LocationItem location={location} key={index}></LocationItem> : null;
+                })}
+              </div>
+              <div className="col s12 m6 l6">
+                {this.state.nbg.map(function(location, index){
+                  return (location.city == "Nürnberg" && index%2 == 1) ? <LocationItem location={location} key={index}></LocationItem> : null;
+                })}
+              </div>
+            </ReactCSSTransitionGroup>
           </div>
 
           {/* Fürth */}
@@ -89,16 +93,18 @@ var LocationOverview = React.createClass({
             <p className="cityDescription">
               Alternative Locations in <b>Fürth</b>.<br />Feiern in Fürth? ABER JA! Kneipen und Bars in Fürth überzeugen mit Charakter und Charme.
             </p>
-            <div className="col s12 m6 l6">
-              {this.state.frth.map(function(location, index){
-                return (location.city == "Fürth" &&  index%2 == 0)? <LocationItem location={location} key={index}></LocationItem> : null;
-              })}
-            </div>
-            <div className="col s12 m6 l6">
-              {this.state.frth.map(function(location, index){
-                return (location.city == "Fürth" && index%2 == 1) ? <LocationItem location={location} key={index}></LocationItem> : null;
-              })}
-            </div>
+            <ReactCSSTransitionGroup transitionName="easeIn" transitionAppear={true}>
+              <div className="col s12 m6 l6">
+                {this.state.frth.map(function(location, index){
+                  return (location.city == "Fürth" &&  index%2 == 0)? <LocationItem location={location} key={index}></LocationItem> : null;
+                })}
+              </div>
+              <div className="col s12 m6 l6">
+                {this.state.frth.map(function(location, index){
+                  return (location.city == "Fürth" && index%2 == 1) ? <LocationItem location={location} key={index}></LocationItem> : null;
+                })}
+              </div>
+            </ReactCSSTransitionGroup>
           </div>
 
           {/* Erlangen */}
@@ -106,16 +112,18 @@ var LocationOverview = React.createClass({
             <p className="cityDescription">
               Alternative Locations in <b>Erlangen</b>.<br />Neben “Berg” und Universtät bietet Erlangen auch für das abendliche Programm eine attraktive Auswahl.
             </p>
-            <div className="col s12 m6 l6">
-              {this.state.erlngn.map(function(location, index){
-                return (location.city == "Erlangen" && index%2 == 0) ? <LocationItem location={location} key={index}></LocationItem> : null;
-              })}
-            </div>
-            <div className="col s12 m6 l6">
-              {this.state.erlngn.map(function(location, index){
-                return (location.city == "Erlangen" && index%2 == 1) ? <LocationItem location={location} key={index}></LocationItem> : null;
-              })}
-            </div>
+            <ReactCSSTransitionGroup transitionName="easeIn" transitionAppear={true}>
+              <div className="col s12 m6 l6">
+                {this.state.erlngn.map(function(location, index){
+                  return (location.city == "Erlangen" && index%2 == 0) ? <LocationItem location={location} key={index}></LocationItem> : null;
+                })}
+              </div>
+              <div className="col s12 m6 l6">
+                {this.state.erlngn.map(function(location, index){
+                  return (location.city == "Erlangen" && index%2 == 1) ? <LocationItem location={location} key={index}></LocationItem> : null;
+                })}
+              </div>
+            </ReactCSSTransitionGroup>
           </div>
 
           {/* Ansbach */}
@@ -123,16 +131,18 @@ var LocationOverview = React.createClass({
             <p className="cityDescription">
               Alternative Locations in <b>Ansbach</b>.<br />Kneipen, Bars und Technopartys!
             </p>
-            <div id="ansbch" className="col s12 m6 l6">
-              {this.state.ansbch.map(function(location, index){
-                return (location.city == "Ansbach" && index%2 == 0) ? <LocationItem location={location} key={index}></LocationItem> : null;
-              })}
-            </div>
-            <div id="ansbch" className="col s12 m6 l6">
-              {this.state.ansbch.map(function(location, index){
-                return (location.city == "Ansbach" && index%2 == 1) ? <LocationItem location={location} key={index}></LocationItem> : null;
-              })}
-            </div>
+            <ReactCSSTransitionGroup transitionName="easeIn" transitionAppear={true}>
+              <div id="ansbch" className="col s12 m6 l6">
+                {this.state.ansbch.map(function(location, index){
+                  return (location.city == "Ansbach" && index%2 == 0) ? <LocationItem location={location} key={index}></LocationItem> : null;
+                })}
+              </div>
+              <div id="ansbch" className="col s12 m6 l6">
+                {this.state.ansbch.map(function(location, index){
+                  return (location.city == "Ansbach" && index%2 == 1) ? <LocationItem location={location} key={index}></LocationItem> : null;
+                })}
+              </div>
+            </ReactCSSTransitionGroup>
           </div>
         </div>
       </div>
