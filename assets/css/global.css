@@ -324,20 +324,20 @@ a.button-collapse.top-nav {
   Test Animations
 */
 
-.frontpage-enter {
+.easeIn-enter {
   opacity: 0.01;
 }
 
-.frontpage-enter.frontpage-enter-active {
+.easeIn-enter.frontpage-enter-active {
   opacity: 1;
   transition: opacity .3s ease-in;
 }
 
-.frontpage-appear {
+.easeIn-appear {
   opacity: 0.01;
   transition: opacity .3s ease-in;
 }
 
-.frontpage-appear.frontpage-appear-active {
+.easeIn-appear.frontpage-appear-active {
   opacity: 1;
 }

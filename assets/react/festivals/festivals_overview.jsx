@@ -1,6 +1,8 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var FestivalItem = require('./festivalItem.jsx');
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 
 var FestivalOverview = React.createClass({
   getInitialState: function() {
@@ -46,23 +48,25 @@ var FestivalOverview = React.createClass({
       <p className="cityDescription">
         Hier findest du ein paar lokale, kleinere und alternative Festivals aus dem Großraum Nürnberg. Natürlich werden die Festivals auch in unseren Eventkalender eingetragen.
       </p>
-      <div className="row">
-        <div className="col s12 m6 l4">
-          {this.state.col1.map(function(festival, index){
-            return <FestivalItem festival={festival} key={index}></FestivalItem>
-          })}
+      <ReactCSSTransitionGroup transitionName="easeIn" transitionAppear={true}>
+        <div className="row">
+          <div className="col s12 m6 l4">
+            {this.state.col1.map(function(festival, index){
+              return <FestivalItem festival={festival} key={index}></FestivalItem>
+            })}
+          </div>
+          <div className="col s12 m6 l4">
+            {this.state.col2.map(function(festival, index){
+              return <FestivalItem festival={festival} key={index}></FestivalItem>
+            })}
+          </div>
+          <div className="col s12 m6 l4">
+            {this.state.col3.map(function(festival, index){
+              return <FestivalItem festival={festival} key={index}></FestivalItem>
+            })}
+          </div>
         </div>
-        <div className="col s12 m6 l4">
-          {this.state.col2.map(function(festival, index){
-            return <FestivalItem festival={festival} key={index}></FestivalItem>
-          })}
-        </div>
-        <div className="col s12 m6 l4">
-          {this.state.col3.map(function(festival, index){
-            return <FestivalItem festival={festival} key={index}></FestivalItem>
-          })}
-        </div>
-      </div>
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

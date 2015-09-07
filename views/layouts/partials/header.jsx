@@ -6,7 +6,7 @@ var Header = React.createClass({
   render: function() {
     return (
       <head>
-        <link rel="icon" href="/images/logos/brand_logo.png" type="img/png" />
+        <link rel="icon" href="/images/logos/favicon_50x50.png" type="img/png" />
         <link type="text/css" rel="stylesheet" href="/css/dist/materialize.css" media="screen,projection"/>
         <link type="text/css" rel="stylesheet" href="/css/dist/global.css" />
 
