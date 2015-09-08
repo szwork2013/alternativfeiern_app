@@ -13,7 +13,7 @@ var LocationPage = React.createClass({
       imgUrl = '/images/locations/' + this.props.location.alias + '.png';
     }
     return (
-      <FE_Layout title={this.props.title} scripts={[]} stylesheets={['/css/locations.css', '/css/sideNavBtn.css']}>
+      <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]}>
         <BackButton></BackButton>
         <main>
           <div className="card singlePage__card">

@@ -13,7 +13,7 @@ var FestivalPage = React.createClass({
       imgUrl = '/images/festivals/' + this.props.festival.alias + '.png';
     }
     return (
-      <FE_Layout title={this.props.title} scripts={[]} stylesheets={['/css/sideNavBtn.css']}>
+      <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]}>
         <BackButton></BackButton>
         <main>
           <div className="card singlePage__card">

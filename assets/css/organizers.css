@@ -28,19 +28,6 @@ div.card-content.white-text {
 }
 
 .organizer-appear {
-  animation: appear .5s;
+  animation: card-appear .5s;
   animation-fill-mode: forwards;
-}
-
-/*
-  Animations
-*/
-@keyframes appear {
-  0% {
-    opacity: 0.01;
-  }
-
-  100% {
-    opacity: 1;
-  }
 }

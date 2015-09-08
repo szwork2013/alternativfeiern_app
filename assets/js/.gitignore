@@ -4,5 +4,6 @@ festivals.js
 frontpage.js
 locations.js
 newsletter.js
+dashboard.js
 # Except this file
 !.gitignore

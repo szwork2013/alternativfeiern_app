@@ -121,12 +121,21 @@ module.exports = {
   }, /* end addfestival */
 
   removeFestival : function(id, response) {
+    var self = this;
+
     var errResponse = {
       removed : true,
       msg   : ''
     };
 
     if(id) {
+      Festival.findOne({'_id' : id}, function(error, festival){
+        if(error) {
+          return
+        } else {
+          self.deleteImage(festival.imgName);
+        }
+      });
       Festival.remove({'_id' : id}, function(err){
         if(err){
           errResponse.remove = false;
@@ -142,16 +151,54 @@ module.exports = {
   downloadImage : function(imgUrl, festivalAlias) {
     var self = this;
     const downloadDir = path.join(__dirname, '../assets/images/festivals/');
-    fileExt = /\.(jpg|png)/.exec(path.extname(imgUrl))[0];
+    fileExt = /\.(jpg|png|gif)/.exec(path.extname(imgUrl))[0];
+    if(fileExt == '.gif') {
+      return console.error('download festival img: dont use GIF images');;
+    }
     fs.exists(downloadDir + festivalAlias + fileExt, function(exists){
       if(!exists) {
         request(imgUrl).pipe(fs.createWriteStream(downloadDir + festivalAlias + fileExt)).on('close', function(){
           console.log('downloaded festival image');
+          self.saveImgName(festivalAlias + fileExt, festivalAlias);
           return;
         });
       } else {
         console.log('image already exists');
         return;
+      }
+    });
+  },
+
+  saveImgName : function(imgName, festivalAlias) {
+    Festival.find(function(error, festivals){
+      if(error) {
+        return console.error(error);
+      } else {
+        festivals.forEach(function(festival){
+          if(festival.alias == festivalAlias) {
+            festival.img = imgName;
+            return festival.save(function(error) {
+              if(error) {
+                console.error(error);
+              } else {
+                console.log('save festival img: ', imgName);
+              }
+            });
+          }
+        });
+      }
+    });
+  },
+
+  deleteImage : function(imgName) {
+    const dir = path.join(__dirname, '../assets/images/festivals/');
+    fs.exists(dir + imgName, function(exists){
+      if(exists){
+        fs.unlink(dir + imgName, function(){
+          console.log('deleted img', dir + imgName);
+        });
+      } else {
+        console.error('can´t delete img, doesn´t exist: ', dir + imgName);
       }
     });
   }

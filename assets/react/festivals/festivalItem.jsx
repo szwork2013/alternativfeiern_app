@@ -1,22 +1,8 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var Image = require('legit-image');
 
 var FestivalItem = React.createClass({
-  getInitialState: function() {
-    return {
-      extSwitched : false,
-    };
-  },
-
-  changeImageExt : function(event) {
-    if(!this.state.extSwitched){
-      var img = React.findDOMNode(this.refs.cardImage);
-      img.src = img.src.replace(/\.jpg/, '.png');
-      this.setState({
-        extSwitched : true
-      });
-    }
-  },
 
   render: function() {
     var festivalName = this.props.festival.name;
@@ -24,13 +10,13 @@ var FestivalItem = React.createClass({
       festivalName = festivalName.substring(0, 25) + '...';
     }
 
-    var imgUrl = 'images/festivals/' + this.props.festival.alias + '.jpg';
+    var imgUrl = 'images/festivals/' + this.props.festival.img;
     var festivalUrl = '/festivals/' + this.props.festival.alias;
     return (
-      <div className="card medium hoverable">
+      <div className="card medium hoverable card--appear">
         <a href={festivalUrl} className="card__link">
           <div className="card-image">
-            <img src={imgUrl} onError={this.changeImageExt} ref="cardImage"></img>
+            <Image src={imgUrl} ref="cardImage" />
           </div>
           <div className="card-content">
             <span className="card-title">{festivalName}</span>

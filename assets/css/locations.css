@@ -25,7 +25,6 @@ ul.tabs {
   bottom: -3px;
 }
 
-
 @media screen and (min-width: 1400px) {
   .tabContent {
     padding: 0 13%;

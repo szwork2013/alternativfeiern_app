@@ -22,12 +22,11 @@ module.exports = {
       var batch_query = [page_query, event_query];
       graph.batch(batch_query, function(err, result) {
         if(err){
-          //console.error(err);
+          console.error(err);
           response.send(err);
-        } else {
+        } else if(!result.error) {
           var pageData = JSON.parse(result[0].body);
           var eventData = JSON.parse(result[1].body);
-          console.log(pageData);
             if(!pageData.error){
             Page.findOne({'fbid' : pageData.id}, function(err, page){
               if(err)
@@ -37,11 +36,8 @@ module.exports = {
               }
               var page = new Page();
               page.fbid = pageData.id;
-              console.log(pageData.id);
-              console.log(page.fbid);
               page.name = pageData.name;
               page.picture = pageData.picture.data.url;
-              console.log(eventData);
               eventData.data.forEach(function(event){
                 var singleEvent = {};
                 if(Date.parse(event.start_time) > Date.now()){

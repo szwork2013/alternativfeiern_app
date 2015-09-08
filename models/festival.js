@@ -7,6 +7,7 @@ var festivalSchema = mongoose.Schema({
   city        :   String,
   website     :   String,
   price       :   String,
+  img         :   String,
 });
 
 module.exports = mongoose.model('Festival', festivalSchema);

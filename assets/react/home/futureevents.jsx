@@ -42,7 +42,6 @@ var FutureEvents = React.createClass({
   incrContainerCount : function (event) {
     if(this.state.containerCount < this.state.events.length) {
       var count = this.state.containerCount + 1;
-      console.log(count);
       this.setState({
         containerCount : count
       });

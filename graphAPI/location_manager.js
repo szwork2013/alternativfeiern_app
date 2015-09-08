@@ -111,7 +111,6 @@ module.exports = {
         location.address = newLocation.address;
         location.city = newLocation.city;
         location.website = newLocation.website;
-        location.img = newLocation.img;
         location.alias = newLocation.name.replace(/ /g,'').toLowerCase();
         location.save(function(err) {
           if(err) {
@@ -119,7 +118,7 @@ module.exports = {
             errResponse.msg = "error saving location";
           }
           console.log('added location: ', location);
-          self.downloadImage(location.img, location.alias);
+          self.downloadImage(newLocation.img, location.alias);
           response.send(errResponse);
         });
       });
@@ -129,12 +128,21 @@ module.exports = {
   }, /* end addLocation */
 
   removeLocation : function(id, response) {
+    var self = this;
     var errResponse = {
       removed : true,
       msg   : ''
     };
 
     if(id) {
+      var img;
+      Location.findOne({'_id' : id}, function(error, location){
+        if(error) {
+          return;
+        } else {
+          self.deleteImage(location.img);
+        }
+      });
       Location.remove({'_id' : id}, function(err){
         if(err){
           errResponse.remove = false;
@@ -150,18 +158,52 @@ module.exports = {
   downloadImage : function(imgUrl, locationAlias) {
     var self = this;
     const downloadDir = path.join(__dirname, '../assets/images/locations/');
-    fileExt = /\.(jpg|png|gif)/.exec(path.extname(imgUrl))[0];
-    if(fileExt == '.gif')
-      return;
+    var fileExt = /\.(jpg|png|gif)/.exec(path.extname(imgUrl))[0];
+    if(fileExt == '.gif') {
+      return console.error('download location img: dont use GIF images');;
+    }
     fs.exists(downloadDir + locationAlias + fileExt, function(exists){
       if(!exists) {
         request(imgUrl).pipe(fs.createWriteStream(downloadDir + locationAlias + fileExt)).on('close', function(){
-          console.log('downloaded location image');
+          self.saveImgName(locationAlias + fileExt, locationAlias);
           return;
         });
       } else {
-        console.log('image already exists');
         return;
+      }
+    });
+  },
+
+  saveImgName : function(imgName, locationAlias) {
+    Location.find(function(error, locations){
+      if(error) {
+        return console.error(error);
+      } else {
+        locations.forEach(function(location){
+          if(location.alias == locationAlias) {
+            location.img = imgName;
+            return location.save(function(error){
+              if (error) {
+                console.error(error);
+              } else {
+                console.log('saved location img: ', imgName);
+              }
+            });
+          }
+        });
+      }
+    });
+  },
+
+  deleteImage : function(imgName) {
+    const dir = path.join(__dirname, '../assets/images/locations/');
+    fs.exists(dir + imgName, function(exists){
+      if(exists){
+        fs.unlink(dir + imgName, function(){
+          console.log('deleted img', dir + imgName);
+        });
+      } else {
+        console.error('can´t delete img, doesn´t exist: ', dir + imgName);
       }
     });
   }

@@ -6,7 +6,7 @@ var Festivals = React.createClass({
 
   render: function() {
     return (
-      <FE_Layout title={this.props.title} scripts={['festivals.js']} stylesheets={['festivals.css']} withTopNav>
+      <FE_Layout title={this.props.title} scripts={['festivals.js']} stylesheets={[]} withTopNav>
         <main id="festivalOverview">
         </main>
       </FE_Layout>

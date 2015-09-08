@@ -321,8 +321,27 @@ a.button-collapse.top-nav {
 }
 
 /*
-  Test Animations
+  Animation Klasses
 */
+
+.card--appear {
+  animation: card-appear .4s;
+  animation-fill-mode: forwards;
+}
+
+/*
+  Animations
+*/
+
+@keyframes card-appear {
+  0% {
+    opacity: 0.01;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
 
 .easeIn-enter {
   opacity: 0.01;
@@ -338,6 +357,6 @@ a.button-collapse.top-nav {
   transition: opacity .3s ease-in;
 }
 
-.easeIn-appear.frontpage-appear-active {
+.easeIn-appear.easeIn-appear-active {
   opacity: 1;
 }

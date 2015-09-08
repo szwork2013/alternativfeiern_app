@@ -53,7 +53,6 @@ module.exports = {
             events.push(singleEvent);
           });
         });
-        console.log(events);
         response.send(events);
       });
     });
@@ -75,7 +74,6 @@ module.exports = {
           }
         });
       });
-      console.log(whitelisted);
       response.send(whitelisted);
     });
   },
@@ -96,8 +94,6 @@ module.exports = {
           if(!event.isBlacklisted) {
             var startTime = new Date(Date.parse(event.start));
             var endTime = event.end ? new Date(Date.parse(event.end)) : null;
-            console.log(event.name);
-            console.log(event.end);
             if(endTime){
               if(startTime <= now && endTime >= now){
                 todayWhitelisted.push(event);
@@ -260,6 +256,7 @@ module.exports = {
       if(!exists){
         request(imgUrl).pipe(fs.createWriteStream(downloadDir + eventId + fileExt)).on('close', function(){
           self.resizeImage(downloadDir + eventId + fileExt, 450);
+          self.saveImgName(eventId + fileExt, eventId);
         });
       }
     });
@@ -277,5 +274,28 @@ module.exports = {
       }
     });
   },
+
+  saveImgName : function(imgName, eventId) {
+    Page.find(function(error, pages){
+      if(error){
+        console.error(error);
+      } else {
+        pages.forEach(function(page){
+          page.events.forEach(function(event){
+            if(event.fbid == eventId){
+              event.img = imgName;
+              return page.save(function(error){
+                if(error){
+                  console.error(error);
+                } else {
+                  console.log('saved imgName: ', imgName);
+                }
+              })
+            }
+          })
+        })
+      }
+    })
+  }
 
 }

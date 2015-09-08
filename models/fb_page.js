@@ -14,6 +14,7 @@ var pageSchema = mongoose.Schema({
       description   :   String,
       cover   :   String,
       isBlacklisted : Boolean,
+      img : String,
     }
   ],
 });
