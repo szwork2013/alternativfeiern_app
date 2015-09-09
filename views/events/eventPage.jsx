@@ -8,26 +8,16 @@ var moment = require('moment');
 moment.locale('de')
 const tz = require('moment-timezone');
 
-var imgStyle = {
-  display : 'block'
-}
-
 var EventPage = React.createClass({
 
   render: function() {
-    var imgUrl = '/images/events/' + this.props.event.fbid + '.jpg';
+    var imgUrl = '/images/events/' + this.props.event.img;
     var fbUrl = 'https://facebook.com/' + this.props.event.fbid;
     /*
       live: '/var/www/AF_Backend/assets'
       switches img extension to png if jpg is not found.
       hides picture if no png ist found.
     */
-    if(!fs.existsSync(path.resolve(__dirname, '../../assets' + imgUrl))){
-      imgUrl = '/images/events/' + this.props.event.fbid + '.png';
-      if(!fs.existsSync(path.resolve(__dirname, '../../assets' + imgUrl))){
-        imgStyle.display = 'none';
-      }
-    }
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={['sideNavBtn.css']}>
         <BackButton></BackButton>
@@ -35,7 +25,7 @@ var EventPage = React.createClass({
                 <meta property="og:image" content={imgUrl}></meta>
                 <div className="card singlePage__card">
                   <div className="card-image singlePage__img">
-                    <img src={imgUrl} style={imgStyle}></img>
+                    <img src={imgUrl}></img>
                   </div>
                   <div className="card-content singlePage__content">
                     <h5>{this.props.event.name}</h5>
