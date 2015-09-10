@@ -69,7 +69,7 @@ const PageManager = React.createClass({
           <div className="row">
             <div className="input-field col s6">
               <input id="page_name" type="text" className="validate" ref="page_name"></input>
-              <label htmlFor="page_name">Hinzufügen</label>
+              <label htmlFor="page_name">Hinzufügen (FB-Seitenname, z.b. alternativ.feiern)</label>
             </div>
           </div>
         </form>

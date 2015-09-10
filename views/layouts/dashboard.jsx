@@ -7,8 +7,8 @@ var BE_Layout = React.createClass({
     return (
       <html>
         <head>
-          <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
-          <link type="text/css" rel="stylesheet" href="css/dashboard.css" />
+          <link type="text/css" rel="stylesheet" href="css/dist/materialize.min.css" media="screen,projection"/>
+          <link type="text/css" rel="stylesheet" href="css/dist/dashboard.css" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
           <title>{this.props.title}</title>
         </head>

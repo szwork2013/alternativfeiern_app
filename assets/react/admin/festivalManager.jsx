@@ -82,6 +82,7 @@ var FestivalManager = React.createClass({
       <div>
         <h3>Festivals</h3>
         <form>
+          <h5>Alles Pflichtfelder!</h5>
           <div className="row">
             <div className="input-field col s3">
               <input id="festival_name" type="text" className="validate" ref="festival_name"></input>
@@ -105,7 +106,7 @@ var FestivalManager = React.createClass({
           <div className="row">
             <div className="input-field col s6">
               <input id="festival_img" type="url" className="validate" ref="festival_img"></input>
-              <label htmlFor="festival_img">Bild URL</label>
+              <label htmlFor="festival_img">Bild URL (nur .png und .jpg)</label>
             </div>
           </div>
           <div className="row">

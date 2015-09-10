@@ -155,6 +155,39 @@ module.exports = {
     }
   },
 
+  updateLocation : function(updatedLocation, response) {
+    var self = this;
+    console.log(updatedLocation);
+    updatedLocation = updatedLocation.location;
+    Location.findOne({'_id' : updatedLocation._id}, function(error, location) {
+      if(error){
+        return response.send(error);
+      }
+      location.name = updatedLocation.name ? updatedLocation.name : location.name;
+      location.website = updatedLocation.website ? updatedLocation.website : location.website;
+      location.address = updatedLocation.address ? updatedLocation.address : location.address;
+      location.city = updatedLocation.city ? updatedLocation.city : location.city;
+      location.description = updatedLocation.description ? updatedLocation.description : location.description;
+      location.alias = location.name.replace(/ /g,'').toLowerCase();
+      if(updatedLocation.img) {
+        self.deleteImage(location.img);
+        self.downloadImage(updatedLocation.img, location.alias);
+      } else {
+        self.renameImage(location.img, location.alias);
+      }
+      location.save(function(error){
+        if(error){
+          console.error(error);
+        } else {
+          console.log('location updated: ', location.name);
+          response.send({
+            updated : true
+          });
+        }
+      })
+    });
+  },
+
   downloadImage : function(imgUrl, locationAlias) {
     var self = this;
     const downloadDir = path.join(__dirname, '../assets/images/locations/');
@@ -206,5 +239,24 @@ module.exports = {
         console.error('can´t delete img, doesn´t exist: ', dir + imgName);
       }
     });
+  },
+
+  renameImage : function(imgName, locationAlias) {
+    const dir = path.join(__dirname, '../assets/images/locations/');
+    var fileExt = /\.(png|jpg)/.exec(imgName)[0];
+    var self = this;
+    fs.exists(dir + imgName, function(exists){
+      if(exists){
+        fs.rename(dir + imgName, dir + locationAlias + fileExt, function(error){
+          if(error) {
+            console.error(error);
+          } else {
+            self.saveImgName(locationAlias + fileExt, locationAlias);
+          }
+        });
+      } else {
+        console.error('can´t rename img, doesn´t exist: ', dir + imgName);
+      }
+    })
   }
 }

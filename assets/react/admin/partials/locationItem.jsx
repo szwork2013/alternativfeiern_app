@@ -1,29 +1,26 @@
-const React = require('react');
-const PropTypes = React.PropTypes;
+var React = require('react');
+var PropTypes = React.PropTypes;
+var LocationEdit = require('./locationEdit.jsx');
 
-const LocationItem = React.createClass({
+var LocationItem = React.createClass({
   getInitialState: function() {
     return {
-      extSwitched : false,
+      editEnabled : false
     };
   },
 
-  changeImageExt : function(event){
-      if(!this.state.extSwitched){
-        var img = React.findDOMNode(this.refs.avatarImage);
-        img.src = img.src.replace(/\.jpg/, '.png');
-        this.setState({
-          extSwitched : true
-        });
-      }
+  startEdit : function(){
+    this.setState({
+      editEnabled : !this.state.editEnabled
+    });
   },
 
-  removeLocation: function(){
-    this.props.location.remove(this.props.location._id);
+  removeLocation : function(){
+    this.props.remove(this.props.location._id)
   },
 
-  render: function() {
-    var imgUrl = '/images/locations/' + this.props.location.alias + '.jpg';
+  showLocation : function(){
+    var imgUrl = '/images/locations/' + this.props.location.img;
     return (
         <li className="collection-item avatar">
           <img src={imgUrl} alt="" className="circle" ref="avatarImage" onError={this.changeImageExt}/>
@@ -31,8 +28,25 @@ const LocationItem = React.createClass({
           {this.props.location.address}<br />
           {this.props.location.city}<br />
         <a href={this.props.location.website} target="_blank">Website</a>
-          <button className="waves-effect waves-light secondary-content btn-floating red" onClick={this.removeLocation}>x</button>
+          <button className="secondary-content btn red" onClick={this.removeLocation}>Delete</button>
+          <button className="secondary-content btn teal" style={{top : '4pc'}} onClick={this.startEdit}>Edit</button>
         </li>
+    );
+  },
+
+  showEditLocation : function() {
+    return (
+      <LocationEdit location={this.props.location} update={this.props.update}>
+        <button className="btn red" onClick={this.startEdit}>Abbrechen</button>
+      </LocationEdit>
+    );
+  },
+
+  render: function() {
+    return (
+      <div>
+        {this.state.editEnabled ? this.showEditLocation() : this.showLocation()}
+      </div>
     );
   }
 

@@ -240,6 +240,11 @@ module.exports = function(app, passport) {
       lm.removeLocation(req.body.id, res);
     });
 
+    app.post('/api/locations/update', isLoggedIn, function(req, res){
+      res.setHeader('Content-Type', 'application/json');
+      lm.updateLocation(req.body, res);
+    });
+
     // =====================================
     // API Methods ======   FESTIVALS   ====
     // =====================================

@@ -24,12 +24,24 @@ var LocationManager = React.createClass({
     $.ajax({
       url : apiUrl.host + '/api/locations',
       success : function(locations) {
-        console.log(locations);
         self.setState({
           locations : locations
         });
       }
     });
+  },
+
+  updateLocation : function(updatedLocation) {
+    $.ajax({
+      method : 'POST',
+      url : apiUrl.host + '/api/locations/update',
+      data : {
+        location : updatedLocation
+      },
+      success : function(response) {
+        console.log(response);
+      }
+    })
   },
 
   addLocation : function(event) {
@@ -81,11 +93,12 @@ var LocationManager = React.createClass({
   },
 
   render: function() {
-    var removeLocation = this.removeLocation;
+    var self = this;
     return (
       <div>
         <h3>Locations (Clubs, Kneipen & Co)</h3>
         <form>
+          <h5>Alles Pflichtfelder!</h5>
           <div className="row">
             <div className="input-field col s3">
               <input id="location_name" type="text" className="validate" ref="location_name"></input>
@@ -114,7 +127,7 @@ var LocationManager = React.createClass({
           <div className="row">
             <div className="input-field col s6">
               <input id="location_img" type="url" className="validate" ref="location_img"></input>
-              <label htmlFor="location_img">Bild URL</label>
+              <label htmlFor="location_img">Bild URL (nur .png und .jpg)</label>
             </div>
           </div>
           <div className="row">
@@ -130,8 +143,7 @@ var LocationManager = React.createClass({
         <h4>Added Locations</h4>
         <ul className="collection">
           {this.state.locations.map(function(location, index){
-            location.remove = removeLocation;
-            return <LocationItem location={location} key={index}></LocationItem>
+            return <LocationItem location={location} key={index} remove={self.removeLocation} update={self.updateLocation}></LocationItem>
           })}
         </ul>
       </div>

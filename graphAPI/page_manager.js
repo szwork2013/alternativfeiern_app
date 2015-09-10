@@ -40,6 +40,7 @@ module.exports = {
               page.picture = pageData.picture.data.url;
               eventData.data.forEach(function(event){
                 var singleEvent = {};
+                console.log(event);
                 if(Date.parse(event.start_time) > Date.now()){
                   if(event.cover)
                     em.downloadImage(event.cover.source, event.id);
@@ -48,7 +49,7 @@ module.exports = {
                     name          :   event.name,
                     start         :   event.start_time,
                     end           :   event.end_time,
-                    location      :   event.place.name,
+                    location      :   event.place ? event.place.name : '-',
                     description   :   event.description,
                     cover         :   event.cover ? event.cover.source : null,
                     isBlacklisted :   true,
