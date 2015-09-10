@@ -36,7 +36,7 @@ var LocationItem = React.createClass({
 
   showEditLocation : function() {
     return (
-      <LocationEdit location={this.props.location} update={this.props.update}>
+      <LocationEdit location={this.props.location} update={this.props.update} editEnabled={this.startEdit}>
         <button className="btn red" onClick={this.startEdit}>Abbrechen</button>
       </LocationEdit>
     );

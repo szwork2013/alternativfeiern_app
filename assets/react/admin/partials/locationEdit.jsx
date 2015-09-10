@@ -29,6 +29,7 @@ var LocationEdit = React.createClass({
       updatedLocation.img = null;
     }
     this.props.update(updatedLocation);
+    this.props.editEnabled();
   },
 
   render: function() {
