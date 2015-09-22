@@ -34,9 +34,12 @@ module.exports = {
           errResponse.found = false;
           errResponse.msg = 'could not found festival with alias: ' + alias;
           return response.send(errResponse);
+        } else if(festival) {
+          console.log('found festival: ', festival.name);
+          response.render('festivals/festivalPage', {title : festival.name, festival: festival});
+        } else {
+          return console.error('festival null for alias: ', alias);
         }
-        console.log('found festival: ', festival.name);
-        response.render('festivals/festivalPage', {title : festival.name, festival: festival});
       });
     }
   },
@@ -120,6 +123,39 @@ module.exports = {
     }
   }, /* end addfestival */
 
+  updateFestival : function(updatedFestival, response) {
+    var self = this;
+    console.log(updatedFestival);
+    updatedFestival = updatedFestival.festival;
+    Festival.findOne({'_id' : updatedFestival._id}, function(error, festival){
+      if(error){
+        return response.send(error);
+      }
+      festival.name = updatedFestival.name ? updatedFestival.name : festival.name;
+      festival.website = updatedFestival.website ? updatedFestival.website : festival.website;
+      festival.city = updatedFestival.name ? updatedFestival.city : festival.city;
+      festival.description = updatedFestival.description ? updatedFestival.description : festival.description;
+      festival.price = updatedFestival.price ? updatedFestival.price : festival.price;
+      festival.alias = festival.name.replace(/ /g, '').toLowerCase();
+      if(updatedFestival.img) {
+        self.deleteImage(festival.img);
+        self.downloadImage(updatedFestival.img, festival.name);
+      } else {
+        self.renameImage(festival.img, festival.alias);
+      }
+      festival.save(function(error){
+        if(error){
+          console.error(error);
+        } else {
+          console.log('festival updated: ', festival.name);
+          response.send({
+            updated : true
+          });
+        }
+      });
+    });
+  },
+
   removeFestival : function(id, response) {
     var self = this;
 
@@ -199,6 +235,25 @@ module.exports = {
         });
       } else {
         console.error('can´t delete img, doesn´t exist: ', dir + imgName);
+      }
+    });
+  },
+
+  renameImage : function(imgName, festivalAlias) {
+    const dir = path.join(__dirname, '../assets/images/festivals/');
+    var fileExt = /\.(png|jpg)/.exec(imgName)[0];
+    var self = this;
+    fs.exists(dir + imgName, function(exists){
+      if(exists){
+        fs.rename(dir + imgName, dir + festivalAlias + fileExt, function(error){
+          if(error) {
+            console.error(error);
+          } else {
+            self.saveImgName(festivalAlias + fileExt, festivalAlias);
+          }
+        });
+      } else {
+        console.error('can´t rename img, doesn´t exist: ', dir + imgName);
       }
     });
   }

@@ -23,11 +23,7 @@ var LocationEdit = React.createClass({
     updatedLocation.address = address;
     updatedLocation.city = city;
     updatedLocation.description = description;
-    if(img.length > 0 ) {
-      updatedLocation.img = img;
-    } else {
-      updatedLocation.img = null;
-    }
+    updateLocation.img = img.length > 0 ? img : null;
     this.props.update(updatedLocation);
     this.props.editEnabled();
   },

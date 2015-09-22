@@ -62,6 +62,19 @@ var FestivalManager = React.createClass({
     });
   },
 
+  updateFestival : function(updatedFestvial) {
+    $.ajax({
+      method : 'POST',
+      url : apiUrl.host + '/api/festivals/update',
+      data : {
+        festival : updatedFestvial
+      },
+      success : function(response) {
+        console.log(response);
+      }
+    })
+  },
+
   removeFestival : function(id) {
     var self = this;
     $.ajax({
@@ -77,7 +90,7 @@ var FestivalManager = React.createClass({
   },
 
   render: function() {
-    var removeFestival = this.removeFestival;
+    var self = this;
     return (
       <div>
         <h3>Festivals</h3>
@@ -122,8 +135,10 @@ var FestivalManager = React.createClass({
         <h4>Added Festivals</h4>
         <ul className="collection">
           {this.state.festivals.map(function(festival, index){
-            festival.remove = removeFestival;
-            return <FestivalItem festival={festival} key={index}></FestivalItem>
+            return <FestivalItem festival={festival}
+                                 key={index}
+                                 remove={self.removeFestival}
+                                 update={self.updateFestival}></FestivalItem>
           })}
         </ul>
       </div>

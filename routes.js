@@ -46,6 +46,10 @@ module.exports = function(app, passport) {
         res.send('eventId is not a number');
       }
     });
+
+    app.get('/events', function(req, res) {
+      res.redirect('/');
+    });
     // =====================================
     // ORGANIZERS ==========================
     // =====================================
@@ -67,7 +71,7 @@ module.exports = function(app, passport) {
     });
 
     // =====================================
-    // LOCATIONS ===========================
+    // FESTIVALS ===========================
     // =====================================
     app.get('/festivals', function(req, res){
       res.render('festivals/festivals', {title: 'Festivals'});
@@ -86,6 +90,10 @@ module.exports = function(app, passport) {
 
         // render the page and pass in any flash data if it exists
         res.render('admin/login', {title: 'Login' + pagetitle});
+    });
+
+    app.get('/admin', function(req, res){
+      res.redirect('/login');
     });
 
     // process the login form
@@ -262,6 +270,11 @@ module.exports = function(app, passport) {
     app.post('/api/festivals/delete', isLoggedIn, function(req, res) {
       res.setHeader('Content-Type', 'application/json');
       fm.removeFestival(req.body.id, res);
+    });
+
+    app.post('/api/festivals/update', isLoggedIn, function(req, res){
+      res.setHeader('Content-Type', 'application/json');
+      fm.updateFestival(req.body, res);
     });
 };
 

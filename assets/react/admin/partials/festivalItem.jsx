@@ -1,38 +1,52 @@
-const React = require('react');
-const PropTypes = React.PropTypes;
+var React = require('react');
+var PropTypes = React.PropTypes;
+var FestivalEdit = require('./festivalEdit.jsx');
 
-const FestivalItem = React.createClass({
+var FestivalItem = React.createClass({
   getInitialState: function() {
     return {
-      extSwitched : false,
+      editEnabled : false,
     };
   },
 
-  changeImageExt : function(event){
-      if(!this.state.extSwitched){
-        var img = React.findDOMNode(this.refs.avatarImage);
-        img.src = img.src.replace(/\.jpg/, '.png');
-        this.setState({
-          extSwitched : true
-        });
-      }
+  startEdit : function () {
+    this.setState({
+      editEnabled : !this.state.editEnabled
+    });
   },
 
   removeFestival: function(){
-    this.props.festival.remove(this.props.festival._id);
+    this.props.remove(this.props.festival._id);
   },
 
-  render: function() {
-    var imgUrl = '/images/festivals/' + this.props.festival.alias + '.jpg';
+  showFestival : function() {
+    var imgUrl = '/images/festivals/' + this.props.festival.img;
     return (
         <li className="collection-item avatar">
           <img src={imgUrl} alt="" className="circle" ref="avatarImage" onError={this.changeImageExt}/>
           <span className="title" style={{fontWeight : 'bold'}}>{this.props.festival.name}</span><br/>
           {this.props.festival.city}<br />
         <a href={this.props.festival.website} target="_blank">Website</a>
-          <button className="waves-effect waves-light secondary-content btn-floating red" onClick={this.removeFestival}>x</button>
+          <button className="secondary-content btn red" onClick={this.removeFestival} style={{top : '.5pc'}}>Remove</button>
+          <button className="secondary-content btn teal" style={{top : '3pc'}} onClick={this.startEdit}>Edit</button>
         </li>
     );
+  },
+
+  showEditFestival : function () {
+    return (
+      <FestivalEdit festival={this.props.festival} update={this.props.update} editEnabled={this.startEdit}>
+        <button className="btn red" onClick={this.startEdit}>Abbrechen</button>
+      </FestivalEdit>
+    );
+  },
+
+  render: function() {
+    return (
+      <div>
+        {this.state.editEnabled ? this.showEditFestival() : this.showFestival()}
+      </div>
+    )
   }
 
 });

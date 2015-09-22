@@ -257,6 +257,6 @@ module.exports = {
       } else {
         console.error('can´t rename img, doesn´t exist: ', dir + imgName);
       }
-    })
+    });
   }
 }
