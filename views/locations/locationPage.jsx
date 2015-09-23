@@ -15,6 +15,7 @@ var LocationPage = React.createClass({
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]}>
         <BackButton></BackButton>
+        <meta name="description" content={this.props.location.description.slice(150)}></meta>
         <main>
           <div className="card singlePage__card">
             <div className="card-image singlePage__img">

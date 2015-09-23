@@ -8,6 +8,8 @@ var Organizers = React.createClass({
   render: function() {
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={['organizers.css']} withTopNav>
+        <meta name="description" content="Eine Übersicht der angesagten alternativen Veranstalter
+          und Kollektive im Raum Nürnberg."></meta>
         <main id="organizers__overview">
           <div className="container">
             <p className="cityDescription">

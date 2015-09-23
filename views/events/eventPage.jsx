@@ -13,16 +13,19 @@ var EventPage = React.createClass({
   render: function() {
     var imgUrl = '/images/events/' + this.props.event.img;
     var fbUrl = 'https://facebook.com/' + this.props.event.fbid;
-    /*
-      live: '/var/www/AF_Backend/assets'
-      switches img extension to png if jpg is not found.
-      hides picture if no png ist found.
-    */
+    if(this.props.event.description && this.props.event.location && this.props.event.start) {
+      var startTime = moment(this.props.event.start).format('lll');
+      var location = this.props.event.location;
+      var metaDescription = startTime + ' | ' +
+                            location  + ' | ' +
+                            this.props.event.description.slice(0, 100);
+    }
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={['sideNavBtn.css']}>
         <BackButton></BackButton>
+        <meta name="description" content={metaDescription}></meta>
+        <meta property="og:image" content={imgUrl}></meta>
         <main>
-                <meta property="og:image" content={imgUrl}></meta>
                 <div className="card singlePage__card">
                   <div className="card-image singlePage__img">
                     <img src={imgUrl}></img>

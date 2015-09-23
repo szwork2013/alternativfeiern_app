@@ -7,6 +7,7 @@ var AboutPage = React.createClass({
   render: function() {
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]} withTopNav>
+        <meta name="description" content="Informationen zur Seite und den Gestaltern von Alternativ-Feiern."></meta>
         <main>
             <div className="card singlePage__card">
               <div className="card-content singlePage__content" style={{minHeight : '413'}}>
