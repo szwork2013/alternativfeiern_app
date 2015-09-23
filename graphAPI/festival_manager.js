@@ -106,15 +106,21 @@ module.exports = {
         festival.description = newFestival.description;
         festival.city = newFestival.city;
         festival.website = newFestival.website;
-        festival.alias = newFestival.name.replace(/ /g,'').toLowerCase();
+        festival.alias = festival.name.replace(/ /g,'').toLowerCase();
         festival.price = newFestival.price;
+        if(updatedFestival.img) {
+          self.deleteImage(festival.img);
+          self.downloadImage(updatedFestival.img, festival.alias);
+        } else {
+          self.renameImage(festival.img, festival.alias);
+        }
         festival.save(function(err) {
           if(err) {
             errResponse.added = false;
             errResponse.msg = "error saving festival";
           }
           console.log('added festival: ', festival);
-          self.downloadImage(newFestival.img, festival.alias);
+          self.downloadImage(festival.img, festival.alias);
           response.send(errResponse);
         });
       });
