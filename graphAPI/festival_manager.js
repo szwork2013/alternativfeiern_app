@@ -241,7 +241,7 @@ module.exports = {
 
   renameImage : function(imgName, festivalAlias) {
     const dir = path.join(__dirname, '../assets/images/festivals/');
-    if(/\.(png|jpg)/.exec(imgName).length > 0) {
+    if(/\.(png|jpg)/.exec(imgName)) {
       var fileExt = /\.(png|jpg)/.exec(imgName)[0];
     } else {
       return console.log('error with fileextension');
