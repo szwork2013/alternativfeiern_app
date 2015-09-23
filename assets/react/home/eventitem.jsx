@@ -7,6 +7,9 @@ var Image = require('legit-image')
 
 var EventItem = React.createClass({
 
+  hideImg : function(event){
+    event.target.style.display = 'none';
+  },
 
   render: function() {
     var eventName = this.props.event.name;
@@ -19,7 +22,7 @@ var EventItem = React.createClass({
       <div className="card medium hoverable">
         <a href={eventUrl} className="card__link">
           <div className="card-image">
-            <Image src={imgUrl} ref="cardImage" />
+            <Image src={imgUrl} ref="cardImage" onError={this.hideImg} />
           </div>
           <div className="card-content">
           <span className="card-title">{eventName}</span>
