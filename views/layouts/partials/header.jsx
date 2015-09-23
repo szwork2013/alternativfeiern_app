@@ -28,7 +28,7 @@ var Header = React.createClass({
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>{this.props.title + ' - Alternativ-Feiern'}</title>
         {/* meta tags*/}
-        <meta name="description" content="✓ Aktuelle Events in und um Nürnberg ✓ Täglich neue Veranstaltungen ✓ Sammlung der besten Locations ✓ Alternative Festivals ✓ Top Veranstalter" />
+        <meta name="description" content={this.props.description}></meta>
         {/* facebook meta tags*/}
         <meta property="og:site_name" content="Alternativ-Feiern" />
         <meta property="og:title" content={this.props.title} />

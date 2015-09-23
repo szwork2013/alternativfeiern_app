@@ -5,6 +5,7 @@ const BackButton = require('../layouts/partials/backbutton.jsx');
 const fs = require('fs');
 const path = require('path');
 
+
 var LocationPage = React.createClass({
 
   render: function() {
@@ -13,9 +14,8 @@ var LocationPage = React.createClass({
       imgUrl = '/images/locations/' + this.props.location.alias + '.png';
     }
     return (
-      <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]}>
+      <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]} description={this.props.location.description.slice(0, 150)}>
         <BackButton></BackButton>
-        <meta name="description" content={this.props.location.description.slice(150)}></meta>
         <main>
           <div className="card singlePage__card">
             <div className="card-image singlePage__img">

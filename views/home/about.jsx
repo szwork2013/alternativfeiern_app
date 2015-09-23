@@ -2,12 +2,13 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var FE_Layout = require('../layouts/frontend.jsx');
 
+const description = "Informationen zur Seite und den Gestaltern von Alternativ-Feiern.";
+
 var AboutPage = React.createClass({
 
   render: function() {
     return (
-      <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]} withTopNav>
-        <meta name="description" content="Informationen zur Seite und den Gestaltern von Alternativ-Feiern."></meta>
+      <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]} withTopNav description={description}>
         <main>
             <div className="card singlePage__card">
               <div className="card-content singlePage__content" style={{minHeight : '413'}}>

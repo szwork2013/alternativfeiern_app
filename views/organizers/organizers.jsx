@@ -3,13 +3,13 @@ var PropTypes = React.PropTypes;
 var FE_Layout = require('../layouts/frontend.jsx');
 var OrganizerItem = require('./organizerItem.jsx');
 
+const description = "Eine Übersicht der angesagten alternativen Veranstalter und Kollektive im Raum Nürnberg."
+
 var Organizers = React.createClass({
 
   render: function() {
     return (
-      <FE_Layout title={this.props.title} scripts={[]} stylesheets={['organizers.css']} withTopNav>
-        <meta name="description" content="Eine Übersicht der angesagten alternativen Veranstalter
-          und Kollektive im Raum Nürnberg."></meta>
+      <FE_Layout title={this.props.title} scripts={[]} stylesheets={['organizers.css']} withTopNav description={description}>
         <main id="organizers__overview">
           <div className="container">
             <p className="cityDescription">

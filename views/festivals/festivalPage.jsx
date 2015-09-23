@@ -13,7 +13,7 @@ var FestivalPage = React.createClass({
       imgUrl = '/images/festivals/' + this.props.festival.alias + '.png';
     }
     return (
-      <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]}>
+      <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]} description={this.props.festival.description.slice(0, 150)}>
         <BackButton></BackButton>
         <meta name="description" content={this.props.festival.description.slice(0, 150)}></meta>
         <main>
