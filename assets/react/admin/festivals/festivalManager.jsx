@@ -1,8 +1,7 @@
-const React = require('react');
-const $ = window.jQuery;
-const PropTypes = React.PropTypes;
-const apiUrl = require('./apiUrl.jsx');
-const FestivalItem = require('./partials/festivalItem.jsx');
+var React = require('react');
+var $ = window.jQuery;
+var apiUrl = require('../config/apiUrl.js');
+var FestivalItem = require('./festivalItem.jsx');
 
 var FestivalManager = React.createClass({
   getInitialState: function() {
@@ -20,7 +19,6 @@ var FestivalManager = React.createClass({
     $.ajax({
       url : apiUrl.host + '/api/festivals',
       success : function(festivals) {
-        console.log(festivals);
         self.setState({
           festivals : festivals
         });
@@ -66,11 +64,8 @@ var FestivalManager = React.createClass({
     $.ajax({
       method : 'POST',
       url : apiUrl.host + '/api/festivals/update',
-      data : {
-        festival : updatedFestvial
-      },
+      data : updatedFestvial,
       success : function(response) {
-        console.log(response);
       }
     })
   },

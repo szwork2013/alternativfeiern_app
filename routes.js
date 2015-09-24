@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 const auth = require('./config/auth');
 const pm = require('./graphAPI/page_manager');
 const em = require('./graphAPI/event_manager');
-const lm = require('./graphAPI/location_manager');
-const fm = require('./graphAPI/festival_manager');
+const lm = require('./controller/_location_controller');
+const FestivalController = require('./controller/festival_controller');
 const newsletter = require('./af_modules/newsletter');
 
 pm.setAuthToken(auth.token);
@@ -79,7 +79,7 @@ module.exports = function(app, passport) {
 
     app.get('/festivals/:festivaAlias', function(req, res) {
       var alias = req.params.festivaAlias;
-      fm.getFestival(alias, res);
+      FestivalController.get(alias, res);
     });
 
     // =====================================
@@ -259,22 +259,22 @@ module.exports = function(app, passport) {
 
     app.get('/api/festivals', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      fm.getFestivals(res);
+      FestivalController.getAll(res);
     });
 
     app.post('/api/festivals/add', isLoggedIn, function(req, res){
       res.setHeader('Content-Type', 'application/json');
-      fm.addFestival(req.body, res);
+      FestivalController.create(req.body, res);
     });
 
     app.post('/api/festivals/delete', isLoggedIn, function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      fm.removeFestival(req.body.id, res);
+      FestivalController.delete(req.body.id, res);
     });
 
     app.post('/api/festivals/update', isLoggedIn, function(req, res){
       res.setHeader('Content-Type', 'application/json');
-      fm.updateFestival(req.body, res);
+      FestivalController.update(req.body, res);
     });
 };
 

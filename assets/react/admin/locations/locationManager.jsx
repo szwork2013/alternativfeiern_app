@@ -1,8 +1,7 @@
-const React = require('react');
-const $ = window.jQuery;
-const PropTypes = React.PropTypes;
-const apiUrl = require('./apiUrl.jsx');
-const LocationItem = require('./partials/locationItem.jsx');
+var React = require('react');
+var $ = window.jQuery;
+var apiUrl = require('../config/apiUrl.js');
+var LocationItem = require('./locationItem.jsx');
 
 var LocationManager = React.createClass({
   getInitialState: function() {
@@ -39,7 +38,6 @@ var LocationManager = React.createClass({
         location : updatedLocation
       },
       success : function(response) {
-        console.log(response);
       }
     })
   },

@@ -1,11 +1,9 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
 var $ = window.jQuery;
 
 var FestivalEdit = React.createClass({
   updateFestival : function(event) {
       event.preventDefault();
-      console.log('updating festival');
       var name = React.findDOMNode(this.refs.festival_name).value;
       var website = React.findDOMNode(this.refs.festival_website).value;
       var city = React.findDOMNode(this.refs.festival_city).value;

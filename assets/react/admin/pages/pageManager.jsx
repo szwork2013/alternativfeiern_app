@@ -1,8 +1,7 @@
-const React = require('react');
-const $ = window.jQuery;
-const PropTypes = React.PropTypes;
-const PageItem = require('./partials/pageItem.jsx');
-const apiUrl = require('./apiUrl.jsx');
+var React = require('react');
+var $ = window.jQuery;
+var PageItem = require('./pageItem.jsx');
+var apiUrl = require('../config/apiUrl.js');
 
 const PageManager = React.createClass({
   getInitialState: function() {
@@ -20,7 +19,6 @@ const PageManager = React.createClass({
     $.ajax({
       url : apiUrl.host + '/api/pages',
       success : function(pages) {
-        console.log(pages);
         self.setState({
           pages : pages
         });

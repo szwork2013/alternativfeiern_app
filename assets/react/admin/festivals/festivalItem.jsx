@@ -1,5 +1,4 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
 var FestivalEdit = require('./festivalEdit.jsx');
 
 var FestivalItem = React.createClass({
@@ -20,7 +19,7 @@ var FestivalItem = React.createClass({
   },
 
   showFestival : function() {
-    var imgUrl = '/images/festivals/' + this.props.festival.img;
+    var imgUrl = '/images/festivals/' + this.props.festival.img_small;
     return (
         <li className="collection-item avatar">
           <img src={imgUrl} alt="" className="circle" ref="avatarImage" onError={this.changeImageExt}/>

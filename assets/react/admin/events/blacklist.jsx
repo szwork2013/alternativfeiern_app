@@ -1,10 +1,9 @@
-const React = require('react');
-const $ = window.jQuery;
-const PropTypes = React.PropTypes;
-const EventContainer = require('./partials/eventContainer_wl.jsx');
-const apiUrl = require('./apiUrl.jsx');
+var React = require('react');
+var $ = window.jQuery;
+var EventContainer = require('./eventContainer_bl.jsx');
+var apiUrl = require('../config/apiUrl.js');
 
-const Whitelist = React.createClass({
+var Blacklist = React.createClass({
   getInitialState: function() {
     return {
       pages : [],
@@ -21,7 +20,6 @@ const Whitelist = React.createClass({
     $.ajax({
       url: apiUrl.host + '/api/pages',
       success : function(pages) {
-        console.log(pages);
         self.setState({
           pages : pages,
           allPages : pages
@@ -44,23 +42,6 @@ const Whitelist = React.createClass({
     });
   },
 
-  addEvent : function(event) {
-    event.preventDefault();
-    var self = this;
-    var id = React.findDOMNode(this.refs.event_id);
-    $.ajax({
-      method  : 'POST',
-      url : apiUrl.host + '/api/events/addPrivate',
-      data : {
-        id : id.value
-      },
-      success : function() {
-        self.getPages();
-        id.value = ''
-      },
-    });
-  },
-
   render: function() {
     var blackList = this.blackListEvent;
     return (
@@ -71,11 +52,6 @@ const Whitelist = React.createClass({
               <div className="input-field col s6">
                 <input id="page_name" type="text" className="validate" ref="page_name" onChange={this.handleInput}></input>
                 <label htmlFor="page_name">Suche Seiten</label>
-              </div>
-              <div className="input-field col s4">
-                <input id="event_id" type="text" className="validate" ref="event_id"></input>
-                <label htmlFor="event_id">Event hinzufügen (via Facebook-ID)</label>
-                <a className="btn" onClick={this.addEvent}>Hinzufügen</a>
               </div>
             </div>
           </form>
@@ -88,4 +64,4 @@ const Whitelist = React.createClass({
   }
 });
 
-module.exports = Whitelist;
+module.exports = Blacklist;

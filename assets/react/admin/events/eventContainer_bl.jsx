@@ -1,9 +1,8 @@
-const React = require('react');
-const PropTypes = React.PropTypes;
-const EventItem = require('./eventItem.jsx');
-const apiUrl = require('../apiUrl.jsx');
+var React = require('react');
+var EventItem = require('./eventItem.jsx');
+var apiUrl = require('../config/apiUrl.js');
 
-const EventContainer  = React.createClass({
+var EventContainer  = React.createClass({
   getInitialState: function() {
     return {
       events : []
@@ -16,7 +15,6 @@ const EventContainer  = React.createClass({
 
   getEvents : function() {
     var self = this;
-    console.log(this.props.page);
     $.ajax({
       method : 'GET',
       url : apiUrl.host + '/api/events/page',
@@ -24,7 +22,6 @@ const EventContainer  = React.createClass({
         pageId : this.props.page.fbid
       },
       success : function(events) {
-        console.log(events);
         self.setState({
           events : events
         });
@@ -42,11 +39,9 @@ const EventContainer  = React.createClass({
         eventId : eventId,
       },
       success : function()  {
-        console.log('blacklisted');
         self.getEvents();
       },
       error : function(err) {
-        console.log(err);
       }
     });
   },
@@ -58,7 +53,7 @@ const EventContainer  = React.createClass({
         <div className="collection-header teal lighten-1"><h5>{this.props.page.name}</h5></div>
           {this.state.events.map(function(event, index){
             event.blackList = blackList;
-            if(!event.isBlacklisted)
+            if(event.isBlacklisted)
               return <EventItem event={event} key={index}></EventItem>
           })}
       </ul>

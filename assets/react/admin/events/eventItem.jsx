@@ -1,7 +1,7 @@
-const React = require('react');
-const PropTypes = React.PropTypes;
+var React = require('react');
+var PropTypes = React.PropTypes;
 
-const weekdays = {
+var weekdays = {
   'Mon' : 'Mo',
   'Tue' : 'Di',
   'Wed' : 'Mi',
@@ -26,7 +26,7 @@ const weekdays = {
   'Dec' : '12',
 };*/
 
-const EventItem  = React.createClass({
+var EventItem  = React.createClass({
 
   blacklist : function(){
     this.props.event.blackList(this.props.event.fbid);

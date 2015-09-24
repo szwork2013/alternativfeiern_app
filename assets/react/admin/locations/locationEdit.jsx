@@ -1,5 +1,4 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
 var $ = window.jQuery;
 
 var LocationEdit = React.createClass({
@@ -9,7 +8,6 @@ var LocationEdit = React.createClass({
 
   updateLocation : function(event) {
     event.preventDefault();
-    console.log('updating location');
     var name = React.findDOMNode(this.refs.location_name).value;
     var website = React.findDOMNode(this.refs.location_website).value;
     var address = React.findDOMNode(this.refs.location_address).value;

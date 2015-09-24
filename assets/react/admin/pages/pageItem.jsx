@@ -1,7 +1,6 @@
-const React = require('react');
-const PropTypes = React.PropTypes;
+var React = require('react');
 
-const PageItem = React.createClass({
+var PageItem = React.createClass({
   removePage: function(){
     this.props.page.remove(this.props.page.fbid);
   },

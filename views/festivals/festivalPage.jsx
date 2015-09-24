@@ -6,12 +6,8 @@ const fs = require('fs');
 const path = require('path');
 
 var FestivalPage = React.createClass({
-
   render: function() {
-    var imgUrl = '/images/festivals/' + this.props.festival.alias + '.jpg';
-    if(!fs.existsSync(path.resolve(__dirname, '../../assets' + imgUrl))){
-      imgUrl = '/images/festivals/' + this.props.festival.alias + '.png';
-    }
+    var img = '/images/festivals/' + this.props.festival.img_orig;
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]} description={this.props.festival.description.slice(0, 150)}>
         <BackButton></BackButton>
@@ -19,7 +15,7 @@ var FestivalPage = React.createClass({
         <main>
           <div className="card singlePage__card">
             <div className="card-image singlePage__img">
-              <img src={imgUrl}></img>
+              <img src={img}></img>
             </div>
             <div className="card-content singlePage__content">
               <h5>{this.props.festival.name}</h5>

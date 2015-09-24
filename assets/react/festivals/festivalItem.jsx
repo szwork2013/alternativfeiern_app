@@ -10,7 +10,7 @@ var FestivalItem = React.createClass({
       festivalName = festivalName.substring(0, 25) + '...';
     }
 
-    var imgUrl = 'images/festivals/' + this.props.festival.img;
+    var imgUrl = 'images/festivals/' + this.props.festival.img_small;
     var festivalUrl = '/festivals/' + this.props.festival.alias;
     return (
       <div className="card medium hoverable card--appear">
