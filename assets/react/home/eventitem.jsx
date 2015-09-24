@@ -3,7 +3,7 @@ var moment = window.moment;
 moment.locale('de');
 var tz = require('moment-timezone');
 var PropTypes = React.PropTypes;
-var Image = require('legit-image')
+var Image = require('legit-image');
 
 var EventItem = React.createClass({
 

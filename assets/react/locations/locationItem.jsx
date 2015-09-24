@@ -5,7 +5,7 @@ var Image = require('legit-image');
 var LocationItem = React.createClass({
 
   render: function() {
-    var imgUrl = '/images/locations/' + this.props.location.img_small;
+    var imgUrl = '/images/locations/' + this.props.location.img_orig;
     var locationUrl = '/locations/' + this.props.location.alias;
     return (
       <div className="card medium hoverable card--appear">
