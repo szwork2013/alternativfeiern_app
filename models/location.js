@@ -7,7 +7,8 @@ var locationSchema = mongoose.Schema({
   address     :   String,
   city        :   String,
   website     :   String,
-  img         :   String,
+  img_orig    :   String,
+  img_small   :   String,
 });
 
 module.exports = mongoose.model('Location', locationSchema);

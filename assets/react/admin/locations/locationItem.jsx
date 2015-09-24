@@ -19,7 +19,7 @@ var LocationItem = React.createClass({
   },
 
   showLocation : function(){
-    var imgUrl = '/images/locations/' + this.props.location.img;
+    var imgUrl = '/images/locations/' + this.props.location.img_small;
     return (
         <li className="collection-item avatar">
           <img src={imgUrl} alt="" className="circle" ref="avatarImage" onError={this.changeImageExt}/>

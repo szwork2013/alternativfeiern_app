@@ -1,4 +1,4 @@
-const Festival = require('../models/festival');
+const Location = require('../models/location');
 const path = require('path');
 const fs = require('fs');
 const request = require('request');
@@ -13,40 +13,39 @@ module.exports = {
   create : function(data, response) {
     var self = this;
 
-    Festival.findOne({'name' : data.name}, function(err, festival){
+    Location.findOne({'name' : data.name}, function(err, location){
       if(err) {
         return response.send({
           error : err
         });
       }
-      if(festival) {
+      if(location) {
         return response.send({
-          error : 'festival already exists',
-          festival : festival
+          error : 'location already exists',
+          location : location
         });
       }
-      var festival = new Festival();
-      festival.name = data.name;
-      festival.description = data.description;
-      festival.city = data.city;
-      festival.website = data.website;
-      festival.alias = festival.name.replace(/ /g,'').toLowerCase();
-      festival.price = data.price;
-      festival.save(function(err) {
+      var location = new Location();
+      location.name = data.name;
+      location.description = data.description;
+      location.address = data.address;
+      location.city = data.city;
+      location.website = data.website;
+      location.alias = location.name.replace(/ /g,'').toLowerCase();
+      location.save(function(err) {
         if(err) {
           return response.send({
-            error : err,
+            error : err
           });
         }
-        ImageController.download(data.img, 'festivals/', festival._id, self.saveImgName);
+        ImageController.download(data.img, 'locations/', location._id, self.saveImgName)
         response.send({
           added : true,
-          festival : festival
+          location : location
         });
       });
     });
-  },
-
+  }, /* end addLocation */
   /*
       ====================
       UPDATE =============
@@ -55,31 +54,31 @@ module.exports = {
   update : function(data, response) {
     var self = this;
 
-    Festival.findOne({'_id' : data._id}, function(error, festival){
+    Location.findOne({'_id' : data._id}, function(error, location) {
       if(error){
         return response.send(error);
       }
-      festival.name = data.name
-      festival.website = data.website
-      festival.city = data.city
-      festival.description = data.description
-      festival.price = data.price
-      festival.alias = festival.name.replace(/ /g, '').toLowerCase();
+      location.name = data.name
+      location.website = data.website
+      location.address = data.address
+      location.city = data.city
+      location.description = data.description
+      location.alias = location.name.replace(/ /g,'').toLowerCase();
 
       if(data.img) {
-        ImageController.delete('festivals/' + festival.img_orig);
-        ImageController.download(data.img, '/festivals', festival._id, self.saveImgName);
+        ImageController.delete('locations/' + location.img_orig);
+        ImageController.download(data.img, '/locations', location._id, self.saveImgName);
       }
-      festival.save(function(error){
+      location.save(function(error){
         if(error){
           console.error(error);
         } else {
           response.send({
             updated : true,
-            festival : festival
+            location : location
           });
         }
-      });
+      })
     });
   },
 
@@ -92,14 +91,14 @@ module.exports = {
     var self = this;
 
     if(id) {
-      Festival.findOne({'_id' : id}, function(error, festival){
+      Location.findOne({'_id' : id}, function(error, location){
         if(error) {
-          return
+          return;
         } else {
-          ImageController.delete('festivals/' + festival.img_orig);
+          ImageController.delete('locations/' + location.img_orig);
         }
       });
-      Festival.remove({'_id' : id}, function(err){
+      Location.remove({'_id' : id}, function(err){
         if(err){
           return response.send({
             error : err
@@ -111,10 +110,9 @@ module.exports = {
       });
     }
   },
-
   /*
       ====================
-      GET ================
+      GET =============
       ====================
   */
   get : function(alias, response) {
@@ -125,19 +123,20 @@ module.exports = {
         error : 'no alias'
       });
     } else {
-      Festival.findOne({'alias' : alias}, function(err, festival){
+      Location.findOne({'alias' : alias}, function(err, location){
         if(err) {
           return response.send({
             error : 'not found'
           });
         }
-        if(festival) {
+        if(location) {
           return response.render(
-            'festivals/festivalPage',
+            'locations/locationPage',
             {
-              title : festival.name,
-              festival: festival
-            });
+              title : location.name,
+              location : location
+            }
+          );
         }
       });
     }
@@ -149,13 +148,13 @@ module.exports = {
       ====================
   */
   getAll : function(response) {
-    Festival.find(function(err, festivals){
+    Location.find(function(err, locations){
       if(err) {
         response.send({
-          msg : 'no festivals',
+          msg : 'no locations',
         });
       }
-      response.send(festivals);
+      response.send(locations);
     });
   },
 
@@ -165,21 +164,21 @@ module.exports = {
       =========================
   */
   saveImgName : function(img_orig, img_small, id) {
-    Festival.findOne({'_id' : id}, function(err, festival){
+    Location.findOne({'_id' : id}, function(err, location){
       if(err) {
-        return console.error(error);
+        return console.error(err);
       } else {
-        festival.img_orig = img_orig;
-        festival.img_small = img_small;
-        festival.save(function(err){
-          if(err){
+        location.img_orig = img_orig;
+        location.img_small = img_small;
+        location.save(function(err){
+          if(err) {
             return console.error(err);
           } else {
-            console.log('saved image name', festival);
+            console.log('saved image name', location);
           }
-        });
+        })
       }
-    });
+    })
   },
 
 }

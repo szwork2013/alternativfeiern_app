@@ -1,25 +1,19 @@
 const React = require('react');
-const PropTypes = React.PropTypes;
 const FE_Layout = require('../layouts/frontend.jsx');
 const BackButton = require('../layouts/partials/backbutton.jsx');
-const fs = require('fs');
-const path = require('path');
 
 
 var LocationPage = React.createClass({
 
   render: function() {
-    var imgUrl = '/images/locations/' + this.props.location.alias + '.jpg';
-    if(!fs.existsSync(path.resolve(__dirname, '../../assets' + imgUrl))){
-      imgUrl = '/images/locations/' + this.props.location.alias + '.png';
-    }
+    var img = '/images/locations/' + this.props.location.img_orig;
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]} description={this.props.location.description.slice(0, 150)}>
         <BackButton></BackButton>
         <main>
           <div className="card singlePage__card">
             <div className="card-image singlePage__img">
-              <img src={imgUrl}></img>
+              <img src={img}></img>
             </div>
             <div className="card-content singlePage__content">
               <h5>{this.props.location.name}</h5>

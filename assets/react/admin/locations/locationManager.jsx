@@ -34,9 +34,7 @@ var LocationManager = React.createClass({
     $.ajax({
       method : 'POST',
       url : apiUrl.host + '/api/locations/update',
-      data : {
-        location : updatedLocation
-      },
+      data : updatedLocation,
       success : function(response) {
       }
     })

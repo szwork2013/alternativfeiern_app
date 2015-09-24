@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const auth = require('./config/auth');
 const pm = require('./graphAPI/page_manager');
 const em = require('./graphAPI/event_manager');
-const lm = require('./controller/_location_controller');
+const LocationController = require('./controller/location_controller');
 const FestivalController = require('./controller/festival_controller');
 const newsletter = require('./af_modules/newsletter');
 
@@ -67,7 +67,7 @@ module.exports = function(app, passport) {
 
     app.get('/locations/:locationAlias', function(req, res){
       var alias = req.params.locationAlias;
-      lm.getLocation(alias, res);
+      LocationController.get(alias, res);
     });
 
     // =====================================
@@ -235,22 +235,22 @@ module.exports = function(app, passport) {
 
     app.get('/api/locations', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      lm.getLocations(res);
+      LocationController.getAll(res);
     });
 
     app.post('/api/locations/add', isLoggedIn, function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      lm.addLocation(req.body, res);
+      LocationController.create(req.body, res);
     });
 
     app.post('/api/locations/delete', isLoggedIn, function(req, res){
       res.setHeader('Content-Type', 'application/json');
-      lm.removeLocation(req.body.id, res);
+      LocationController.delete(req.body.id, res);
     });
 
     app.post('/api/locations/update', isLoggedIn, function(req, res){
       res.setHeader('Content-Type', 'application/json');
-      lm.updateLocation(req.body, res);
+      LocationController.update(req.body, res);
     });
 
     // =====================================
