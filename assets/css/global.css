@@ -320,6 +320,29 @@ a.button-collapse.top-nav {
   }
 }
 
+/*
+  Animation Klasses
+*/
+
+.card--appear {
+  animation: card-appear .4s;
+  animation-fill-mode: forwards;
+}
+
+/*
+  Animations
+*/
+
+@keyframes card-appear {
+  0% {
+    opacity: 0.01;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 
 .easeIn-enter {
   opacity: 0.01;

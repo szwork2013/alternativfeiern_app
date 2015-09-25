@@ -11,7 +11,7 @@ const tz = require('moment-timezone');
 var EventPage = React.createClass({
 
   render: function() {
-    var imgUrl = '/images/events/' + this.props.event.img;
+    var imgUrl = '/images/events/' + this.props.event.img_orig;
     var fbUrl = 'https://facebook.com/' + this.props.event.fbid;
     if(this.props.event.description && this.props.event.location && this.props.event.start) {
       var startTime = moment(this.props.event.start).format('lll');

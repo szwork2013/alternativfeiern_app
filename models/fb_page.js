@@ -12,9 +12,10 @@ var pageSchema = mongoose.Schema({
       end    :   String,
       location  :   String,
       description   :   String,
-      cover   :   String,
       isBlacklisted : Boolean,
       img : String,
+      img_orig : String,
+      img_small : String
     }
   ],
 });

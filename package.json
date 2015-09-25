@@ -17,6 +17,7 @@
     "express": "~4.13.1",
     "express-react-views": "^0.8.1",
     "express-session": "~1.0.0",
+    "express-sitemap": "^1.6.0",
     "fbgraph": "^1.0.0",
     "jsdom": "^3.1.2",
     "legit-image": "0.0.2",

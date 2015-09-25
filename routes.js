@@ -3,9 +3,12 @@ const bodyParser = require('body-parser');
 const auth = require('./config/auth');
 const pm = require('./graphAPI/page_manager');
 const em = require('./graphAPI/event_manager');
+const PageController = require('./controller/page_controller');
+const EventController = require('./controller/event_controller');
 const LocationController = require('./controller/location_controller');
 const FestivalController = require('./controller/festival_controller');
 const newsletter = require('./af_modules/newsletter');
+const Page = require('./models/fb_page');
 
 pm.setAuthToken(auth.token);
 
@@ -40,7 +43,8 @@ module.exports = function(app, passport) {
     app.get('/events/:eventId', function(req, res){
       var eventId = req.params.eventId;
       if(!isNaN(eventId)){
-        em.getSingle(eventId, res);
+        EventController.get(eventId, res);
+        //em.getSingle(eventId, res);
       } else {
         console.log('sth wrong with the parameter');
         res.send('eventId is not a number');
@@ -152,15 +156,13 @@ module.exports = function(app, passport) {
     // adds a page and its events to the db
     app.post('/api/pages/add', isLoggedIn, function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      var pageName = req.body.pageName;
-      pm.addPage(pageName, res);
+      PageController.create(req.body, res);
     });
 
     // deletes a page from the db (and its events)
     app.post('/api/pages/delete', isLoggedIn, function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      var pageId = req.body.pageId;
-      pm.removePage(pageId, res);
+      PageController.delete(req.body, res);
     });
 
     // returns the events from a given page
@@ -168,7 +170,7 @@ module.exports = function(app, passport) {
       res.setHeader('Content-Type', 'application/json');
       var pageId = req.query.pageId;
       if(pageId){
-        em.getPageEvents(pageId, res);
+        EventController.getByPage(pageId, res);
       } else {
         res.send({
           events : [],
@@ -184,24 +186,18 @@ module.exports = function(app, passport) {
     // returns a list of all whitelisted events
     app.get('/api/events/whitelisted', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      em.getWhitelisted(res);
+      EventController.getWhitelisted(res);
     });
 
     app.get('/api/events/whitelisted/today', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      em.getTodayWhitelisted(res);
+      EventController.getWhitelistedToday(res);
     });
 
     //returns a array of events sorted after starttime (without today events)
     app.get('/api/events/whitelisted/sorted', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      em.getSorted(res);
-    });
-
-    // returns a shorter version of all events from the db
-    app.get('/api/events/all/short', function(req, res) {
-      res.setHeader('Content-Type', 'application/json');
-      em.getAllEventsShort(res);
+      EventController.getWhitelistedSorted(res);
     });
 
     // sets a given event to blacklisted/whitelisted depending on the current state
@@ -210,7 +206,7 @@ module.exports = function(app, passport) {
       var eventId = req.body.eventId;
       var pageId = req.body.pageId;
       if(pageId && eventId){
-        em.blacklist(pageId, eventId, res);
+        EventController.blacklist(pageId, eventId, res);
       } else {
         res.send({
           isBlacklisted : false,
@@ -222,8 +218,8 @@ module.exports = function(app, passport) {
     app.post('/api/events/addPrivate', isLoggedIn, function(req, res){
       console.log(req.body);
       if(req.body.id) {
-        em.pushPrivateEvent(req.body.id);
-        res.end('done.');
+        EventController.addManually(req.body.id);
+        res.end('done');
       } else {
         res.send('no id supplied.');
       }

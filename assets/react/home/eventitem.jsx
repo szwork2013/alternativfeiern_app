@@ -16,7 +16,7 @@ var EventItem = React.createClass({
     if(this.props.event.name.length > 30){
       eventName = eventName.substring(0, 30) + '...';
     }
-    var imgUrl = 'images/events/small_' + this.props.event.img;
+    var imgUrl = 'images/events/' + this.props.event.img_small;
     var eventUrl = '/events/' + this.props.event.fbid;
     return (
       <div className="card medium hoverable">
