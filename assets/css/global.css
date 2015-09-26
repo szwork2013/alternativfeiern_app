@@ -325,8 +325,9 @@ a.button-collapse.top-nav {
 */
 
 .card--appear {
-  animation: card-appear .4s;
+  animation: card-appear .3s;
   animation-fill-mode: forwards;
+  -webkit-animation: .3s appear forwards;
 }
 
 /*
@@ -341,6 +342,22 @@ a.button-collapse.top-nav {
   100% {
     opacity: 1;
   }
+}
+
+@-webkit-keyframes card-appear {
+  0%  { opacity: 0.01; }
+
+  50% { opacity : 0.5; }
+
+  100% { opacity: 1.0; }
+}
+
+@-moz-keyframes card-appear {
+  0%  { opacity: 0.01; }
+
+  50% { opacity : 0.5; }
+
+  100% { opacity: 1.0; }
 }
 
 

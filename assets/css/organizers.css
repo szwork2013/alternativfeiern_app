@@ -28,6 +28,10 @@ div.card-content.white-text {
 }
 
 .organizer-appear {
-  animation: card-appear .5s;
+  animation: card-appear .3s;
   animation-fill-mode: forwards;
+  -webkit-animation: .3s card-appear;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation: .3s card-appear;
+  -moz-animation-fill-mode: forwards;
 }

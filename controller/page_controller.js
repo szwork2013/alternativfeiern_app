@@ -66,14 +66,12 @@ module.exports = {
       ====================
   */
   delete : function(data, response) {
-    console.log(data);
-    Page.findOne({'_id' : data._id}, function(err, page){
+    Page.findOne({'fbid' : data.pageId}, function(err, page){
       if(err) {
         reponse.send({
           error : err
         });
         return console.error(err);
-
       } else if(page) {
         //TODO: delete all event images
         page.remove(function(err){
