@@ -1,29 +1,18 @@
 var React = require('react');
+var Reflux = require('reflux');
 var $ = window.jQuery;
-var PageItem = require('./pageItem.jsx');
-var apiUrl = require('../config/apiUrl.js');
 
-const PageManager = React.createClass({
+var PageItem = require('./pageItem.jsx');
+var PageStore = require('../../Stores/PageStore.jsx');
+var PageActions = require('../../Actions/PageActions.jsx');
+
+var PageManager = React.createClass({
+  mixins : [Reflux.connect(PageStore, 'pages')],
+
   getInitialState: function() {
     return {
-      pages: []
+      pages: [],
     };
-  },
-
-  componentWillMount: function() {
-    this.getPages();
-  },
-
-  getPages : function() {
-    var self = this;
-    $.ajax({
-      url : apiUrl.host + '/api/pages',
-      success : function(pages) {
-        self.setState({
-          pages : pages
-        });
-      }
-    });
   },
 
   addPage : function(event) {
@@ -31,35 +20,17 @@ const PageManager = React.createClass({
     var self = this;
     var inputField = React.findDOMNode(this.refs.page_name);
     var pageName = inputField.value;
-    $.ajax({
-      method : 'POST',
-      url : apiUrl.host + '/api/pages/add',
-      data : {
-        pageName : pageName
-      },
-      success : function() {
-        inputField.value = '';
-        self.getPages();
-      }
+    PageActions.addPage(pageName, function(){
+      inputField.value = '';
     });
   },
 
   removePage : function(pageId) {
-    var self = this;
-    $.ajax({
-      method  : 'POST',
-      url : apiUrl.host + '/api/pages/delete',
-      data : {
-        pageId : pageId
-      },
-      success : function() {
-        self.getPages();
-      },
-    });
+    PageActions.removePage(pageId);
   },
 
   render: function() {
-    var removePage = this.removePage
+    var self = this;
     return(
       <div>
         <h3>Seiten</h3>
@@ -73,8 +44,7 @@ const PageManager = React.createClass({
         </form>
         <ul className="collection">
           {this.state.pages.map(function(page, index){
-            page.remove = removePage;
-            return <PageItem page={page} key={index}></PageItem>
+            return <PageItem page={page} key={index} remove={self.removePage}/>
           })}
         </ul>
       </div>

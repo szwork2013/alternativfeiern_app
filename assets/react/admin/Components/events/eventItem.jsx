@@ -29,7 +29,7 @@ var weekdays = {
 var EventItem  = React.createClass({
 
   blacklist : function(){
-    this.props.event.blackList(this.props.event.fbid);
+    this.props.blacklist(this.props.event.fbid);
   },
 
   render: function() {

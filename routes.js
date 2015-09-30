@@ -150,7 +150,7 @@ module.exports = function(app, passport) {
     // returns all pages in the db
     app.get('/api/pages', function(req, res) {
       res.setHeader('Content-Type', 'application/json');
-      pm.getAllPages(res);
+      PageController.getAll(res);
     });
 
     // adds a page and its events to the db

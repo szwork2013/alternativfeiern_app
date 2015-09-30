@@ -31,15 +31,24 @@ module.exports = {
         event.location = result.place ? result.place.name : ' - ';
         event.description = result.description;
         event.isBlacklisted = manually ? false : true;
-        page.events.push(event);
-        page.save(function(err){
-          if(err){
-            return console.error(err);
+
+        var doublCheckIsNew = true;
+        page.events.forEach(function(storedEvent){
+          if(storedEvent.fbid == event.fbid) {
+            doublCheckIsNew = false;
           }
-          console.log('saved new event: ', page.name + ': ' + event.name);
         });
-        if(result.cover) {
-          ImageController.download(result.cover.source, '/events', event.fbid, self.saveImgName);
+        if(doublCheckIsNew) {
+          page.events.push(event);
+          page.save(function(err){
+            if(err){
+              return console.error(err);
+            }
+            console.log('saved new event: ', page.name + ': ' + event.name);
+          });
+          if(result.cover) {
+            ImageController.download(result.cover.source, '/events', event.fbid, self.saveImgName);
+          }
         }
       }
     });
@@ -230,14 +239,15 @@ module.exports = {
       if(page) {
         page.events.forEach(function(event){
           if(event.fbid == eventId) {
-            event.isBlacklisted = !event.isBlacklisted
+            event.isBlacklisted = !event.isBlacklisted;
             return page.save(function(err){
               if(err){
                 return console.error(err);
+              } else {
+                return response.send({
+                  isBlacklisted : event.isBlacklisted
+                });
               }
-              return response.send({
-                isBlacklisted : event.isBlacklisted
-              });
             });
           }
         });
@@ -256,15 +266,11 @@ module.exports = {
     =======================
   */
   getPageEvents : function(page) {
-    console.log('calling helper');
     var self = this;
-    var query = page.fbid + '/events?limit=50';
+    var query = page.fbid + '/events?limit=30';
     Graph.get(query, function(err, result){
       if(err) {
-        console.error(err);
-        return response.send({
-          error : err
-        });
+        console.error(err);g
       }
       if(result.data) {
         result.data.forEach(function(event){
@@ -272,13 +278,10 @@ module.exports = {
           page.events.forEach(function(storedEvent){
             if(storedEvent.fbid == event.id) {
               isNew = false;
-              return console.log('event already stored');;
             }
           });
           if(Date.parse(event.start_time) > Date.now() && isNew){
             self.create(page, event.id);
-          } else {
-            console.log('event already happened');
           }
         });
       }

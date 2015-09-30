@@ -1,11 +1,11 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
-var PageManager = require('./pages/pageManager.jsx');
-var Blacklist = require('./events/blacklist.jsx');
-var Whitelist = require('./events/whitelist.jsx');
-var LocationManager = require('./locations/locationManager.jsx');
-var FestivalManager = require('./festivals/festivalManager.jsx');
+var PageManager = require('./Components/pages/pageManager.jsx');
+var Blacklist = require('./Components/events/blacklist.jsx');
+var Whitelist = require('./Components/events/whitelist.jsx');
+var LocationManager = require('./Components/locations/locationManager.jsx');
+var FestivalManager = require('./Components/festivals/festivalManager.jsx');
 
 var Dashboard = React.createClass({
 

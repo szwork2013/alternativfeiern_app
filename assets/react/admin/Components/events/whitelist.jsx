@@ -1,45 +1,22 @@
 var React = require('react');
+var Reflux = require('reflux');
 var $ = window.jQuery;
-var EventContainer = require('./eventContainer_wl.jsx');
-var apiUrl = require('../config/apiUrl.js');
 
-const Whitelist = React.createClass({
+var PageStore = require('../../Stores/PageStore.jsx');
+var PageActions = require('../../Actions/PageActions.jsx');
+var EventContainer = require('./eventContainer.jsx');
+
+var Whitelist = React.createClass({
+  mixins : [Reflux.connect(PageStore, 'pages')],
+
   getInitialState: function() {
     return {
       pages : [],
-      allPages : []
     };
   },
 
-  componentWillMount: function() {
-    this.getPages();
-  },
-
-  getPages : function() {
-    var self = this;
-    $.ajax({
-      url: apiUrl.host + '/api/pages',
-      success : function(pages) {
-        self.setState({
-          pages : pages,
-          allPages : pages
-        });
-      }
-    });
-  },
-
   handleInput : function(event) {
-    event.preventDefault();
-    var input = React.findDOMNode(this.refs.page_name).value;
-    var foundPages = [];
-    this.state.allPages.forEach(function(page){
-      if(page.name.toLowerCase().indexOf(input.toLowerCase()) != -1){
-        foundPages.push(page);
-      }
-    });
-    this.setState({
-      pages : foundPages,
-    });
+
   },
 
   addEvent : function(event) {
@@ -59,15 +36,19 @@ const Whitelist = React.createClass({
     });
   },
 
+  blacklist : function(pageId, eventId) {
+    PageActions.blacklistEvent(pageId, eventId);
+  },
+
   render: function() {
-    var blackList = this.blackListEvent;
+    var self = this;
     return (
       <div>
         <h3>Events</h3>
           <form>
             <div className="row">
               <div className="input-field col s6">
-                <input id="page_name" type="text" className="validate" ref="page_name" onChange={this.handleInput}></input>
+                <input id="page_name" type="text" className="validate" ref="page_name" onChange={this.handleInput} disabled></input>
                 <label htmlFor="page_name">Suche Seiten</label>
               </div>
               <div className="input-field col s4">
@@ -78,8 +59,7 @@ const Whitelist = React.createClass({
             </div>
           </form>
         {this.state.pages.map(function(page, index){
-          if(page.eventCount > 0)
-            return <EventContainer page={page} key={index}></EventContainer>
+            return page.whitelist.length > 0 ? <EventContainer page={page} events={page.whitelist} key={page.fbid} blacklist={self.blacklist}/> : null
         })}
       </div>
     );

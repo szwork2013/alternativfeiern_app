@@ -60,6 +60,26 @@ module.exports = {
     });
   },
 
+  getAll : function(response) {
+    Page.find(function(err, pages){
+      if(err) {
+         console.error(err);
+         response.send(err);
+      } else {
+        pages.forEach(function(page){
+          var activeEvents = [];
+          page.events.forEach(function(event){
+            if(Date.parse(event.start) >= Date.now()) {
+              activeEvents.push(event);
+            }
+          });
+          page.events = activeEvents;
+        });
+        response.send(pages);
+      }
+    });
+  },
+
   /*
       ====================
       DELETE =============

@@ -8,7 +8,9 @@ module.exports = {
   */
   setupSchedule : function() {
     var self = this;
-    var job = schedule.scheduleJob('* * 1 * * *', function(){
+    var rule = new schedule.RecurrenceRule();
+    rule.hour = [0, 12];
+    var job = schedule.scheduleJob(rule, function(){
       self.getNewEvents();
     });
   },
@@ -17,10 +19,17 @@ module.exports = {
     triggers updating of event data.
   */
   getNewEvents : function() {
+    console.log(Date.now() + ': running event job');
     Page.find(function(err, pages){
       pages.forEach(function(page){
         EventController.getPageEvents(page);
       });
     });
-  }
+  },
+
+  //TODO which checks image names and event fields
+  /*
+    if event.img_orig/small == undefined check if image exists
+    if not --> try downloading
+  */
 }

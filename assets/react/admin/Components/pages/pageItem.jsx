@@ -1,8 +1,10 @@
 var React = require('react');
 
 var PageItem = React.createClass({
-  removePage: function(){
-    this.props.page.remove(this.props.page.fbid);
+
+  removePage: function(event){
+    event.preventDefault();
+    this.props.remove(this.props.page.fbid);
   },
 
   render: function() {
