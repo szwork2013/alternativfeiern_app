@@ -13,7 +13,7 @@ var server = require('gulp-develop-server');
 
 var livereload = require('gulp-livereload');
 
-const bp = './assets/react/';
+const bp = './react/';
 
 
 var browserifyOpts = {

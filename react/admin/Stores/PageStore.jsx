@@ -1,7 +1,7 @@
 var Reflux = require('reflux');
 var $ = window.jQuery;
 var PageActions = require('../Actions/PageActions.jsx');
-var apiUrl = require('../config/apiUrl.js')
+var apiUrl = require('../config/apiUrl.js');
 
 var data = [];
 

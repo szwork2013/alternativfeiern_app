@@ -1,24 +1,24 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
-var FutureEvents = require('./futureevents.jsx');
-var TodayEvents = require('./todayevents.jsx');
+var FutureEvents = require('./Components/FutureEvents.jsx');
+var TodayEvents = require('./Components/TodayEvents.jsx');
+var TodayEventStore = require('./Stores/TodayEventStore.jsx');
 
-const switchRowStyle = {
+var switchRowStyle = {
   marginTop : 20,
   marginBottom : 0,
   textAlign : 'center',
 };
 
-const switchStyle = {
+var switchStyle = {
   display : 'inline-block'
 };
 
-const switchLabelStyle = {
+var switchLabelStyle = {
   color : '#fff',
   fontSize : 15
 }
 
-const leverStyle = {
+var leverStyle = {
   backgroundColor : '#272F38'
 }
 
@@ -53,10 +53,10 @@ var Frontpage = React.createClass({
         </div>
         </div>
         <div className="row" id="todayevents" style={{marginBottom : 0}}>
-          <TodayEvents listView={this.state.listView}></TodayEvents>
+          <TodayEvents listView={this.state.listView} />
         </div>
         <div className="row" id="futureevents">
-          <FutureEvents listView={this.state.listView}></FutureEvents>
+          <FutureEvents listView={this.state.listView} />
         </div>
       </div>
     );

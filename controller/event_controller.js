@@ -105,8 +105,7 @@ module.exports = {
     Page.find(function(err, pages){
       if(err){
         console.error(err);
-        response.send(err);
-        return;
+        return response.send(err);
       }
       pages.forEach(function(page){
         page.events.forEach(function(event){
@@ -267,10 +266,11 @@ module.exports = {
   */
   getPageEvents : function(page) {
     var self = this;
-    var query = page.fbid + '/events?limit=30';
+    var query = page.fbid + '/events?limit=35';
     Graph.get(query, function(err, result){
       if(err) {
-        console.error(err);g
+        console.log(query);
+        return console.error(err);
       }
       if(result.data) {
         result.data.forEach(function(event){
