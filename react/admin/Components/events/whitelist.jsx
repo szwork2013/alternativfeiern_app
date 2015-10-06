@@ -2,6 +2,7 @@ var React = require('react');
 var Reflux = require('reflux');
 var $ = window.jQuery;
 
+var apiUrl = require('../../config/apiUrl.js');
 var PageStore = require('../../Stores/PageStore.jsx');
 var PageActions = require('../../Actions/PageActions.jsx');
 var EventContainer = require('./eventContainer.jsx');
@@ -30,8 +31,8 @@ var Whitelist = React.createClass({
         id : id.value
       },
       success : function() {
-        self.getPages();
-        id.value = ''
+        id.value = '';
+        PageActions.fetchPageEvents('703596129748908');
       },
     });
   },
