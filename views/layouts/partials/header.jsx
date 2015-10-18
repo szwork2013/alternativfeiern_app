@@ -9,6 +9,7 @@ var Header = React.createClass({
         <link rel="icon" href="/images/logos/favicon_50x50.png" type="img/png" />
         <link type="text/css" rel="stylesheet" href="/css/dist/materialize.css" media="screen,projection"/>
         <link type="text/css" rel="stylesheet" href="/css/dist/global.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
         {this.props.stylesheets.map(function(css){
           return <link type="text/css" rel="stylesheet" href={'/css/dist/' + css} />
