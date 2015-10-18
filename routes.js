@@ -24,6 +24,10 @@ module.exports = function(app, passport) {
         res.render('home/index', {title: 'Aktuelle Events'});
     });
 
+    app.get('/singlepage', function(req, res){
+      res.render('singlepage', {title: 'Singlepage Test'});
+    });
+
     app.get('/newsletter', function(req, res){
       res.render('home/newsletter', {title : 'Newsletter'});
     });
