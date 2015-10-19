@@ -22,7 +22,6 @@ var EventPage = React.createClass({
     }
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={['sideNavBtn.css']} description={metaDescription}>
-        <BackButton></BackButton>
         <meta name="description" content={metaDescription}></meta>
         <meta property="og:image" content={imgUrl}></meta>
         <main>

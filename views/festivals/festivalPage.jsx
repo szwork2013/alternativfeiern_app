@@ -10,7 +10,6 @@ var FestivalPage = React.createClass({
     var img = '/images/festivals/' + this.props.festival.img_orig;
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]} description={this.props.festival.description.slice(0, 150)}>
-        <BackButton></BackButton>
         <meta name="description" content={this.props.festival.description.slice(0, 150)}></meta>
         <main>
           <div className="card singlePage__card">

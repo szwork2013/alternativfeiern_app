@@ -9,7 +9,6 @@ var LocationPage = React.createClass({
     var img = '/images/locations/' + this.props.location.img_orig;
     return (
       <FE_Layout title={this.props.title} scripts={[]} stylesheets={[]} description={this.props.location.description.slice(0, 150)}>
-        <BackButton></BackButton>
         <main>
           <div className="card singlePage__card">
             <div className="card-image singlePage__img">

@@ -18,7 +18,7 @@ var SideNavigation = React.createClass({
         {this.props.children}
             <div className="container">
               <a href="#" data-activates="nav-mobile" className="btn-floating sideNavBtn top-nav full hide-on-large-only">
-                <i className="mdi-navigation-menu"></i>
+                {<i className="mdi-navigation-menu"></i>}
               </a>
             </div>
             <div className="container">
@@ -36,9 +36,7 @@ var SideNavigation = React.createClass({
               <li className="bold"><a href="/locations">Clubs, Kneipen & Co</a></li>
               <li className="bold"><a href="/organizers">Veranstalter & Kollektive</a></li>
               <li className="bold"><a href="/festivals">Festivals</a></li>
-              <li><a href="/login">Login</a></li>
-
-                <hr />
+              <hr />
               <li>
                 <a href="/newsletter" style={{fontSize : '12px'}}>Newsletter</a>
               </li>
