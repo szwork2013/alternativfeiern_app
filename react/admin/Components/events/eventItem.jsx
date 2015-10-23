@@ -28,8 +28,12 @@ var weekdays = {
 
 var EventItem  = React.createClass({
 
-  blacklist : function(){
+  blacklist : function() {
     this.props.blacklist(this.props.event.fbid);
+  },
+
+  recommend : function() {
+    this.props.recommend(this.props.event.fbid);
   },
 
   render: function() {
@@ -50,6 +54,12 @@ var EventItem  = React.createClass({
           <div className="col s4">{weekday + ', ' + date.toLocaleDateString()}</div>
           <div className="col s2">
             {this.props.event.isBlacklisted ? unlistBtn : listBtn}
+            {this.props.event.isBlacklisted ? null :
+                <div className="checkboxWrapper" style={{marginTop : 10}}>
+                  <input type="checkbox" id={'check'+this.props.event.fbid} onChange={this.recommend} checked={this.props.event.isRecommended}></input>
+                  <label htmlFor={'check'+this.props.event.fbid}>Recommend</label>
+                </div>
+            }
           </div>
         </div>
       </li>

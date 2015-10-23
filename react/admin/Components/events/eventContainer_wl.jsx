@@ -38,7 +38,7 @@ var EventContainer  = React.createClass({
         pageId : this.props.page.fbid,
         eventId : eventId,
       },
-      success : function()  {
+      success : function() {
         self.getEvents();
       },
       error : function(err) {
@@ -46,13 +46,32 @@ var EventContainer  = React.createClass({
     });
   },
 
+  recommendEvent : function(eventId) {
+    var self = this;
+    $.ajax({
+      method  : 'POST',
+      success : apiUrl.host + '/api/events/recommend',
+      data    : {
+        pageId : this.props.page.fbid,
+        eventId : eventId
+      },
+      success : function() {
+        self.getEvents();
+      },
+      error : function(err){
+      }
+    });
+  },
+
   render: function() {
     var blackList = this.blackListEvent;
+    var recommend = this.recommendEvent;
     return (
       <ul className="collection with-header">
         <div className="collection-header teal lighten-1"><h5>{this.props.page.name}</h5></div>
           {this.state.events.map(function(event, index){
             event.blackList = blackList;
+            event.recommend = recommend;
             if(!event.isBlacklisted)
               return <EventItem event={event} key={index}></EventItem>
           })}

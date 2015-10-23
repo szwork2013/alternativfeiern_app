@@ -83,6 +83,21 @@ var PageStore = Reflux.createStore({
     });
   },
 
+  onRecommendEvent : function(pageId, eventId) {
+    var self = this;
+    $.ajax({
+      method  : 'POST',
+      url     : apiUrl.host + '/api/events/recommend',
+      data    : {
+        pageId  : pageId,
+        eventId : eventId
+      },
+      success : function(response) {
+        self.onFetchPageEvents(pageId);
+      }
+    });
+  },
+
   /*
     HELPER for sorting Events
   */

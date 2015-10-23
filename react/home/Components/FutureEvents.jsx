@@ -2,7 +2,7 @@ var $ = window.jQuery;
 var React = require('react');
 var Reflux = require('reflux');
 var Preloader = require('./preloader.jsx');
-var MonthContainer = require('./monthcontainer.jsx');
+var EventsContainer = require('./EventsContainer.jsx');
 var EventStore = require('../Stores/FutureEventStore.jsx');
 
 var FutureEvents = React.createClass({
@@ -38,9 +38,9 @@ var FutureEvents = React.createClass({
     var self = this;
     return (
       <div>
-        {this.state.store.length > 0 ? 
+        {this.state.store.length > 0 ?
           this.state.store.map(function(container,index){
-          return container.hasEvents ?  <MonthContainer data={container} listView={self.props.listView} key={index}/> : null
+          return container.hasEvents ?  <EventsContainer key={index} data={container} first={index==0}/> : null
         }) : self.renderPreloader()}
         {self.renderScrollback()}
       </div>

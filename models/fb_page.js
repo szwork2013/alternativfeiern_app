@@ -13,6 +13,7 @@ var pageSchema = mongoose.Schema({
       location  :   String,
       description   :   String,
       isBlacklisted : Boolean,
+      isRecommended : Boolean,
       img : String,
       img_orig : String,
       img_small : String

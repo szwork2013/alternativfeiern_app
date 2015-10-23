@@ -8,8 +8,7 @@ var data = {
   col1 : [],
   col2 : [],
   col3 : [],
-  list1 : [],
-  list2 : []
+  col4 : []
 };
 
 var EventStore = Reflux.createStore({
@@ -34,21 +33,18 @@ var EventStore = Reflux.createStore({
 
   sortColumns : function(events) {
     data.hasEvents = events.length > 0 ? true : false;
-    var half = Math.ceil(events.length/2);
     for(var i = 0; i < events.length; i++) {
-      if(i%3 == 0){
+      if(i%4 == 0){
         data.col1.push(events[i]);
       }
-      if(i%3 == 1){
+      if(i%4 == 1){
         data.col2.push(events[i]);
       }
-      if(i%3 == 2){
+      if(i%4 == 2){
         data.col3.push(events[i]);
       }
-      if(i <= half) {
-        data.list1.push(events[i]);
-      } else {
-        data.list2.push(events[i]);
+      if(i%4 == 3) {
+        data.col4.push(events[i]);
       }
     }
     this.trigger(data);

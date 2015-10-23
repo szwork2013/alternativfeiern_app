@@ -215,6 +215,20 @@ module.exports = function(app, passport) {
       }
     });
 
+    app.post('/api/events/recommend', function(req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      var eventId = req.body.eventId;
+      var pageId = req.body.pageId;
+      if(pageId && eventId){
+        EventController.recommend(pageId, eventId, res);
+      } else {
+        res.send({
+          isRecommend : false,
+          error : 'insufficient ids supplied'
+        });
+      }
+    });
+
     app.post('/api/events/addPrivate', isLoggedIn, function(req, res){
       console.log(req.body);
       if(req.body.id) {

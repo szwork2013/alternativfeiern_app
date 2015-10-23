@@ -6,7 +6,19 @@ main {
 }
 
 .container {
-  width: 85%;
+  width: 100%;
+  max-width: 100%; /* overwrite 80pc from materialize.css*/
+}
+
+.container .row
+ {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container .row:first-of-type
+{
+  padding: 0 35px;
 }
 
 body {
@@ -16,6 +28,10 @@ body {
 
 nav {
   line-height: 97px;
+}
+
+nav .nav-wrapper {
+  padding-left: 35px;
 }
 
 nav.top-nav {
@@ -78,14 +94,9 @@ a.btn.sideNavBtn.top-nav.full.hide-on-large-only {
   width: 100%;
 }
 
-
 .btn-floating i {
   font-size: 2rem;
   line-height: 42px;
-}
-
-.switch label input[type=checkbox]:checked + .lever:after {
-  background-color: #55c954;
 }
 
 .card__link {
@@ -179,8 +190,107 @@ a.button-collapse.top-nav {
   z-index: 2;
 }
 
+.section .row:first-of-type {
+  margin-bottom: 0;
+}
+
+.section.monthContainer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.monthContainer h4 {
+  margin-top: 0;
+  font-family: Bitter, serif;
+  font-size: 36px;
+}
+
+.recommendation {
+  padding: 0 15%;
+  color: #fff;
+  text-align: center;
+}
+
+.recommendation h4 {
+  text-align: center;
+  margin-top: .5rem;
+  margin-bottom: 30px;
+  color: #272F38;
+}
+
+.recommendation .title {
+  font-size: 22px;
+}
+
+.recommendation .collection {
+  border: none;
+  color :#272F38;
+}
+
+.recommendationItem {
+  margin-bottom: 30px;
+}
+
+.recommendationItem .collection li.collection-item {
+  background-color: #455A64;
+  border: none;
+}
+
+.recommendationItem li.collection-item:last-child {
+  border-bottom: none
+}
+
+.recommendation img {
+  width: 100%;
+}
+
 .container__title {
   color: white;
+}
+
+.card.listCard {
+  min-height: 92px;
+}
+
+.card.listCard .card-content {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  color: #000;
+}
+
+.card.listCard .date {
+  height: 82px;
+  min-width: 82px;
+  margin-right: 7px;
+  border-radius: 41px;
+  background-color: #ff0000;
+  text-align: center;
+  color: white;
+  font-family: Bitter,serif;
+}
+
+.listCard .date .dayOfMonth {
+  font-size: 35px;
+  line-height: 35px;
+  margin-left: 8px;
+}
+
+.listCard .date .weekday,
+.listCard .date .hours {
+  font-size: 13px;
+}
+
+.listCard .date .hours {
+  margin-left: 5px;
+}
+
+.listCard .info {
+  font-size: 22px;
+}
+
+.listCard .info .location {
+  font-weight: 200;
 }
 
 .card.small{
@@ -332,6 +442,31 @@ a.button-collapse.top-nav {
 
   a.button-collapse.top-nav {
     left: 84%;
+  }
+
+  .section.monthContainer {
+    padding-top: 0px;
+  }
+
+  .container .row:first-of-type {
+    padding: 0 2px;
+  }
+
+  .recommendation {
+    padding: 0 2px;
+  }
+
+  .recommendation h4 {
+    margin-top: 2.5rem;
+    margin-bottom: 18px;
+  }
+
+  .col.s12 {
+    padding: 0 2px;
+  }
+
+  .listCard .info {
+    font-size: 16px;
   }
 
   .card-content {

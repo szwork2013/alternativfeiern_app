@@ -15,13 +15,14 @@ var TodayEvents = React.createClass({
         col1 : [],
         col2 : [],
         col3 : [],
+        col4 : []
       }
     };
   },
 
   renderMonthContainer : function(){
     if(this.state.store.hasEvents) {
-      return <MonthContainer data={this.state.store} listView={this.props.listView}/>
+      return <MonthContainer data={this.state.store}/>
     }
   },
 

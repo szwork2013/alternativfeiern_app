@@ -31,6 +31,7 @@ module.exports = {
         event.location = result.place ? result.place.name : ' - ';
         event.description = result.description;
         event.isBlacklisted = manually ? false : true;
+        event.isRecommended = false;
 
         var doublCheckIsNew = true;
         page.events.forEach(function(storedEvent){
@@ -245,6 +246,40 @@ module.exports = {
               } else {
                 return response.send({
                   isBlacklisted : event.isBlacklisted
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  },
+  /*
+    =============
+    RECOMMEND ===
+    =============
+  */
+  recommend : function(pageId, eventId, response) {
+    var self = this;
+    console.log('recommending: ', eventId);
+    Page.findOne({'fbid' : pageId}, function(err, page){
+      if(err) {
+        console.error(err);
+        return response.send({
+          error : err
+        });
+      }
+      if(page) {
+        page.events.forEach(function(event){
+          if(event.fbid == eventId) {
+            event.isRecommended = event.isRecommended ? false : true;
+            return page.save(function(err){
+              if(err){
+                console.log('here');
+                return console.error(err);
+              } else {
+                return response.send({
+                  isRecommended : event.isRecommended
                 });
               }
             });

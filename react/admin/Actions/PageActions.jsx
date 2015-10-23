@@ -5,7 +5,8 @@ var PageActions = Reflux.createActions([
   'fetchPageEvents',
   'addPage',
   'removePage',
-  'blacklistEvent'
+  'blacklistEvent',
+  'recommendEvent'
 ]);
 
 module.exports = PageActions;

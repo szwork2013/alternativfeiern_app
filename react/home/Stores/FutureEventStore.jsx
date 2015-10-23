@@ -1,5 +1,6 @@
 var Reflux = require('reflux');
 var $ = window.jQuery;
+var moment = window.moment;
 var EventActions = require('../Actions/EventActions.jsx');
 var TodayEventStore = require('./TodayEventStore.jsx');
 
@@ -48,29 +49,27 @@ var EventStore = Reflux.createStore({
       var container = {
         name : monthNames[index],
         hasEvents : eventArrays[index].length > 0 ? true : false,
-        col1 : [],
-        col2 : [],
-        col3 : [],
-        list1 : [],
-        list2 : []
+        events : []
       };
-      var half = Math.ceil(eventArrays[index].length/2);
+      var date = container.hasEvents ? moment(eventArrays[index][0].start).format('D') : null;
+      var tmp = true;
       for(j = 0; j < eventArrays[index].length; j++) {
-        if(j%3 == 0){
-          container.col1.push(eventArrays[index][j]);
+        var current = moment(eventArrays[index][j].start).format('D');
+        while(current == date && j < eventArrays[index].length) {
+          eventArrays[index][j].break = tmp;
+          container.events.push(eventArrays[index][j]);
+          j++;
+          if(j < eventArrays[index].length) {
+            current = moment(eventArrays[index][j].start).format('D');
+          }
         }
-        if(j%3 == 1){
-          container.col2.push(eventArrays[index][j]);
+        if(j < eventArrays[index].length){
+          tmp = !tmp;
+          eventArrays[index][j].break = tmp;
+          container.events.push(eventArrays[index][j]);
+          date = current;
         }
-        if(j%3 == 2){
-          container.col3.push(eventArrays[index][j]);
-        }
-        if(j <= half) {
-          container.list1.push(eventArrays[index][j]);
-        } else {
-          container.list2.push(eventArrays[index][j]);
-        }
-      } /* end column sort */
+      }
       data.push(container);
     } /* end month container sort */
     this.trigger(data);

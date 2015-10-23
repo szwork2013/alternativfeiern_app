@@ -41,6 +41,10 @@ var Whitelist = React.createClass({
     PageActions.blacklistEvent(pageId, eventId);
   },
 
+  recommend : function(pageId, eventId) {
+    PageActions.recommendEvent(pageId, eventId);
+  },
+
   render: function() {
     var self = this;
     return (
@@ -60,7 +64,11 @@ var Whitelist = React.createClass({
             </div>
           </form>
         {this.state.pages.map(function(page, index){
-            return page.whitelist.length > 0 ? <EventContainer page={page} events={page.whitelist} key={page.fbid} blacklist={self.blacklist}/> : null
+            return page.whitelist.length > 0 ? <EventContainer page={page}
+                                                               events={page.whitelist}
+                                                               key={page.fbid}
+                                                               blacklist={self.blacklist}
+                                                               recommend={self.recommend}  /> : null
         })}
       </div>
     );
