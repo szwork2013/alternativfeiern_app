@@ -179,8 +179,14 @@ module.exports = {
             var startTime = new Date(Date.parse(event.start));
             var endTime = event.end ? new Date(Date.parse(event.end)) : null;
             if(endTime){
-              if(startTime <= now && endTime >= now){
-                todayWhitelisted.push(event);
+              if(startTime.getTime() <= now.getTime()){
+                if(endTime.getTime() >= now.getTime()) {
+                  todayWhitelisted.push(event);
+                }
+              } else {
+                if(startTime.toDateString() == now.toDateString()) {
+                  todayWhitelisted.push(event);
+                }
               }
             } else {
               if(startTime.toDateString() == now.toDateString()){
