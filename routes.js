@@ -10,6 +10,15 @@ const FestivalController = require('./controller/festival_controller');
 const newsletter = require('./af_modules/newsletter');
 const Page = require('./models/fb_page');
 
+import {match, RoutingContext} from 'react-router';
+import routes from './react_routes';
+import ReactDom from 'react-dom/server';
+import React from 'react';
+import {Provider} from 'react-redux';
+import configureStore from './react/singlepage/stores/configureStore.js';
+
+const store = configureStore();
+
 pm.setAuthToken(auth.token);
 
 const pagetitle = ' - Alternativ-Feiern';
@@ -101,7 +110,28 @@ module.exports = function(app, passport) {
     });
 
     app.get('/admin', function(req, res){
-      res.redirect('/login');
+      //res.redirect('/login');
+      match({
+        routes,
+        location: req.url
+      }, (error, redirectLocation, renderProps) => {
+        if (error) {
+          res.status(500).send(error.message);
+        } else if (redirectLocation) {
+          res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+        } else if (renderProps) {
+          //res.status(200).send(ReactDom.renderToString(<RoutingContext {...renderProps} />));
+          var body = ReactDom.renderToString(
+              <RoutingContext {...renderProps} />
+          );
+          res.status(200).render('singlepage/layout', {
+            body : body,
+            title : 'DEV'
+          });
+        } else {
+          res.status(404).send('Not found');
+        }
+      });
     });
 
     // process the login form

@@ -1,15 +1,20 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchPages } from '../actions/actions.js';
 
-var PageManager = require('./Components/pages/pageManager.jsx');
-var Blacklist = require('./Components/events/blacklist.jsx');
-var Whitelist = require('./Components/events/whitelist.jsx');
-var LocationManager = require('./Components/locations/locationManager.jsx');
-var FestivalManager = require('./Components/festivals/festivalManager.jsx');
+//import PageManager from './tabs/Pages/PageManager.jsx';
 
-var Dashboard = React.createClass({
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  render: function() {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchPages());
+  }
+
+  render() {
     return (
       <div className="row">
         <div className="col s12">
@@ -33,33 +38,36 @@ var Dashboard = React.createClass({
         </div>
         <div className="container">
           <div className="col s12" id="page__container">
-            <PageManager />
           </div>
         </div>
         <div className="container">
           <div className="col s12" id="event__container-bl">
-            <Blacklist />
           </div>
         </div>
         <div className="container">
           <div className="col s12" id="event__container-wl">
-            <Whitelist />
           </div>
         </div>
         <div className="container">
           <div className="col s12" id="location__container">
-            <LocationManager />
           </div>
         </div>
         <div className="container">
           <div className="col s12" id="festival__container">
-            <FestivalManager />
           </div>
         </div>
       </div>
     );
   }
+};
 
-});
+function select (state) {
+  console.log(state);
+  const { isFetching, pages } = state;
+  return {
+    isFetching,
+    pages
+  };
+}
 
-module.exports = Dashboard;
+export default connect(select)(Dashboard);

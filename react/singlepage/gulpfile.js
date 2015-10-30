@@ -7,7 +7,7 @@ var source = require('vinyl-source-stream');
 
 gulp.task('build', function () {
   browserify({
-    entries: 'main.jsx',
+    entries: 'app.jsx',
     extensions: ['.jsx', '.js'],
     debug: true
   })
@@ -19,9 +19,10 @@ gulp.task('build', function () {
 
 gulp.task('watch', function(){
   var bundler = browserify({
-    entries: 'main.jsx',
-    extensions: ['.jsx', '.js'],
-    debug: true
+    entries : 'app.jsx',
+    extensions : ['.jsx', '.js'],
+    debug : true,
+    verbose : true
   });
   var watcher = watchify(bundler);
   return watcher
