@@ -1,8 +1,10 @@
+#Alternativ-Feiern
+
 "Alternativ Feiern" is a website informing users about current and future events in Nuremberg and its vicinity. 
 
 Check it out: http://alternativ-feiern.de
 
-#Components
+## Components
 
 - `express` as the server framework
 - `express-react-views` for server views (these aren´t real react components)
