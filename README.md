@@ -11,5 +11,6 @@ Check it out: http://alternativ-feiern.de
 - MongoDB as a database, holding events, pages, location etc...
 - `mongoose` for modeling the application data
 - MaterializeCSS as a CSS framework, for a nice material designy look
+- of course there is lot more, just checkout the `package.json`
 
 
