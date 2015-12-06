@@ -24,8 +24,10 @@ module.exports = function(app, passport) {
         res.render('home/index', {title: 'Aktuelle Events'});
     });
 
+    /* 2015-12-06: deactivate newsletter due to safe harbor... */
     app.get('/newsletter', function(req, res){
-      res.render('home/newsletter', {title : 'Newsletter'});
+      // res.render('home/newsletter', {title : 'Newsletter'});
+      res.redirect('/');
     });
 
     app.post('/newsletter/subscribe', function(req, res){

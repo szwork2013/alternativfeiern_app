@@ -19,10 +19,9 @@ var BE_Layout = React.createClass({
             <nav className="teal darken-3">
               <div className="nav-wrapper">
                 <ul className="right hide-on-med-and-down">
-                  <li><a href="http://alternativ-feiern.de/" target="_blank">Website</a></li>
-                  <li><a href="http://alternativ-feiern.de/wp-admin/" target="_blank">Wordpress</a></li>
+                  <li><a href="https://alternativ-feiern.de/" target="_blank">Website</a></li>
                   <li><a href="https://us10.admin.mailchimp.com/" target="_blank">Mailchimp</a></li>
-                  <li><a href="http://piwik.alternativ-feiern.de/index.php" target="_blank">Piwik</a></li>
+                  <li><a href="https://piwik.alternativ-feiern.de/index.php" target="_blank">Piwik</a></li>
                   <li className="teal darken-2"><a href="/logout">Logout</a></li>
                 </ul>
               </div>

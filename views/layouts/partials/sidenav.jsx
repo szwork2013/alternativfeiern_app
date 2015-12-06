@@ -37,9 +37,11 @@ var SideNavigation = React.createClass({
               <li className="bold"><a href="/organizers">Veranstalter & Kollektive</a></li>
               <li className="bold"><a href="/festivals">Festivals</a></li>
               <hr />
-              <li>
+              {/* 2015-12-06: deactivate newsletter due to safe harbor
+                <li>
                 <a href="/newsletter" style={{fontSize : '12px'}}>Newsletter</a>
               </li>
+              */}
               <li>
                 <a href="/about" style={{fontSize : '12px'}}>Über uns</a>
               </li>
